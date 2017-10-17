@@ -1,0 +1,26 @@
+{
+  "extends": ["react-app", "plugin:import/errors"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/forbid-prop-types": [
+      "error",
+      { "forbid": ["any", "array", "object"] }
+    ],
+    "react/prop-types": [
+      "error",
+      {
+        "ignore": [],
+        "customValidators": [],
+        "skipUndeclared": false
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["./src"]
+      }
+    }
+  }
+}
