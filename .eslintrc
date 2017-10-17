@@ -14,7 +14,8 @@
         "customValidators": [],
         "skipUndeclared": false
       }
-    ]
+    ],
+    "no-unused-vars": ["error", { "vars": "all", "args": "after-used" }]
   },
   "settings": {
     "import/resolver": {

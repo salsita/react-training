@@ -4,12 +4,16 @@ import { Provider } from "react-redux";
 
 import Root from "modules/root/components/root";
 import buildStore from "build-store";
+import buildRouter from "modules/routing/build-router";
 
-const store = buildStore();
+const router = buildRouter();
+const store = buildStore(router);
 
-render(
-  <Provider store={store}>
-    <Root />
-  </Provider>,
-  document.getElementById("root")
-);
+router.start(() => {
+  render(
+    <Provider store={store}>
+      <Root />
+    </Provider>,
+    document.getElementById("root")
+  );
+});
