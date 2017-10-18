@@ -16,6 +16,10 @@ const mapDispatchToProps = {
   onClick: actions.navigateTo
 };
 
+/**
+ * router5 synchronized link component
+ * changes router state in the app state
+ */
 const ConnectedLink = connect(
   null,
   mapDispatchToProps,
