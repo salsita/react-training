@@ -7,6 +7,7 @@
   },
   "private": true,
   "dependencies": {
+    "normalizr": "^3.2.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
@@ -17,6 +18,7 @@
     "reselect": "^3.0.1",
     "router5": "^5.4.0",
     "router5-helpers": "^5.0.0",
+    "reduxsauce": "^0.7.0",
     "serve": "^6.3.0"
   },
   "scripts": {
