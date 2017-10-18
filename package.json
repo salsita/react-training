@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile ./src/tests/setup-tests.js",
     "test:single": "export CI=true && yarn test",
     "eject": "react-scripts eject",
     "lint:eslint": "eslint --ignore-path .gitignore .",
@@ -31,10 +31,13 @@
     "start:prod": "serve -s build"
   },
   "devDependencies": {
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
     "eslint-plugin-prettier": "^2.3.1",
     "lint-staged": "^4.2.3",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.7.4"
+    "prettier": "^1.7.4",
+    "react-test-renderer": "^16.0.0"
   },
   "lint-staged": {
     "*.js": "lint:eslint"
