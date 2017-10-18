@@ -12,8 +12,8 @@ const buildStore = router => {
   const store = createStore(
     rootReducer,
     compose(
+      applyMiddleware(sagaMiddleware, router5Middleware(router)),
       process.env.NODE_ENV !== "production" &&
-        applyMiddleware(sagaMiddleware, router5Middleware(router)),
       window.__REDUX_DEVTOOLS_EXTENSION__
         ? window.__REDUX_DEVTOOLS_EXTENSION__()
         : identityFn
