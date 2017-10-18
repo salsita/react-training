@@ -1,3 +1,5 @@
+import { all } from "redux-saga/effects";
+
 export default function*() {
-  console.log("Hello from saga");
+  yield all([]);
 }
