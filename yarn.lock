@@ -6277,6 +6277,10 @@ router5-transition-path@5.0.0, router5-transition-path@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/router5-transition-path/-/router5-transition-path-5.0.0.tgz#8be2a6a0907e93083a4b7d705713f624cc60b861"
 
+router5.transition-path@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/router5.transition-path/-/router5.transition-path-4.0.1.tgz#6d61d6b78e233aeff2e68f3b91b9a83338c2f723"
+
 router5@^5.4.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/router5/-/router5-5.4.0.tgz#3324657fe7c8df86cd5414353ca5c158da85790b"
