@@ -38,7 +38,7 @@ const repository = {
 ## Dependencies
 
 - reduxsauce
-- lodash/merge
+- lodash
 - normalizr
 - redux-saga/effects
 

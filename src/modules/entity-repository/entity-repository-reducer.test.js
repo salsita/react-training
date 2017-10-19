@@ -38,4 +38,31 @@ describe("Entity Repository Reducer", () => {
       }
     });
   });
+
+  it("should replace array values when merging", () => {
+    let state = {
+      users: {
+        user1: {
+          name: "John",
+          references: [1, 2, 3]
+        }
+      }
+    };
+
+    state = reducer(
+      state,
+      Actions.Creators.repositoryHasChanged({
+        users: { user1: { references: [1] } }
+      })
+    );
+
+    expect(state).toEqual({
+      users: {
+        user1: {
+          name: "John",
+          references: [1]
+        }
+      }
+    });
+  });
 });
