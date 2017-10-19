@@ -1,5 +1,6 @@
 import createSagaMiddleware from "redux-saga";
 import { applyMiddleware, compose, createStore } from "redux";
+import { router5Middleware } from "redux-router5";
 
 import identityFn from "helpers/identity-fn";
 import rootReducer from "modules/root/root-reducer";
@@ -11,7 +12,7 @@ const buildStore = router => {
   const store = createStore(
     rootReducer,
     compose(
-      applyMiddleware(sagaMiddleware),
+      applyMiddleware(sagaMiddleware, router5Middleware(router)),
       process.env.NODE_ENV !== "production" &&
       window.__REDUX_DEVTOOLS_EXTENSION__
         ? window.__REDUX_DEVTOOLS_EXTENSION__()
