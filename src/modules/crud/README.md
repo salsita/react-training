@@ -11,7 +11,7 @@ CRUD module for basic read/write operations with API entities.
 
 ## Integration
 
-Combine `crud- reducer` into your root reducer.
+Combine `crud-reducer` into your root reducer.
 
 ## Public interface
 
