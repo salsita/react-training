@@ -115,7 +115,7 @@ export function* saveEntity({ id, ...entityData }, entity, form) {
   yield put(startSubmit(form));
   const { effect, schema } = mapEntityToSaveParams(entity, Boolean(id));
 
-  const updatedEntity = yield call(effect, entityData, id);
+  const updatedEntity = yield call(effect, ...[entityData, id].filter(Boolean));
   yield call(normalizeAndStore, updatedEntity, schema);
   yield put(stopSubmit(form));
 
