@@ -1,13 +1,39 @@
 import transitionPath from "router5.transition-path";
 import { all, call, put, select, takeEvery } from "redux-saga/effects";
 import { actionTypes } from "redux-router5";
+import { startSubmit, stopSubmit } from "redux-form";
 
 import * as Routes from "modules/routing/routes";
 import * as Effects from "modules/crud/crud-effects";
+import * as Entities from "modules/crud/crud-entities";
 import * as Schema from "modules/crud/crud-schema";
+import * as RoutingSelectors from "modules/routing/routing-selectors";
 import identityFn from "helpers/identity-fn";
 import Actions from "modules/crud/crud-actions";
 import { normalizeAndStore } from "modules/entity-repository/entity-repository-saga";
+
+const mapEntityToSaveParams = (entity, isUpdate) => {
+  switch (entity) {
+    case Entities.USER:
+      return {
+        effect: isUpdate ? Effects.updateUser : Effects.addUser,
+        schema: Schema.user
+      };
+
+    default:
+      throw new Error(`Unknown entity ${entity}`);
+  }
+};
+
+/**
+ * Creates a composed effectParamsFactory which automatically passes
+ * current route params to effectParamsFactory
+ * 
+ * @param {Function} effectParamsFactory to be wrapped
+ * @returns {Function} Composed effectParamsFactory
+ */
+const withRouterParams = effectParamsFactory => state =>
+  effectParamsFactory(RoutingSelectors.getRouteParams(state));
 
 /**
  * Returns effect & schema pair which will be used for fetching & normalizing the entity based on provided route.
@@ -22,6 +48,15 @@ const mapRouteToFetchParams = route => {
       return {
         effect: Effects.getUsers,
         schema: Schema.users
+      };
+
+    case Routes.USER_DETAIL:
+      return {
+        effect: Effects.getUser,
+        schema: Schema.user,
+        effectParamsFactory: withRouterParams(routeParams => [
+          routeParams[Routes.USER_ROUTE_ID_PARAM]
+        ])
       };
 
     default:
@@ -56,6 +91,17 @@ export function* fetchEntities(route) {
     // And store the result
     yield put(Actions.Creators.entitiesFetched(route, result));
   }
+}
+
+export function* saveEntity({ id, ...entityData }, entity, form) {
+  yield put(startSubmit(form));
+  const { effect, schema } = mapEntityToSaveParams(entity, Boolean(id));
+
+  const updatedEntity = yield call(effect, entityData, id);
+  yield call(normalizeAndStore, updatedEntity, schema);
+  yield put(stopSubmit(form));
+
+  return updatedEntity;
 }
 
 /**

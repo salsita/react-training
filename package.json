@@ -6,19 +6,28 @@
     "npm": ">=5.4.2"
   },
   "private": true,
+  "proxy": {
+    "/api/v1": {
+      "target": "http://localhost:8080"
+    }
+  },
   "dependencies": {
+    "axios": "^0.16.2",
+    "email-validator": "^1.1.1",
     "normalizr": "^3.2.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-portal": "^4.0.0-beta.3",
     "react-redux": "^5.0.6",
     "react-scripts": "1.0.14",
     "redux": "^3.7.2",
+    "redux-form": "^7.1.1",
     "redux-router5": "^5.0.0",
     "redux-saga": "^0.16.0",
+    "reduxsauce": "^0.7.0",
     "reselect": "^3.0.1",
     "router5": "^5.4.0",
     "router5-helpers": "^5.0.0",
-    "reduxsauce": "^0.7.0",
     "router5.transition-path": "^4.0.1",
     "serve": "^6.3.0"
   },
