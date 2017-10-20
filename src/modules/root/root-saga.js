@@ -1,5 +1,7 @@
-import { all } from "redux-saga/effects";
+import { all, fork } from "redux-saga/effects";
+
+import crudSaga from "modules/crud/crud-saga";
 
 export default function*() {
-  yield all([]);
+  yield all([fork(crudSaga)]);
 }
