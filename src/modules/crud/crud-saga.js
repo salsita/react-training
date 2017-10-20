@@ -12,6 +12,14 @@ import identityFn from "helpers/identity-fn";
 import Actions from "modules/crud/crud-actions";
 import { normalizeAndStore } from "modules/entity-repository/entity-repository-saga";
 
+/**
+ * Returns effect & schema pair will will be used for saving & normalizing the entity.
+ * 
+ * @param {String} Entity type
+ * @param {Boolean} Flag if entity is being updated or created
+ *
+ * @returns {Object} Object containing effect to be executed and schema for normalizing the result
+ */
 const mapEntityToSaveParams = (entity, isUpdate) => {
   switch (entity) {
     case Entities.USER:
@@ -93,6 +101,16 @@ export function* fetchEntities(route) {
   }
 }
 
+/**
+ * Creates or Updates entity from form data. After entity
+ * has been saved, it refelects the data back into entity repo.
+ * 
+ * @param {Object} entity data
+ * @param {String} entity type
+ * @param {String} form id
+ * 
+ * @returns {Object} updated entity
+ */
 export function* saveEntity({ id, ...entityData }, entity, form) {
   yield put(startSubmit(form));
   const { effect, schema } = mapEntityToSaveParams(entity, Boolean(id));
