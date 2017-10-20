@@ -8,7 +8,7 @@ import { Field } from "redux-form";
  * messages. As well as it defines a template
  * of any field.
  */
-const FieldAdapter = ({
+export const FieldAdapter = ({
   input,
   label,
   type,
@@ -26,7 +26,7 @@ const FieldAdapter = ({
 );
 
 FieldAdapter.propTypes = {
-  input: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  input: PropTypes.object.isRequired,
   label: PropTypes.string,
   type: PropTypes.string.isRequired,
   meta: PropTypes.shape({

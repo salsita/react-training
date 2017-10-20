@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Field Tests should not render warning/error when field has not been touched 1`] = `
+<div>
+  <label>
+    foobar
+  </label>
+  <div>
+    <input
+      placeholder="foobar"
+      type="text"
+    />
+  </div>
+</div>
+`;
+
+exports[`Form Field Tests should render warning/error when field has been touched 1`] = `
+<div>
+  <label>
+    foobar
+  </label>
+  <div>
+    <input
+      placeholder="foobar"
+      type="text"
+    />
+    <span>
+      some error
+    </span>
+  </div>
+</div>
+`;
