@@ -2,6 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Field } from "redux-form";
 
+/**
+ * Field adapter to be used for any
+ * redux-form field. It adds validation
+ * messages. As well as it defines a template
+ * of any field.
+ */
 const FieldAdapter = ({
   input,
   label,
