@@ -20,7 +20,7 @@ const mapRouteToFetchParams = route => {
   switch (route) {
     case Routes.USERS_LIST:
       return {
-        effect: call(Effects.getUsers),
+        effect: Effects.getUsers,
         schema: Schema.users
       };
 
@@ -35,16 +35,20 @@ const mapRouteToFetchParams = route => {
  * reference to it stored in the app state
  */
 export function* fetchEntities(route) {
-  const state = yield select(identityFn);
-  const fetchParams = mapRouteToFetchParams(route, state);
+  const fetchParams = mapRouteToFetchParams(route);
 
   // Some routes might not have CRUD fetching defined
   // We'll skip these
   if (fetchParams) {
-    const { effect, schema } = fetchParams;
+    // Fetch state so that it's possible to pass it
+    // to effectParamsFactory to return params
+    // of the effect
+    const state = yield select(identityFn);
+
+    const { effect, schema, effectParamsFactory = () => [] } = fetchParams;
 
     // Just call the effect
-    const data = yield effect;
+    const data = yield call(effect, ...effectParamsFactory(state));
 
     // Normalize the response
     const result = yield call(normalizeAndStore, data, schema);
