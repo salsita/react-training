@@ -54,6 +54,12 @@ export function* fetchEntities(route) {
   }
 }
 
+/**
+ * Handles sucessful route transition and automatically calls
+ * fetch for all corresponding routes
+ * 
+ * @param {Object} router5/TRANSITION_SUCCESS action
+ */
 export function* onRouteTransition({ payload: { route, previousRoute } }) {
   // Find routing transition path
   const { toActivate } = transitionPath(route, previousRoute);
