@@ -31,7 +31,7 @@ const ConnectedLink = connect(
 
 ConnectedLink.propTypes = {
   name: PropTypes.string.isRequired,
-  params: PropTypes.object // eslint-disable-line react/forbid-prop-types
+  params: PropTypes.object
 };
 
 export default ConnectedLink;
