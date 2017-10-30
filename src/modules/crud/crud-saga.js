@@ -9,8 +9,11 @@ import * as Entities from "modules/crud/crud-entities";
 import * as Schema from "modules/crud/crud-schema";
 import * as RoutingSelectors from "modules/routing/routing-selectors";
 import identityFn from "helpers/identity-fn";
+import compose from "helpers/compose-saga";
 import Actions from "modules/crud/crud-actions";
 import { normalizeAndStore } from "modules/entity-repository/entity-repository-saga";
+import { withErrorHandling } from "modules/api/api-sagas";
+import { BusinessValidationError } from "modules/api/api-errors";
 
 /**
  * Returns effect & schema pair will will be used for saving & normalizing the entity.
@@ -77,7 +80,7 @@ const mapRouteToFetchParams = route => {
  * Fetched entity/ies is/are automatically normalized and
  * reference to it stored in the app state
  */
-export function* fetchEntities(route) {
+export function* fetchEntitiesImpl(route) {
   const fetchParams = mapRouteToFetchParams(route);
 
   // Some routes might not have CRUD fetching defined
@@ -101,6 +104,8 @@ export function* fetchEntities(route) {
   }
 }
 
+export const fetchEntities = compose(withErrorHandling, fetchEntitiesImpl);
+
 /**
  * Creates or Updates entity from form data. After entity
  * has been saved, it refelects the data back into entity repo.
@@ -111,16 +116,33 @@ export function* fetchEntities(route) {
  * 
  * @returns {Object} updated entity
  */
-export function* saveEntity({ id, ...entityData }, entity, form) {
-  yield put(startSubmit(form));
-  const { effect, schema } = mapEntityToSaveParams(entity, Boolean(id));
+export function* saveEntityImpl({ id, ...entityData }, entity, form) {
+  try {
+    yield put(startSubmit(form));
+    const { effect, schema } = mapEntityToSaveParams(entity, Boolean(id));
 
-  const updatedEntity = yield call(effect, ...[entityData, id].filter(Boolean));
-  yield call(normalizeAndStore, updatedEntity, schema);
-  yield put(stopSubmit(form));
+    const updatedEntity = yield call(
+      effect,
+      ...[entityData, id].filter(Boolean)
+    );
+    yield call(normalizeAndStore, updatedEntity, schema);
+    yield put(stopSubmit(form));
 
-  return updatedEntity;
+    return updatedEntity;
+  } catch (exception) {
+    // In case of business validation error
+    // let's just deal with the error
+    // and inform the form about the exception.
+    if (exception instanceof BusinessValidationError) {
+      yield put(stopSubmit(form, exception.getReason()));
+      return false;
+    } else {
+      throw exception;
+    }
+  }
 }
+
+export const saveEntity = compose(withErrorHandling, saveEntityImpl);
 
 /**
  * Handles sucessful route transition and automatically calls

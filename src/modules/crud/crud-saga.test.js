@@ -12,7 +12,7 @@ import { normalizeAndStore } from "modules/entity-repository/entity-repository-s
 
 describe("CRUD Saga Tests", () => {
   it("should fetch API effect, normalize result and store entity references", () => {
-    const it = Saga.fetchEntities(USERS_LIST);
+    const it = Saga.fetchEntitiesImpl(USERS_LIST);
 
     // Should select the whole state first
     // in order to pass it to effect mapper
@@ -40,7 +40,7 @@ describe("CRUD Saga Tests", () => {
   });
 
   it("should do nothing for unknown routes", () => {
-    const it = Saga.fetchEntities("foobarroute");
+    const it = Saga.fetchEntitiesImpl("foobarroute");
     expect(it.next()).toEqual({ done: true, value: undefined });
   });
 
@@ -58,7 +58,7 @@ describe("CRUD Saga Tests", () => {
     const MOCK_FORM = "foobar";
     const MOCK_ENTITY = { firstName: "John" };
 
-    const it = Saga.saveEntity(MOCK_ENTITY, Entities.USER, MOCK_FORM);
+    const it = Saga.saveEntityImpl(MOCK_ENTITY, Entities.USER, MOCK_FORM);
 
     // Should set start submitting flag in redux form
     expect(it.next().value).toEqual(put(startSubmit(MOCK_FORM)));
@@ -89,7 +89,7 @@ describe("CRUD Saga Tests", () => {
       lastName: "Doe",
       id: "user-42"
     };
-    const it = Saga.saveEntity(MOCK_ENTITY, Entities.USER, "bazbar");
+    const it = Saga.saveEntityImpl(MOCK_ENTITY, Entities.USER, "bazbar");
 
     // skip form submitting field
     it.next();
