@@ -12,7 +12,7 @@ import identityFn from "helpers/identity-fn";
 import compose from "helpers/compose-saga";
 import Actions from "modules/crud/crud-actions";
 import { normalizeAndStore } from "modules/entity-repository/entity-repository-saga";
-import { withErrorHandling } from "modules/api/api-sagas";
+import { withErrorHandling } from "modules/api/api-saga";
 import { BusinessValidationError } from "modules/api/api-errors";
 
 /**
