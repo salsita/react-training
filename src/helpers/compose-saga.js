@@ -4,6 +4,7 @@ import { call } from "redux-saga/effects";
  * A helper function to compose multiple sagas.
  * Given two Sagas as arguments, eg. compose(f, g)
  * function composition f∘g is performed.
+ * Please note that functions are executed in backward order.
  *
  * @param {...Generator} Sagas to be composed
  * @return {Generator} Composed Saga
