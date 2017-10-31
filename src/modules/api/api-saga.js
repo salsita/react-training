@@ -25,3 +25,18 @@ export function* withErrorHandling(saga, ...args) {
     }
   }
 }
+
+/**
+ * Wraps saga into start/stop loading actions
+ *
+ * @param {Function*} long running saga
+ * @param {...Any} arguments to be passed to the saga
+ */
+export function* withLoadingIndicator(saga, ...args) {
+  try {
+    yield put(Actions.Creators.startLoading());
+    return yield call(saga, ...args);
+  } finally {
+    yield put(Actions.Creators.stopLoading());
+  }
+}
