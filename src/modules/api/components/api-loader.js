@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { isLoading } from "modules/api/api-selectors";
 
-const ApiLoader = ({ loading }) => loading && <div>Loading...</div>;
+export const ApiLoader = ({ loading }) => loading && <div>Loading...</div>;
 
 const mapStateToProps = state => ({
   loading: isLoading(state)
