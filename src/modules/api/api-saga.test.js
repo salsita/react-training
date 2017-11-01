@@ -45,4 +45,35 @@ describe("API saga tests", () => {
       it.throw(MOCK_ERROR);
     }).toThrow(MOCK_ERROR);
   });
+
+  it("should wrap saga to try/finally block and dispatch Start/Stop loading actions", () => {
+    const MOCK_RESULT = 42;
+
+    const it = Saga.withLoadingIndicator(MOCK_SAGA, MOCK_ARGUMENT);
+
+    // Should put START_LOADING first
+    expect(it.next().value).toEqual(put(Actions.Creators.startLoading()));
+
+    // Should call the saga then
+    expect(it.next().value).toEqual(call(MOCK_SAGA, MOCK_ARGUMENT));
+
+    // Should put STOP_LOADING then
+    expect(it.next(MOCK_RESULT).value).toEqual(
+      put(Actions.Creators.stopLoading())
+    );
+
+    // Should return the result from Saga
+    expect(it.next()).toEqual({ done: true, value: MOCK_RESULT });
+  });
+
+  it("should dispatch stop loading even when exception is thrown", () => {
+    const it = Saga.withLoadingIndicator(MOCK_SAGA, MOCK_ARGUMENT);
+
+    it.next();
+    it.next();
+
+    expect(it.throw(new Error("foobar")).value).toEqual(
+      put(Actions.Creators.stopLoading())
+    );
+  });
 });

@@ -12,7 +12,7 @@ import identityFn from "helpers/identity-fn";
 import compose from "helpers/compose-saga";
 import Actions from "modules/crud/crud-actions";
 import { normalizeAndStore } from "modules/entity-repository/entity-repository-saga";
-import { withErrorHandling } from "modules/api/api-saga";
+import { withErrorHandling, withLoadingIndicator } from "modules/api/api-saga";
 import { BusinessValidationError } from "modules/api/api-errors";
 
 /**
@@ -104,7 +104,11 @@ export function* fetchEntitiesImpl(route) {
   }
 }
 
-export const fetchEntities = compose(withErrorHandling, fetchEntitiesImpl);
+export const fetchEntities = compose(
+  withErrorHandling,
+  withLoadingIndicator,
+  fetchEntitiesImpl
+);
 
 /**
  * Creates or Updates entity from form data. After entity
@@ -142,7 +146,11 @@ export function* saveEntityImpl({ id, ...entityData }, entity, form) {
   }
 }
 
-export const saveEntity = compose(withErrorHandling, saveEntityImpl);
+export const saveEntity = compose(
+  withErrorHandling,
+  withLoadingIndicator,
+  saveEntityImpl
+);
 
 /**
  * Handles sucessful route transition and automatically calls

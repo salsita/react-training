@@ -6,3 +6,8 @@ export const getError = createSelector(
   getState,
   state => (state.error ? state.error.errorType : null)
 );
+
+export const isLoading = createSelector(
+  getState,
+  state => state.callsInProgress > 0
+);
