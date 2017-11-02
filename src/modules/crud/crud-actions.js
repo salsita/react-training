@@ -2,7 +2,7 @@ import { createActions } from "reduxsauce";
 
 export default createActions(
   {
-    entitiesFetched: ["route", "result"]
+    entitiesFetched: ["route", "index", "result"]
   },
   { prefix: "crud/" }
 );
