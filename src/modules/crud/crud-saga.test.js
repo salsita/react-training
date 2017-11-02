@@ -1,4 +1,4 @@
-import { all, call, put, select } from "redux-saga/effects";
+import { all, call, put, select, fork } from "redux-saga/effects";
 import { startSubmit, stopSubmit } from "redux-form";
 
 import * as Saga from "modules/crud/crud-saga";
@@ -7,20 +7,65 @@ import * as Entities from "modules/crud/crud-entities";
 import Actions from "modules/crud/crud-actions";
 import identityFn from "helpers/identity-fn";
 import { USERS_LIST } from "modules/routing/routes";
-import { getUsers, addUser, updateUser } from "modules/crud/crud-effects";
+import { addUser, updateUser } from "modules/crud/crud-effects";
 import { normalizeAndStore } from "modules/entity-repository/entity-repository-saga";
 
 describe("CRUD Saga Tests", () => {
-  it("should fetch API effect, normalize result and store entity references", () => {
+  it("should call fetchEntityByFetchParams for all the effects defined by mapRouteToFetchParams", () => {
     const it = Saga.fetchEntitiesImpl(USERS_LIST);
 
     // Should select the whole state first
     // in order to pass it to effect mapper
     expect(it.next().value).toEqual(select(identityFn));
 
-    // Because USER_LIST route is requested
-    // it should call getUsers effect
-    expect(it.next().value).toEqual(call(getUsers));
+    const [firstFetchParam, secondFetchParam] = Saga.mapRouteToFetchParams(
+      USERS_LIST
+    );
+
+    const MOCK_STATE = 42;
+    // It should call fetchEntityByFetchParams for all the
+    // effects
+    expect(it.next(MOCK_STATE).value).toEqual(
+      all([
+        fork(
+          Saga.fetchEntityByFetchParams,
+          firstFetchParam,
+          MOCK_STATE,
+          USERS_LIST,
+          0
+        ),
+        fork(
+          Saga.fetchEntityByFetchParams,
+          secondFetchParam,
+          MOCK_STATE,
+          USERS_LIST,
+          1
+        )
+      ])
+    );
+  });
+
+  it("should fetch API effect, normalize result and store entity references", () => {
+    const MOCK_EFFECT = () => {};
+    const MOCK_INDEX = 28;
+    const MOCK_SCHEMA = 43;
+    const MOCK_EFFECT_PARAMS_FACTORY = value => [value.foo];
+    const MOCK_STATE = { foo: 43 };
+
+    const it = Saga.fetchEntityByFetchParams(
+      {
+        effect: MOCK_EFFECT,
+        schema: MOCK_SCHEMA,
+        effectParamsFactory: MOCK_EFFECT_PARAMS_FACTORY
+      },
+      MOCK_STATE,
+      USERS_LIST,
+      MOCK_INDEX
+    );
+
+    // It should call the effect with argument extracted
+    // using effectParamsFactory and provided state
+    expect(it.next().value).toEqual(call(MOCK_EFFECT, 43));
 
     const MOCK_USER_LIST = [
       { id: "user-1", firstName: "bar", lastName: "qux" }
@@ -28,14 +73,20 @@ describe("CRUD Saga Tests", () => {
 
     // It should normalize the response
     expect(it.next(MOCK_USER_LIST).value).toEqual(
-      call(normalizeAndStore, MOCK_USER_LIST, Schema.users)
+      call(normalizeAndStore, MOCK_USER_LIST, MOCK_SCHEMA)
     );
 
     const MOCK_NORMALIZED_RESULT = [1, 2, 3];
 
     // It should store normalized references of entities
     expect(it.next(MOCK_NORMALIZED_RESULT).value).toEqual(
-      put(Actions.Creators.entitiesFetched(USERS_LIST, MOCK_NORMALIZED_RESULT))
+      put(
+        Actions.Creators.entitiesFetched(
+          USERS_LIST,
+          MOCK_INDEX,
+          MOCK_NORMALIZED_RESULT
+        )
+      )
     );
   });
 
@@ -45,9 +96,7 @@ describe("CRUD Saga Tests", () => {
   });
 
   it("should call fetch entities for route in transition path", () => {
-    const it = Saga.onRouteTransition({
-      payload: { route: { name: USERS_LIST }, previousRoute: null }
-    });
+    const it = Saga.routeTransitioned([USERS_LIST]);
 
     expect(it.next().value).toEqual(
       all([call(Saga.fetchEntities, USERS_LIST)])

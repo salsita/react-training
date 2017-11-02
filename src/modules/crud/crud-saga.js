@@ -52,7 +52,7 @@ const withRouterParams = effectParamsFactory => state =>
  *
  * @returns {Object} Object containing effect to be executed and schema for normalizing the result
  */
-const mapRouteToFetchParams = route => {
+export const mapRouteToFetchParams = route => {
   switch (route) {
     case Routes.USERS_LIST:
       return [
@@ -82,6 +82,15 @@ const mapRouteToFetchParams = route => {
   }
 };
 
+/**
+ * Fetches entity (based on provided effect), normalizes it (based on provided schema)
+ * and stores result in app state (based on route and index).
+ *
+ * @param {Object} fetchParams containing effect, schema, effectParamsFactory
+ * @param {any} entire state object
+ * @param {String} route to fetch entities for
+ * @param {Number} index of entity to fetch for particular route
+ */
 export function* fetchEntityByFetchParams(fetchParams, state, route, index) {
   const { effect, schema, effectParamsFactory = () => [] } = fetchParams;
 
