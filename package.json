@@ -25,7 +25,8 @@
     "router5": "^5.4.0",
     "router5-helpers": "^5.0.0",
     "router5.transition-path": "^4.0.1",
-    "serve": "^6.3.0"
+    "serve": "^6.3.0",
+    "styled-components": "^2.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
