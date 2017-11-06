@@ -4,9 +4,12 @@ import Actions from "modules/crud/crud-actions";
 
 const INITIAL_STATE = {};
 
-const entitiesFetched = (state, { route, result }) => ({
+const entitiesFetched = (state, { route, index, result }) => ({
   ...state,
-  [route]: result
+  [route]: {
+    ...(state[route] || {}),
+    [index]: result
+  }
 });
 
 export const HANDLERS = {

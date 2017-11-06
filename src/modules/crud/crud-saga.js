@@ -1,6 +1,4 @@
-import transitionPath from "router5.transition-path";
-import { all, call, put, select, takeEvery } from "redux-saga/effects";
-import { actionTypes } from "redux-router5";
+import { all, call, fork, put, select } from "redux-saga/effects";
 import { startSubmit, stopSubmit } from "redux-form";
 
 import * as Routes from "modules/routing/routes";
@@ -14,6 +12,7 @@ import Actions from "modules/crud/crud-actions";
 import { normalizeAndStore } from "modules/entity-repository/entity-repository-saga";
 import { withErrorHandling, withLoadingIndicator } from "modules/api/api-saga";
 import { BusinessValidationError } from "modules/api/api-errors";
+import { onRouteTransition } from "modules/routing/routing-saga";
 
 /**
  * Returns effect & schema pair will will be used for saving & normalizing the entity.
@@ -53,21 +52,29 @@ const withRouterParams = effectParamsFactory => state =>
  *
  * @returns {Object} Object containing effect to be executed and schema for normalizing the result
  */
-const mapRouteToFetchParams = route => {
+export const mapRouteToFetchParams = route => {
   switch (route) {
     case Routes.USERS_LIST:
       return {
-        effect: Effects.getUsers,
-        schema: Schema.users
+        users: {
+          effect: Effects.getUsers,
+          schema: Schema.users
+        },
+        skills: {
+          effect: Effects.getSkills,
+          schema: Schema.skills
+        }
       };
 
     case Routes.USER_DETAIL:
       return {
-        effect: Effects.getUser,
-        schema: Schema.user,
-        effectParamsFactory: withRouterParams(routeParams => [
-          routeParams[Routes.USER_ROUTE_ID_PARAM]
-        ])
+        user: {
+          effect: Effects.getUser,
+          schema: Schema.user,
+          effectParamsFactory: withRouterParams(routeParams => [
+            routeParams[Routes.USER_ROUTE_ID_PARAM]
+          ])
+        }
       };
 
     default:
@@ -76,31 +83,48 @@ const mapRouteToFetchParams = route => {
 };
 
 /**
+ * Fetches entity (based on provided effect), normalizes it (based on provided schema)
+ * and stores result in app state (based on route and index).
+ *
+ * @param {Object} fetchParams containing effect, schema, effectParamsFactory
+ * @param {any} entire state object
+ * @param {String} route to fetch entities for
+ * @param {String} key of entity to fetch for particular route
+ */
+export function* fetchEntityByFetchParams(fetchParams, state, route, key) {
+  const { effect, schema, effectParamsFactory = () => [] } = fetchParams;
+
+  // Just call the effect
+  const data = yield call(effect, ...effectParamsFactory(state));
+
+  // Normalize the response
+  const result = yield call(normalizeAndStore, data, schema);
+
+  // And store the result
+  yield put(Actions.Creators.entitiesFetched(route, key, result));
+}
+
+/**
  * Fetches CRUD entity/ies based on provided route.
  * Fetched entity/ies is/are automatically normalized and
  * reference to it stored in the app state
  */
 export function* fetchEntitiesImpl(route) {
-  const fetchParams = mapRouteToFetchParams(route);
+  const fetches = mapRouteToFetchParams(route);
 
   // Some routes might not have CRUD fetching defined
   // We'll skip these
-  if (fetchParams) {
+  if (fetches) {
     // Fetch state so that it's possible to pass it
     // to effectParamsFactory to return params
     // of the effect
     const state = yield select(identityFn);
 
-    const { effect, schema, effectParamsFactory = () => [] } = fetchParams;
-
-    // Just call the effect
-    const data = yield call(effect, ...effectParamsFactory(state));
-
-    // Normalize the response
-    const result = yield call(normalizeAndStore, data, schema);
-
-    // And store the result
-    yield put(Actions.Creators.entitiesFetched(route, result));
+    yield all(
+      Object.keys(fetches).map(key =>
+        fork(fetchEntityByFetchParams, fetches[key], state, route, key)
+      )
+    );
   }
 }
 
@@ -156,16 +180,13 @@ export const saveEntity = compose(
  * Handles sucessful route transition and automatically calls
  * fetch for all corresponding routes
  * 
- * @param {Object} router5/TRANSITION_SUCCESS action
+ * @param {Array} Array of activated routes
  */
-export function* onRouteTransition({ payload: { route, previousRoute } }) {
-  // Find routing transition path
-  const { toActivate } = transitionPath(route, previousRoute);
-
+export function* routeTransitioned(toActivate) {
   // Call fetch for all activated routes
   yield all(toActivate.map(route => call(fetchEntities, route)));
 }
 
 export default function* crudSaga() {
-  yield all([takeEvery(actionTypes.TRANSITION_SUCCESS, onRouteTransition)]);
+  yield all([fork(onRouteTransition, routeTransitioned)]);
 }
