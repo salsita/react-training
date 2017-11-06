@@ -18,9 +18,7 @@ describe("CRUD Saga Tests", () => {
     // in order to pass it to effect mapper
     expect(it.next().value).toEqual(select(identityFn));
 
-    const [firstFetchParam, secondFetchParam] = Saga.mapRouteToFetchParams(
-      USERS_LIST
-    );
+    const { users, skills } = Saga.mapRouteToFetchParams(USERS_LIST);
 
     const MOCK_STATE = 42;
     // It should call fetchEntityByFetchParams for all the
@@ -29,17 +27,17 @@ describe("CRUD Saga Tests", () => {
       all([
         fork(
           Saga.fetchEntityByFetchParams,
-          firstFetchParam,
+          users,
           MOCK_STATE,
           USERS_LIST,
-          0
+          "users"
         ),
         fork(
           Saga.fetchEntityByFetchParams,
-          secondFetchParam,
+          skills,
           MOCK_STATE,
           USERS_LIST,
-          1
+          "skills"
         )
       ])
     );

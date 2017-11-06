@@ -55,27 +55,27 @@ const withRouterParams = effectParamsFactory => state =>
 export const mapRouteToFetchParams = route => {
   switch (route) {
     case Routes.USERS_LIST:
-      return [
-        {
+      return {
+        users: {
           effect: Effects.getUsers,
           schema: Schema.users
         },
-        {
+        skills: {
           effect: Effects.getSkills,
           schema: Schema.skills
         }
-      ];
+      };
 
     case Routes.USER_DETAIL:
-      return [
-        {
+      return {
+        user: {
           effect: Effects.getUser,
           schema: Schema.user,
           effectParamsFactory: withRouterParams(routeParams => [
             routeParams[Routes.USER_ROUTE_ID_PARAM]
           ])
         }
-      ];
+      };
 
     default:
       return null;
@@ -89,9 +89,9 @@ export const mapRouteToFetchParams = route => {
  * @param {Object} fetchParams containing effect, schema, effectParamsFactory
  * @param {any} entire state object
  * @param {String} route to fetch entities for
- * @param {Number} index of entity to fetch for particular route
+ * @param {String} key of entity to fetch for particular route
  */
-export function* fetchEntityByFetchParams(fetchParams, state, route, index) {
+export function* fetchEntityByFetchParams(fetchParams, state, route, key) {
   const { effect, schema, effectParamsFactory = () => [] } = fetchParams;
 
   // Just call the effect
@@ -101,7 +101,7 @@ export function* fetchEntityByFetchParams(fetchParams, state, route, index) {
   const result = yield call(normalizeAndStore, data, schema);
 
   // And store the result
-  yield put(Actions.Creators.entitiesFetched(route, index, result));
+  yield put(Actions.Creators.entitiesFetched(route, key, result));
 }
 
 /**
@@ -121,8 +121,8 @@ export function* fetchEntitiesImpl(route) {
     const state = yield select(identityFn);
 
     yield all(
-      fetches.map((fetchParams, index) =>
-        fork(fetchEntityByFetchParams, fetchParams, state, route, index)
+      Object.keys(fetches).map(key =>
+        fork(fetchEntityByFetchParams, fetches[key], state, route, key)
       )
     );
   }
