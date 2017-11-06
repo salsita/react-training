@@ -2,6 +2,7 @@
 
 exports[`Link Component Tests should render link as anchor with children nodes inside 1`] = `
 <a
+  className={undefined}
   onClick={[Function]}
 >
   <div>
