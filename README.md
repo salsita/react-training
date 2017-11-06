@@ -1,5 +1,5 @@
 # react-training
-React training app based on CRA. For information about used boilerplate visit [https://github.com/facebookincubator/create-react-app](CRA repo).
+React training app based on CRA. For information about used boilerplate visit [CRA repo](https://github.com/facebookincubator/create-react-app).
 
 ## Development
 Use `yarn`:
