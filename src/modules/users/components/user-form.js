@@ -8,6 +8,31 @@ import FormFieldSelect from "modules/forms/components/form-field-select";
 import * as Validations from "modules/forms/validations";
 import { getSkills } from "modules/crud/crud-selectors";
 
+import styled from "styled-components";
+import { Button, Title, MessageError } from "./../../../styles";
+
+const Form = styled.form`
+  width: 800px;
+  margin: 0 auto;
+  border: 1px solid #eeeeee;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 3px;
+`;
+
+const Label = styled.label`
+  font-family: Arial, "sans-serif";
+  font-size: 13px;
+  color: #aaaaaa;
+`;
+
+const StyledList = styled.ul`
+  font-family: Arial, "sans-serif";
+  padding: 0;
+  margin: 0;
+  list-style: none;
+`;
+
 export const USER_FORM_NAME = "user-form";
 
 const validateSkillNotEmpty = Validations.notEmptyObject("Skill is required");
@@ -21,9 +46,9 @@ const validateEmailNotEmpty = Validations.notEmptyString("E-mail is required");
 
 const Skills = ({ skills, fields, meta: { error, submitFailed, dirty } }) => (
   <div>
-    <h2>Skills</h2>
-    {(submitFailed || dirty) && error && <div>{error}</div>}
-    <ul>
+    <Title>Skills</Title>
+    {(submitFailed || dirty) && error && <MessageError>{error}</MessageError>}
+    <StyledList>
       {fields.map((name, index) => (
         <li key={index}>
           <FormFieldSelect
@@ -33,15 +58,15 @@ const Skills = ({ skills, fields, meta: { error, submitFailed, dirty } }) => (
             labelKey="skill"
             validate={validateSkillNotEmpty}
           />
-          <button type="button" onClick={() => fields.remove(index)}>
-            x
-          </button>
+          <Button type="button" onClick={() => fields.push({})}>
+            Add skill
+          </Button>
         </li>
       ))}
-    </ul>
-    <button type="button" onClick={() => fields.push({})}>
+    </StyledList>
+    <Button type="button" onClick={() => fields.push({})}>
       Add skill
-    </button>
+    </Button>
   </div>
 );
 
@@ -56,22 +81,22 @@ Skills.propTypes = {
 };
 
 const UserForm = ({ handleSubmit, skills, onSubmit }) => (
-  <form onSubmit={handleSubmit(onSubmit)}>
-    <label>First Name</label>
+  <Form onSubmit={handleSubmit(onSubmit)}>
+    <Label>First Name</Label>
     <FormField
       name="firstName"
       type="text"
       placeholder="John"
       validate={validateNotEmptyFirstName}
     />
-    <label>Last Name</label>
+    <Label>Last Name</Label>
     <FormField
       name="lastName"
       type="text"
       placeholder="Doe"
       validate={validateNotEmptyLastName}
     />
-    <label>E-mail</label>
+    <Label>E-mail</Label>
     <FormField
       name="email"
       type="text"
@@ -84,8 +109,8 @@ const UserForm = ({ handleSubmit, skills, onSubmit }) => (
       skills={skills}
       validate={[Validations.notEmptySkills, Validations.allSkillsUnique]}
     />
-    <button>Save</button>
-  </form>
+    <Button>Save</Button>
+  </Form>
 );
 
 UserForm.propTypes = {

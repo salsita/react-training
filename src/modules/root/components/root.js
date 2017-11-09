@@ -6,19 +6,20 @@ import ApiLoader from "modules/api/components/api-loader";
 import Route from "modules/routing/components/route";
 import UsersRoute from "modules/users/components/users-route";
 
-import styled from "styled-components";
-import { colors, fontSize, space } from "./../../../styles";
+import styled, { injectGlobal } from "styled-components";
+import { colors, fontSize, space, Title } from "./../../../styles";
+
+injectGlobal`
+  body {
+    font-family: Arial, "sans-serif";
+    font-size: ${fontSize[0]};
+  }
+`;
 
 const App = styled.div`
   color: ${colors.black};
-  font-family: Arial, "sans-serif";
-  font-size: ${fontSize[0]};
   margin: ${space[3]} auto;
   width: 800px;
-`;
-
-const Title = styled.h1`
-  font-size: ${fontSize[1]};
 `;
 
 const Root = () => (

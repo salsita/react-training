@@ -5,6 +5,8 @@ import { Field } from "redux-form";
 
 import "react-select/dist/react-select.css";
 
+import { MessageError, MessageWarning } from "./../../../styles";
+
 export const FieldSelectAdapter = ({
   input,
   label,
@@ -16,8 +18,8 @@ export const FieldSelectAdapter = ({
     <div>
       <Select {...input} {...rest} onBlur={() => input.onBlur()} />
       {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
+        ((error && <MessageError>{error}</MessageError>) ||
+          (warning && <MessageWarning>{warning}</MessageWarning>))}
     </div>
   </div>
 );
