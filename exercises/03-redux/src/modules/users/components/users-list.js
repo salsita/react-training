@@ -32,11 +32,13 @@ const UsersList = ({ users, addUser }) => (
 );
 
 UsersList.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired
-  })).isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired,
   addUser: PropTypes.func.isRequired
 };
 
