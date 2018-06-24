@@ -273,24 +273,26 @@ The main purpose of this exercise is to try [Reselect](https://github.com/reactj
 ### UsersSelectors
 Location: `src/modules/users/users-selectors.js`
 
-* Create a selector called `getHeaderTitle` with [`createSelector`](https://github.com/reactjs/reselect#createselectorinputselectors--inputselectors-resultfunc) from `reselect`
-  * This selector just returns the `title` from the `state`
+* Create a selector called `getTitle` with [`createSelector`](https://github.com/reactjs/reselect#createselectorinputselectors--inputselectors-resultfunc) from `reselect`
+  * This selector just returns the `title` string from the `state`
 * Create a selector called `getUsers` with `createSelector`
-  * This selector returns the `users` from the `state` and modifies last names to upper case
+  * This selector just returns the `users` array from the `state`
+* Create a selector called `getUsersList` with `createSelector`
+  * This selector uses the `getUsers` selector and modifies last names to upper case
 
 ### Header component
 Location: `src/modules/root/components/header.js`
 
 The same component with the same props like in the previous exercise.
 
-* Use the `getHeaderTitle` selector in `mapStateToProps`
+* Use the `getTitle` selector in `mapStateToProps`
 
 ### UsersList component
 Location: `src/modules/users/components/users-list.js`
 
 The same component with the same props like in the previous exercise.
 
-* Use the `getUsers` selector in `mapStateToProps`
+* Use the `getUsersList` selector in `mapStateToProps`
 
 
 ## Exercise \#6
