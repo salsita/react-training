@@ -348,7 +348,7 @@ Location: `src/modules/api/api-client.js`
 This file contains an API client with `axios` that is used to make requests to the BE server.
 
 * Use [`axios.create`](https://github.com/axios/axios#creating-an-instance) to create the client
-* Set `baseURL: "http://localhost:3000"` in the config
+* Set `baseURL: 'http://localhost:3000'` in the config
 
 ### UsersEffects
 Location: `src/modules/users/users-effects.js`
@@ -465,7 +465,7 @@ Location: `src/modules/root/root-reducer.js`
 
 The `@salsita/react-entities` library uses Redux so it's necessary to add its reducer into our root reducer.
 
-* Import `import { entitiesReducer as entities } from "@salsita/react-entities";`
+* Import `import { entitiesReducer as entities } from '@salsita/react-entities';`
 * Add `entities` into the root reducer
 
 ### Entity Repository Schema
@@ -481,7 +481,7 @@ Location: `src/modules/users/users-saga.js`
 
 Currently, the same denormalized data that comes from the BE server are stored in the state. We need to normalize the data from response and store them in the entity repository.
 
-* Import `import { normalizeAndStore } from "@salsita/react-entities";`
+* Import `import { normalizeAndStore } from '@salsita/react-entities';`
 * Call `normalizeAndStore(data, schema)` and save the result (an array of `id`s) in the `usersReducer`
 
 ### usersReducer
@@ -564,9 +564,9 @@ Location: `src/modules/root/root-reducer.js`
 
 We need to add all required reducers into the root reducer.
 
-* Import `import { apiReducer as api } from "@salsita/react-api/api-reducer";`
-* Import `import { crudReducer as crud } from "@salsita/react-crud/crud-reducer";`
-* Import `import { routerReducer as router } from "@salsita/react-routing/routing-reducer";`
+* Import `import { apiReducer as api } from '@salsita/react-api/api-reducer';`
+* Import `import { crudReducer as crud } from '@salsita/react-crud/crud-reducer';`
+* Import `import { routerReducer as router } from '@salsita/react-routing/routing-reducer';`
 * Add all three reducers into the root reducer
 
 ### Routes
@@ -583,8 +583,8 @@ Location: `src/index.js`
 
 Use `buildRouter` and `buildStore` functions easier configuration of `redux`, `router5`, and `redux-saga`.
 
-* Import `import { buildRouter } from "@salsita/react-router";`
-* Import `import { buildStore } from "@salsita/react-core";`
+* Import `import { buildRouter } from '@salsita/react-router';`
+* Import `import { buildStore } from '@salsita/react-core';`
 * Create a router with the `buildRouter(routes, options)` function
   * You can specify the `defaultRoute` in the `options` argument
 * Create the redux store with the `buildStore(rootReducer, rootSaga, router)` function
@@ -636,7 +636,7 @@ Location: `src/modules/users/components/users-list.js`
 
 We need to add links to the detail page. Navigate to the detail page when the user clicks on the first name.
 
-* Import `import { Link } from "@salsita/react-router";`
+* Import `import { Link } from '@salsita/react-router';`
 * Use the `Link` component and set `name` and `params` props on it
 
 ### Root component
@@ -644,9 +644,9 @@ Location: `src/modules/root/components/root.js`
 
 Use the `Route` component from `@salsita/react-router` for easier routing. You can also use `ApiErrorToast` and `ApiLoader` to display a basic error toast and loading spinner. The data for both components are automatically stored in the state from `@salsita/react-api`.
 
-* Import `import { Route } from "@salsita/react-router";`
+* Import `import { Route } from '@salsita/react-router';`
 * Use the `Route` component instead of `UsersList` and set `startsWith` and `component` props on it
-* Import `import { ApiErrorToast, ApiLoader } from "@salsita/react-api";`
+* Import `import { ApiErrorToast, ApiLoader } from '@salsita/react-api';`
 * Use `Portal` from `react-portal` to render `ApiErrorToast` and `ApiLoader`
 
 ### CRUD Saga file
@@ -704,7 +704,7 @@ Location: `src/modules/root/root-saga.js`
 
 Start `crudSaga` to automatically fetch entities.
 
-* Import `import { crudSaga } from "@salsita/react-crud";`
+* Import `import { crudSaga } from '@salsita/react-crud';`
 * Start `crudSaga` (it needs `mapRouteToFetchParams` as an argument)
 
 ### UsersEffects
@@ -712,7 +712,7 @@ Location: `src/modules/users/users-effects.js`
 
 We need a new effect to fetch a single user. Also, we should use `wrapApiCall` from `@salsita/react-api` for proper error handling.
 
-* Import `import { wrapApiCall } from "@salsita/react-api";`
+* Import `import { wrapApiCall } from '@salsita/react-api';`
 * Wrap all effects with `wrapApiCall(effect)`
 * Add a new effect called `getUser`
 
@@ -778,7 +778,7 @@ Location: `src/modules/root/root-reducer.js`
 
 We need to add the `form` reducer into the root reducer.
 
-* Import `import { formsReducer as form } from "@salsita/react-forms";`
+* Import `import { formsReducer as form } from '@salsita/react-forms';`
 * Add the `form` reducer into the root reducer
 
 ### Routes
@@ -901,6 +901,6 @@ There are couple of things we need to update in our sagas.
 * Currently, our saga handles update as well so it is good to rename it to `saveUser` since the new name of the action that starts the saga is `SAVE_USER`.
   * Update names of the action and saga
 * Since the `saveUser` saga can be called from two routes now (`USERS_LIST` and `USER_DETAIL`), we want to redirect the user into `USERS_LIST` route after the successful submission.
-  * Import `import { RoutingActions } from "@salsita/react-router";`
+  * Import `import { RoutingActions } from '@salsita/react-router';`
   * Use the `routerActions.Creators.navigateTo(routeName)` action to perform the redirect
 * Since we use forms for creating and updating users, we should add the 4th argument to the `saveEntity` saga, which is the name of the form that was submitted
