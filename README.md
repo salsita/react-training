@@ -23,6 +23,10 @@ This is the simplest component created with a class. It just renders a heading (
 * Create a class named `Header` that extends [`React.Component`](https://reactjs.org/docs/react-component.html)
 * Implement [`render`](https://reactjs.org/docs/react-component.html#render) method to render the heading
 * Implement correct [`PropTypes`](https://reactjs.org/docs/typechecking-with-proptypes.html) in the `static propTypes` field
+  * `PropTypes` are in a separate library called `prop-types` and can be imported as
+    ```js
+    import PropTypes from 'prop-types';
+    ```
 * Use this component in the `Root` component
 
 ### UsersList component
