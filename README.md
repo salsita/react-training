@@ -426,7 +426,7 @@ The main purpose of this exercise is to try [`normalizr`](https://github.com/pau
   * If you used `06-redux-saga`, run `yarn` or `npm i` in the root of this repo
   * Otherwise, install dependencies with the following commands
     * with `yarn`
-      * `yarn normalizr roman-numerals @salsita/react-core @salsita/react-entities`
+      * `yarn add normalizr roman-numerals @salsita/react-core @salsita/react-entities`
     * or with `npm`
       * `npm i normalizr roman-numerals @salsita/react-core @salsita/react-entities`
 * Add skills and [regnal number](https://en.wikipedia.org/wiki/Regnal_number) to users
@@ -550,7 +550,7 @@ The main purpose of this exercise is to try [`router5`](http://router5.github.io
   * If you used `07-normalizr`, run `yarn` or `npm i` in the root of this repo
   * Otherwise, install dependencies with the following commands
     * with `yarn`
-      * `yarn react-portal router5-helpers @salsita/react-api @salsita/react-crud @salsita/react-router`
+      * `yarn add react-portal router5-helpers @salsita/react-api @salsita/react-crud @salsita/react-router`
     * or with `npm`
       * `npm i react-portal router5-helpers @salsita/react-api @salsita/react-crud @salsita/react-router`
 * Create a page for user detail (e.g. at `/users/user-1`)
@@ -764,7 +764,7 @@ The main purpose of this exercise is to try [Redux Form](https://redux-form.com/
   * If you used `08-router5`, run `yarn` or `npm i` in the root of this repo
   * Otherwise, install dependencies with the following commands
     * with `yarn`
-      * `yarn redux-form @salsita/react-forms`
+      * `yarn add redux-form @salsita/react-forms`
     * or with `npm`
       * `npm i redux-form @salsita/react-forms`
 * Create forms for creating and updating users
