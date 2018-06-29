@@ -579,8 +579,8 @@ Location: `src/routing/routes.js`
 This file contains names and configuration of routes.
 
 * Create 2 routes
-  * `users` for the list of all users
-  * `users.detail` for the detail page (with `id` parameter)
+  * `const USERS_LIST = 'users'` for the list of all users
+  * `const USER_DETAIL = 'users.detail'` for the detail page (with `id` parameter)
 
 ### Index file
 Location: `src/index.js`
@@ -772,10 +772,11 @@ The main purpose of this exercise is to try [Redux Form](https://redux-form.com/
 ### Server file
 Location: `src/server.js`
 
-Add a route that updates a user and fetches skills.
+Add routes that updates a user and fetches skills. Modify the route that saves a new user.
 
 * Add a route for `PATCH /users/:id` that updates the user and returns the updated user in the response
 * Add a route for `GET /skills` that returns all skills
+* Modify the route `POST /users/:id` and add `skills` field into the request body
 
 ### rootReducer
 Location: `src/modules/root/root-reducer.js`
@@ -788,7 +789,7 @@ We need to add the `form` reducer into the root reducer.
 ### Routes
 Location: `src/routing/routes.js`
 
-* Create a new route called `users.create` for the form that creates a new user
+* Create a new route `const USER_CREATE = 'users.create'` for the form that creates a new user
 
 ### UsersEffects
 Location: `src/modules/users/users-effects.js`
@@ -803,7 +804,7 @@ Location: `src/modules/users/users-actions.js`
 
 Currently, we have only one action called `ADD_USER` that is dispatched when a user clicks on one of the buttons. Since we will use this action to create or update a user, let's rename it to `SAVE_USER`.
 
-* Rename the `ADD_USER` action into `SAVE_USER`
+* Rename the `ADD_USER` action to `SAVE_USER`
 
 ### CRUD Saga file
 Location: `src/modules/crud/crud-saga.js`
@@ -823,7 +824,7 @@ Location: `src/modules/users/components/user-form.js`
 
 This [form component](https://redux-form.com/7.3.0/docs/api/reduxform.md/) has fields for `firstName`, `lastName`, `regnalNumber`, and `skills` where a single user can have multiple `skills`.
 
-* Use `FormField` from `@salsita-react-forms` for
+* Use `FormField` from `@salsita/react-forms` for
   * `firstName`
   * `lastName`
   * `regnalNumber`
@@ -887,7 +888,7 @@ Props:
 ```
 
 * Remove both buttons
-* Add a `Link` to detail page
+* Add a `Link` to the `USERS` page
 
 ### UsersRoute component
 Location `src/modules/users/components/users-route.js`
@@ -905,6 +906,6 @@ There are couple of things we need to update in our sagas.
 * Currently, our saga handles update as well so it is good to rename it to `saveUser` since the new name of the action that starts the saga is `SAVE_USER`.
   * Update names of the action and saga
 * Since the `saveUser` saga can be called from two routes now (`USERS_LIST` and `USER_DETAIL`), we want to redirect the user into `USERS_LIST` route after the successful submission.
-  * Import `import { RoutingActions } from '@salsita/react-router';`
-  * Use the `routerActions.Creators.navigateTo(routeName)` action to perform the redirect
+  * Import `import { RouterActions } from '@salsita/react-router';`
+  * Use the `RouterActions.Creators.navigateTo(routeName)` action to perform the redirect
 * Since we use forms for creating and updating users, we should add the 4th argument to the `saveEntity` saga, which is the name of the form that was submitted
