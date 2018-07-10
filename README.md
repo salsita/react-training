@@ -569,13 +569,13 @@ Location: `src/modules/root/root-reducer.js`
 
 We need to add all required reducers into the root reducer.
 
-* Import `import { apiReducer as api } from '@salsita/react-api/api-reducer';`
-* Import `import { crudReducer as crud } from '@salsita/react-crud/crud-reducer';`
-* Import `import { routerReducer as router } from '@salsita/react-routing/routing-reducer';`
+* Import `import { apiReducer as api } from '@salsita/react-api';`
+* Import `import { crudReducer as crud } from '@salsita/react-crud';`
+* Import `import { routerReducer as router } from '@salsita/react-router';`
 * Add all three reducers into the root reducer
 
 ### Routes
-Location: `src/routing/routes.js`
+Location: `src/router/routes.js`
 
 This file contains names and configuration of routes.
 
@@ -586,7 +586,7 @@ This file contains names and configuration of routes.
 ### Index file
 Location: `src/index.js`
 
-Use `buildRouter` and `buildStore` functions easier configuration of `redux`, `router5`, and `redux-saga`.
+Use `buildRouter` and `buildStore` functions for easier configuration of `redux`, `router5`, and `redux-saga`.
 
 * Import `import { buildRouter } from '@salsita/react-router';`
 * Import `import { buildStore } from '@salsita/react-core';`
@@ -695,14 +695,14 @@ Location: `src/modules/crud/crud-selectors.js`
 
 The CRUD module takes care about automatic storing of entity `id`s. Since the `id`s won't be in the `usersReducer` anymore, we need to slightly update `UsersSelectors` and move them into `CrudSelectors`.
 
-* Create the following selectors that read the data from CRUD and Entity Repository modules
+* Create the following selectors that read the data from CRUD and Entities modules
   * `getUsersList`
   * `getUserDetail`
 
 ### UsersSelectors
 Location: `src/modules/users/users-selectors.js`
 
-* Update the `getUsers` selector (hint: use `CrudSelectors`)
+* Update the `getUsersList` selector (hint: use `CrudSelectors`)
 
 ### rootSaga
 Location: `src/modules/root/root-saga.js`
