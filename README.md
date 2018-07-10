@@ -472,8 +472,8 @@ The `@salsita/react-entities` library uses Redux so it's necessary to add its re
 * Import `import { entitiesReducer as entities } from '@salsita/react-entities';`
 * Add `entities` into the root reducer
 
-### Entity Repository Schema
-Location: `src/modules/entity-repository/entity-repository-schema.js`
+### Entities Schema
+Location: `src/modules/entities/entities-schema.js`
 
 This file contains [`normalizr` schema](https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#schema) of our entities.
 
@@ -506,8 +506,8 @@ Location: `src/modules/users/users-actions.js`
 
 * Update the payload variable into `userIds`
 
-### EntityRepositorySelectors
-Location: `src/modules/entity-repository/entity-repository-selectors.js`
+### EntitiesSelectors
+Location: `src/modules/entities/entities-selectors.js`
 
 Since data are stored in the normalized form in the state, we need to denormalize them for easier access to values.
 
@@ -518,8 +518,9 @@ Location: `src/modules/users/users-selectors.js`
 
 The `usersReducer` does not store the entity data, it stores `id`s only.
 
-* Create a new selector that maps users ids from the `usersReducer` into denormalized users
-* Use the new selector in the `getUsers` selector that returns the users with
+* Create a new selector called `getUserIds` that returns `id`s from the redux state
+* Modify the `getUsers` selector to map users `id`s from the `usersReducer` into denormalized users
+* Modify the `getUsersList` selector to return the users with
   * upper cased last names
   * converted regnal number into Roman numerals (use the [`roman-numerals`](https://github.com/joshleaves/roman-numerals) library)
 
@@ -530,7 +531,7 @@ Props:
 ```ts
 {
   users: Array<{
-    id: number,
+    id: string,
     firstName: string,
     lastName: string,
     regnalNumber: string
