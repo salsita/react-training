@@ -797,7 +797,7 @@ We need to add the `form` reducer into the root reducer.
 * Add the `form` reducer into the root reducer
 
 ### Routes
-Location: `src/routing/routes.js`
+Location: `src/router/routes.js`
 
 * Create a new route `const USER_CREATE = 'users.create'` for the form that creates a new user
 
@@ -832,18 +832,16 @@ Location: `src/modules/crud/crud-selectors.js`
 ### UserForm component
 Location: `src/modules/users/components/user-form.js`
 
-This [form component](https://redux-form.com/7.3.0/docs/api/reduxform.md/) has fields for `firstName`, `lastName`, `regnalNumber`, and `skills` where a single user can have multiple `skills`.
+This [form component](https://redux-form.com/7.3.0/docs/api/reduxform.md/) has fields for `firstName`, `lastName`, and `skills` where a single user can have multiple `skills`.
 
 * Use `FormField` from `@salsita/react-forms` for
   * `firstName`
   * `lastName`
-  * `regnalNumber`
 * Use `FormFieldSelect` from `@salsita/react-forms` for `skills`
 * Since a user can have multiple skills, implement adding and deleting of skills with the [`FieldArray`](https://redux-form.com/7.3.0/docs/api/fieldarray.md/) component from `redux-form`
 * Implement the following [field-level](https://redux-form.com/7.3.0/examples/fieldlevelvalidation/) validations
   * `firstName` cannot be an empty string
   * `lastName` cannot be an empty string
-  * `regnalNumber` has to be a number
   * `skills` cannot be empty and must be unique
 * You can use some validation functions from `@salsita/react-forms`
 

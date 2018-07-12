@@ -2,7 +2,7 @@ import { createActions } from 'reduxsauce';
 
 export default createActions(
   {
-    addUser: ['user']
+    saveUser: ['user']
   },
   { prefix: 'users/' }
 );
