@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`API Loader Tests should render nothing when loading is false 1`] = `null`;
-
-exports[`API Loader Tests should render the loader when loading is true 1`] = `
-<div>
-  Loading...
-</div>
-`;
