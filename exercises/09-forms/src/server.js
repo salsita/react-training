@@ -43,7 +43,7 @@ app.get('/users/:id', (req, res) => {
 });
 
 app.patch('/users/:id', (req, res) => {
-  const { id, ...userData } = req.body;
+  const { firstName, lastName, skills } = req.body;
 
   const userIndex = users.findIndex(user => user.id === req.params.id);
 
@@ -53,7 +53,9 @@ app.patch('/users/:id', (req, res) => {
 
   users[userIndex] = {
     ...users[userIndex],
-    ...userData
+    firstName,
+    lastName,
+    skills
   };
 
   res.json(users[userIndex]);

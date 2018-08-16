@@ -25,6 +25,7 @@ const Skills = ({ skills, fields, meta: { error, submitFailed, dirty } }) => (
     <ul>
       {fields.map((name, index) => (
         <li key={index}>
+          Skill
           <FormFieldSelect
             name={`${name}.skill`}
             options={skills}
@@ -32,6 +33,7 @@ const Skills = ({ skills, fields, meta: { error, submitFailed, dirty } }) => (
             labelKey="name"
             validate={validateSkillNotEmpty}
           />
+          Level
           <FormField
             name={`${name}.level`}
             type="number"
