@@ -1,3 +1,6 @@
+# Syllabus
+https://docs.google.com/presentation/d/1xaw0AXhimgnBBTctfTFHHIHddcI1RBUM0ITjexDiRRo
+
 # Exercises
 * [Exercise \#1](#exercise-1)
 * [Exercise \#2](#exercise-2)
