@@ -31,7 +31,7 @@
     "router5-helpers": "^5.2.0"
   },
   "scripts": {
-    "start": "concurrently 'yarn start-fe' 'yarn start-be'",
+    "start": "concurrently \"yarn start-fe\" \"yarn start-be\"",
     "start-fe": "react-scripts start",
     "start-be": "nodemon src/server.js",
     "build": "react-scripts build",

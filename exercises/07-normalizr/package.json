@@ -23,7 +23,7 @@
     "@salsita/react-entities": "^1.0.0"
   },
   "scripts": {
-    "start": "concurrently 'yarn start-fe' 'yarn start-be'",
+    "start": "concurrently \"yarn start-fe\" \"yarn start-be\"",
     "start-fe": "react-scripts start",
     "start-be": "nodemon src/server.js",
     "build": "react-scripts build",
