@@ -332,13 +332,13 @@ Location: `package.json`
 * Change the `start` script into the following
   * if you use `yarn`
     ```json
-    "start": "concurrently 'yarn start-fe' 'yarn start-be'",
+    "start": "concurrently \"yarn start-fe\" \"yarn start-be\"",
     "start-fe": "react-scripts start",
     "start-be": "nodemon src/server.js",
     ```
   * or if you use `npm`
     ```json
-    "start": "concurrently 'npm run start-fe' 'npm run start-be'",
+    "start": "concurrently \"npm run start-fe\" \"npm run start-be\"",
     "start-fe": "react-scripts start",
     "start-be": "nodemon src/server.js",
     ```
