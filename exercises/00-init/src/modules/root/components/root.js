@@ -1,8 +1,9 @@
 import React from 'react';
+import Header from './header.js'
 
 const Root = () => (
   <div>
-    <h1>User Management</h1>
+    <Header title="User Management" />
     <p>Hello React!</p>
   </div>
 );
