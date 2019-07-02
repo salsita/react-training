@@ -2,10 +2,10 @@ import React from 'react';
 import Header from './header.js'
 import UsersList from './users-list'
 
-const Root = () => (
+const Root = (props) => (
   <div>
-    <Header title="User Management" />
-    <UsersList/>
+    <Header title={props.title} />
+    <UsersList users={props.users} addUser={props.addUser}/>
   </div>
 );
 

@@ -5,7 +5,22 @@ import ReactDOM from 'react-dom';
 
 import Root from 'modules/root/components/root';
 
-ReactDOM.render(
-  <Root />,
-  document.getElementById('root')
-);
+const state = {
+  title: "Amazing list of users",
+  users: []
+}
+
+function addUser(firstName, lastName) {
+  state.users = state.users.concat({id: state.users.length, firstName: firstName, lastName: lastName})
+  render()
+}
+
+function render ()
+{
+  ReactDOM.render(
+    <Root title={state.title} users={state.users} addUser={addUser} />,
+    document.getElementById('root')
+  );
+}
+
+render()

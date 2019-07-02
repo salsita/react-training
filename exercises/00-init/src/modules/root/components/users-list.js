@@ -1,31 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-class UsersList extends React.Component {
-    constructor() {
-        super();
-        this.state = { 
-            users : []
-        }
-    }
-
-    render() {
+function UsersList (props) {
         return <div>
-            <button onClick={ () => this.addUser('Arya', 'Stark')}>Add Arya</button>
-            <button onClick={ () => this.addUser('Daenerys', 'Targaryen')}>Add Daenerys</button>
+            <button onClick={ () => props.addUser('Arya', 'Stark')}>Add Arya</button>
+            <button onClick={ () => props.addUser('Daenerys', 'Targaryen')}>Add Daenerys</button>
             <br/>
-            {this.state.users.length === 0 ? 
+            {props.users.length === 0 ? 
                 "No users" :
-                this.state.users.map( ({id, firstName, lastName}) => 
+                props.users.map( ({id, firstName, lastName}) => 
                     <li key={id}>{firstName} {lastName}</li>)
             }
         </div>
-    }
+}
 
-    addUser(firstName, lastName) {
-        this.setState( 
-            {users: this.state.users.concat({id: this.state.users.length, firstName: firstName, lastName: lastName}) }
-        )
-    }
+UsersList.propTypes = {
+    users: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        firstName: PropTypes.string,
+        lastName: PropTypes.string
+      })),
+      addUser: PropTypes.func
 }
 
 export default UsersList
