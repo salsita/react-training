@@ -11,7 +11,11 @@ const state = {
 }
 
 function addUser(firstName, lastName) {
-  state.users = state.users.concat({id: state.users.length, firstName: firstName, lastName: lastName})
+  state.users = 
+  [
+    ...state.users,
+    { id: state.users.length, firstName, lastName }
+  ]
   render()
 }
 

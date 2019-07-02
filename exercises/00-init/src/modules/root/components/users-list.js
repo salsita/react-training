@@ -6,9 +6,9 @@ function UsersList (props) {
             <button onClick={ () => props.addUser('Arya', 'Stark')}>Add Arya</button>
             <button onClick={ () => props.addUser('Daenerys', 'Targaryen')}>Add Daenerys</button>
             <br/>
-            {props.users.length === 0 ? 
-                "No users" :
-                props.users.map( ({id, firstName, lastName}) => 
+            {props.users.length === 0
+                ? "No users" 
+                : props.users.map( ({id, firstName, lastName}) => 
                     <li key={id}>{firstName} {lastName}</li>)
             }
         </div>
