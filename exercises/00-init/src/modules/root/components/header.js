@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Header extends React.Component {
-    render() {
-      return <h1>{this.props.title}</h1>;
-    }
+const Header = (props) => <h1>{props.title}</h1>;
 
-    static propTypes = {
-        title: PropTypes.string
-    }
+Header.propTypes = {
+    title: PropTypes.string
 }
 
 export default Header
