@@ -13,9 +13,9 @@ class UsersList extends React.Component {
             <button onClick={ () => this.addUser('Arya', 'Stark')}>Add Arya</button>
             <button onClick={ () => this.addUser('Daenerys', 'Targaryen')}>Add Daenerys</button>
             <br/>
-            {this.state.users.length === 0 ? 
-                "No users" :
-                this.state.users.map( ({id, firstName, lastName}) => 
+            {this.state.users.length === 0 
+                ? "No users" 
+                : this.state.users.map( ({id, firstName, lastName}) => 
                     <li key={id}>{firstName} {lastName}</li>)
             }
         </div>
@@ -23,8 +23,11 @@ class UsersList extends React.Component {
 
     addUser(firstName, lastName) {
         this.setState( 
-            {users: this.state.users.concat({id: this.state.users.length, firstName: firstName, lastName: lastName}) }
-        )
+            { users: [
+                ...this.state.users,
+                {id: this.state.users.length, firstName, lastName}
+            ]
+        })
     }
 }
 
