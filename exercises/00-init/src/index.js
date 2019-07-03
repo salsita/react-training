@@ -3,10 +3,10 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore} from 'redux'
+import { Provider } from 'react-redux';
 
 import Root from 'modules/root/components/root';
 import rootReducer from 'modules/root/root-reducer'
-import UsersActions from 'modules/users/users-actions'
 
 
 const store = createStore(rootReducer,  
@@ -15,15 +15,12 @@ const store = createStore(rootReducer,
     : v => v
 )
 
-function dispatchAddUser(firstName, lastName)
-{
-  store.dispatch(UsersActions.Creators.addUser(firstName, lastName))
-}
-
 function render ()
 {
   ReactDOM.render(
-    <Root title={store.getState().users.title} users={store.getState().users.userList} addUser={dispatchAddUser}/>,
+    <Provider store={store}>
+      <Root/>
+    </Provider>,
     document.getElementById('root')
   );
 }

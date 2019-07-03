@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import UsersActions from 'modules/users/users-actions'
 
 const UsersList = (props) => (
     <div>
@@ -23,4 +26,12 @@ UsersList.propTypes = {
       addUser: PropTypes.func
 }
 
-export default UsersList
+const mapStateToProps = (state) => ({
+    users: state.users.userList
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    addUser: (firstName, lastName) => dispatch(UsersActions.Creators.addUser(firstName, lastName))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersList)
