@@ -15,15 +15,15 @@ const store = createStore(rootReducer,
     : v => v
 )
 
-function dispatchAddUser(user)
+function dispatchAddUser(firstName, lastName)
 {
-  store.dispatch(UsersActions.Creators.addUser(user))
+  store.dispatch(UsersActions.Creators.addUser(firstName, lastName))
 }
 
 function render ()
 {
   ReactDOM.render(
-    <Root title={store.getState().users.title} users={store.getState().users} addUser={dispatchAddUser}/>,
+    <Root title={store.getState().users.title} users={store.getState().users.userList} addUser={dispatchAddUser}/>,
     document.getElementById('root')
   );
 }

@@ -1,22 +1,21 @@
 import UsersActions from './users-actions'
 
-function usersReducer(prevState, action) {
-    if (prevState === undefined) {
-        return {
-            title: "Users are reacting!",
-            users: []
-        }
-    }
+const initialState = {
+    title: "Users are reacting!",
+    userList: []
+}
+
+const usersReducer = (prevState = initialState, action) => {
 
     switch(action.type) {
 
         case UsersActions.Types.ADD_USER:
             return {
                     ...prevState,
-                    users: [
-                        ...prevState.users,
+                    userList: [
+                        ...prevState.userList,
                         {   
-                        id: prevState.users.length, 
+                        id: prevState.userList.length, 
                         firstName: action.payload.firstName, 
                         lastName: action.payload.lastName 
                         }

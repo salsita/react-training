@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 const UsersList = (props) => (
     <div>
-    <button onClick={ () => props.addUser( {firstName:'Arya', lastName:'Stark'} )}>Add Arya</button>
-    <button onClick={ () => props.addUser( {firstName:'Daenerys', lastName:'Targaryen'} )}>Add Daenerys</button>
+    <button onClick={ () => props.addUser('Arya', 'Stark')}>Add Arya</button>
+    <button onClick={ () => props.addUser('Daenerys','Targaryen')}>Add Daenerys</button>
     <br/>
-    {props.users.users.length === 0
+    {props.users.length === 0
         ? "No users" 
-        : props.users.users.map( ({id, firstName, lastName}) => 
+        : props.users.map( ({id, firstName, lastName}) => 
             <li key={id}>{firstName} {lastName}</li>)
     }
     </div>

@@ -2,9 +2,9 @@
 
 const ADD_USER = 'ADD_USER'
 
-const addUser = (user) => ({
+const addUser = (firstName, lastName) => ({
     type: ADD_USER,
-    payload: user
+    payload: {firstName, lastName}
 })
 
 export default {
