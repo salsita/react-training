@@ -15,15 +15,9 @@ const store = createStore(rootReducer,
     : v => v
 )
 
-function render ()
-{
-  ReactDOM.render(
-    <Provider store={store}>
-      <Root/>
-    </Provider>,
-    document.getElementById('root')
-  );
-}
-
-store.subscribe(render)
-render()
+ReactDOM.render(
+  <Provider store={store}>
+    <Root/>
+  </Provider>,
+  document.getElementById('root')
+);
