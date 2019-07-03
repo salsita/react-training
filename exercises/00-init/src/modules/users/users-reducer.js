@@ -9,7 +9,7 @@ const initialState = {
 }
 
 const handlers = {
-    [UsersActions.Types.ADD_USER]: (prevState, action) => ({
+    [UsersActions.Types.ADD]: (prevState, action) => ({
         ...prevState,
         userList: [
             ...prevState.userList,

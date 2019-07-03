@@ -31,7 +31,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    addUser: (firstName, lastName) => dispatch(UsersActions.Creators.addUser(firstName, lastName))
+    addUser: (firstName, lastName) => dispatch(UsersActions.Creators.add(firstName, lastName))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersList)

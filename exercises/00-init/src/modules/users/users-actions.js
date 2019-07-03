@@ -3,11 +3,10 @@ import { createActions } from 'reduxsauce'
 
 const { Types, Creators } = createActions(
     {
-        addUser: ['firstName', 'lastName'],
+        add: ['firstName', 'lastName'],
     },
     {   
         prefix: "users",
-        namespace: "/"
     }
 )
 
