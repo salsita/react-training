@@ -1,17 +1,13 @@
+import { createActions } from 'reduxsauce'
 
 
-const ADD_USER = 'ADD_USER'
-
-const addUser = (firstName, lastName) => ({
-    type: ADD_USER,
-    payload: {firstName, lastName}
-})
-
-export default {
-    Types: {
-      ADD_USER
+const { Types, Creators } = createActions(
+    {
+        add: ['firstName', 'lastName'],
     },
-    Creators: {
-        addUser
+    {   
+        prefix: "users",
     }
-  };
+)
+
+export default { Types, Creators }
