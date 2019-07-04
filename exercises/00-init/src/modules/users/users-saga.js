@@ -1,34 +1,29 @@
-import { call, fork, put, takeEvery } from 'redux-saga/effects';
+import { call, fork, put, takeEvery, } from 'redux-saga/effects';
 
 import {getUsers as getUsersEffect, addUser as addUserEffect} from 'modules/users/users-effects'
 import UsersActions from 'modules/users/users-actions'
 
 
 function* getUsers() {
-    yield alert(`getUsers saga called`)
-
     try {
         const users = yield call(getUsersEffect);
-        yield put({ type: 'LOADED', payload: users });
+        yield put({ type: UsersActions.Types.LOADED, payload: users });
     }
     catch (e)
     {
-        yield alert(`getUsersSaga failed:${e}`)
+        console.log(`getUsers Saga failed:${e}`)
     }
 }
 
 function* addUser(user) {
-    yield alert(`AddUserSaga called, user:${JSON.stringify(user)}`)
     try {
-        // yield call(addUserEffect, user.firstName, user.lastName)
-        yield addUserEffect(user.firstName, user.lastName)
-        yield alert(`addUserEffect called, about to call getUsers`)
-
+        yield call(addUserEffect, user.firstName, user.lastName) // option 1
+        // yield addUserEffect(user.firstName, user.lastName) // option 2
         yield getUsers();
     }
     catch (e)
     {
-        yield alert(`addUser failed:${e}`)
+        console.log(`addUser Saga failed:${e}`)
     }
 }
 
@@ -36,7 +31,6 @@ function* usersSaga()
 {
     yield fork(getUsers);
     yield takeEvery(UsersActions.Types.ADD, addUser);
-    // ToDo: Catch errors
 }
 
 export default usersSaga

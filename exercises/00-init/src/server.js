@@ -6,11 +6,6 @@ const app = express()
 app.use(bodyParser.json())
 
 const users = [
-    {
-        id: 0,
-        firstName: "Jon",
-        lastName: "Snow"
-    }
 ]
 
 app.get('/users', function (req, res) {
@@ -18,7 +13,6 @@ app.get('/users', function (req, res) {
 })
 
 app.post('/users', function (req, res) {
-    console.log(`users endpoint received post request with body:${JSON.stringify(req.body)}`)
     users.push(
         {
             id: users.length,
@@ -26,7 +20,6 @@ app.post('/users', function (req, res) {
             lastName: req.body.lastName,
         }
     )
-    // console.log(`users endpoint, users after post request:${JSON.stringify(users)}`)
     res.end()
 })
 
