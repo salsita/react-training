@@ -16,11 +16,11 @@ const getUsersList = createSelector(
 const getUsersUpperCase = createSelector(
     getUsersList,
     userList => userList.map( user => (
-        {
-            ...user, 
-            lastName: user.lastName.toUpperCase() 
-        } 
-    ))
+            {
+                ...user, 
+                lastName: user.lastName.toUpperCase() 
+            } 
+        ))
 )
 
 export { getTitle, getUsers, getUsersUpperCase} 

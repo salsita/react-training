@@ -4,20 +4,31 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "axios": "^0.19.0",
     "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^7.1.0",
     "react-scripts": "1.0.17",
     "redux": "^4.0.1",
+    "redux-saga": "^1.0.5",
     "reduxsauce": "^1.1.0",
     "reselect": "^4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run start-fe\" \"npm run start-be\"",
+    "start-fe": "react-scripts start",
+    "start-be": "nodemon src/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.1",
+    "nodemon": "^1.19.1"
+  },
+  "proxy": "http://localhost:3001"
 }
