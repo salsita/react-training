@@ -1,4 +1,4 @@
-import { call, fork, put, takeEvery, } from 'redux-saga/effects';
+import { call, fork, put, takeEvery } from 'redux-saga/effects';
 
 import {getUsers as getUsersEffect, addUser as addUserEffect} from 'modules/users/users-effects'
 import UsersActions from 'modules/users/users-actions'
@@ -17,8 +17,7 @@ function* getUsers() {
 
 function* addUser(user) {
     try {
-        yield call(addUserEffect, user.firstName, user.lastName) // option 1
-        // yield addUserEffect(user.firstName, user.lastName) // option 2
+        yield call(addUserEffect, user.firstName, user.lastName)
         yield getUsers();
     }
     catch (e)

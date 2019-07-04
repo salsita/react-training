@@ -7,6 +7,7 @@ const { Types, Creators } = createActions(
         loaded: ['users'],
     },
     {   
+        prefix: "users/",
     }
 )
 
