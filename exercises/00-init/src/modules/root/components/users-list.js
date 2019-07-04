@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import UsersActions from 'modules/users/users-actions'
+import {getUsersUpperCase} from 'modules/users/users-selectors';
 
 const UsersList = (props) => (
     <div>
@@ -26,8 +27,9 @@ UsersList.propTypes = {
       addUser: PropTypes.func
 }
 
+
 const mapStateToProps = (state) => ({
-    users: state.users.userList
+    users: getUsersUpperCase(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

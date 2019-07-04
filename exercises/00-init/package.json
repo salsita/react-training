@@ -11,7 +11,8 @@
     "react-redux": "^7.1.0",
     "react-scripts": "1.0.17",
     "redux": "^4.0.1",
-    "reduxsauce": "^1.1.0"
+    "reduxsauce": "^1.1.0",
+    "reselect": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
