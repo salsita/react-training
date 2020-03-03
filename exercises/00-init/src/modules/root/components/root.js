@@ -1,9 +1,11 @@
 import React from 'react';
+import { Header } from './Header';
+import { UsersList } from './UsersList';
 
 const Root = () => (
   <div>
-    <h1>User Management</h1>
-    <p>Hello React!</p>
+    <Header title="User Management"></Header>
+    <UsersList></UsersList>
   </div>
 );
 
