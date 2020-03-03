@@ -2,10 +2,10 @@ import React from 'react';
 import { Header } from './Header';
 import { UsersList } from './UsersList';
 
-const Root = () => (
+const Root = ({ title, users, addUser, children }) => (
   <div>
-    <Header title="User Management"></Header>
-    <UsersList></UsersList>
+    <Header title={title}></Header>
+    <UsersList users={users} children={children} addUser={addUser}></UsersList>
   </div>
 );
 
