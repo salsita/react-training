@@ -3,17 +3,28 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
+    "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "sam-pattern": "^1.4.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"yarn start-fe\" \"yarn start-be\"",
+    "start-fe": "react-scripts start",
+    "start-be": "nodemon src/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
   }
 }
