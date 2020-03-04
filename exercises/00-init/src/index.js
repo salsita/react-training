@@ -5,30 +5,19 @@ import ReactDOM from "react-dom";
 
 import Root from "modules/root/components/root";
 
-import { addInitialState, addComponent, setRender, step } from "sam-pattern";
+import Intents from "./main";
+import "./modules/users/user-naps";
 
-import Actions from "./modules/users/user-actions";
-import Acceptors from "./modules/users/user-acceptors";
-
-addInitialState({
-    title: "User Management",
-    users: []
-});
-
-const {
-    intents: [init, addUser]
-} = addComponent({
-    actions: [step, Actions.addUser],
-    acceptors: [Acceptors.setUsers]
-});
+import { setRender } from "sam-pattern";
 
 const render = state => {
+    console.log("rendering")
     ReactDOM.render(
-        <Root title={state.title} users={state.users} addUser={addUser} />,
+        <Root title={state.title} users={state.users} addUser={Intents.addUser} />,
         document.getElementById("root")
     );
 };
 
 setRender(render);
 
-init();
+Intents.init();
