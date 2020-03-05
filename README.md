@@ -1,6 +1,9 @@
 # Syllabus
 https://docs.google.com/presentation/d/1xaw0AXhimgnBBTctfTFHHIHddcI1RBUM0ITjexDiRRo
 
+# Before you begin
+Install all dependencies and link executables to child projects with `yarn` or `npm i` in the `exercises` folder.
+
 # Exercises
 * [Exercise \#1](#exercise-1)
 * [Exercise \#2](#exercise-2)
@@ -17,7 +20,6 @@ https://docs.google.com/presentation/d/1xaw0AXhimgnBBTctfTFHHIHddcI1RBUM0ITjexDi
 The main purpose of this exercise is to try [React](https://reactjs.org/docs/) and its [stateful components](https://reactjs.org/docs/react-component.html).
 
 * Open the initial project `00-init`
-* Install all dependencies with `yarn` or `npm i`
 * Create two components (`Header` and `UsersList`) with [classes](https://reactjs.org/docs/react-component.html)
 
 ### Header component
@@ -69,7 +71,6 @@ This component renders a list of the users saved in `this.state.users` and two b
 The main purpose of this exercise is to try [stateless components](https://reactjs.org/docs/components-and-props.html#functional-and-class-components).
 
 * Continue with your previous project or open `01-react-stateful`
-* Install all dependencies with `yarn` or `npm i` if you used `01-react-stateful`
 * Modify both components (`Header` and `UsersList`) and rewrite them into [functions](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)
 
 ### Header component
@@ -148,9 +149,6 @@ Try 3 different versions of the `Header` component and see when they get rendere
 The main purpose of this exercise is to try [Redux](https://redux.js.org/).
 
 * Continue with your previous project or open `02-react-stateless`
-* Install all dependencies with `yarn` or `npm i` if you used `02-react-stateless`, otherwise install just `redux`
-  * `yarn add redux`, or
-  * `npm i redux`
 * Move the logic into a reducer
 
 ### UsersActions
@@ -216,9 +214,6 @@ Configure all necessary things for `redux`.
 The main purpose of this exercise is to try [`react-redux`](https://github.com/reactjs/react-redux) and [`reduxsauce`](https://github.com/infinitered/reduxsauce).
 
 * Continue with your previous project or open `03-redux`
-* Install all dependencies with `yarn` or `npm i` if you used `03-redux`, otherwise install just `react-redux` and `reduxsauce`
-  * `yarn add react-redux reduxsauce`, or
-  * `npm i react-redux reduxsauce`
 * Use [`Provider`](https://github.com/reduxjs/react-redux/blob/master/docs/api/Provider.md) from `react-redux` instead of the manual re-rendering
 * Connect `Header` and `UsersList` with the [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md) function from `react-redux`
 * Rewrite actions with `reduxsauce`
@@ -281,9 +276,6 @@ Currently, we need only `store` and we need to call `ReactDOM.render` directly w
 The main purpose of this exercise is to try [Reselect](https://github.com/reactjs/reselect).
 
 * Continue with your previous project or open `04-react-redux`
-* Install all dependencies with `yarn` or `npm i` if you used `04-react-redux`, otherwise install just `reselect`
-  * `yarn add reselect`, or
-  * `npm i reselect`
 * Create selectors and use them in `Header` and `UsersList`
 
 ### UsersSelectors
@@ -315,13 +307,6 @@ The same component with the same props like in the previous exercise.
 The main purpose of this exercise is to try [Redux-Saga](https://redux-saga.js.org/), [`axios`](https://github.com/axios/axios), and [Express](http://expressjs.com/).
 
 * Continue with your previous project or open `05-reselect`
-* Install all dependencies with `yarn` or `npm i` if you used `05-reselect`, otherwise install the following dependencies
-  * with `yarn`
-    * `yarn add axios body-parser express redux-saga`
-    * `yarn add -D concurrently nodemon`
-  * or with `npm`
-    * `npm i axios body-parser express redux-saga`
-    * `npm i -D concurrently nodemon`
 * Create a simple server that allows you to add a new user and get all users
 * Move the logic of adding a new user to the server
 * Create sagas that handle communication with the server
@@ -435,12 +420,6 @@ The main purpose of this exercise is to try [`normalizr`](https://github.com/pau
 
 * Continue with your previous project or open `06-redux-saga`
 * This exercise uses [react-modules](https://github.com/salsita/react-modules) packages
-  * If you used `06-redux-saga`, run `yarn` or `npm i` in the root of this repo
-  * Otherwise, install dependencies with the following commands
-    * with `yarn`
-      * `yarn add normalizr roman-numerals @salsita/react-core @salsita/react-entities`
-    * or with `npm`
-      * `npm i normalizr roman-numerals @salsita/react-core @salsita/react-entities`
 * Add skills and [regnal number](https://en.wikipedia.org/wiki/Regnal_number) to users
 * Save users and skills into the entity repository in the denormalized form
 
@@ -560,12 +539,6 @@ The main purpose of this exercise is to try [`router5`](http://router5.github.io
 
 * Continue with your previous project or open `07-normalizr`
 * This exercise uses [react-modules](https://github.com/salsita/react-modules) packages
-  * If you used `07-normalizr`, run `yarn` or `npm i` in the root of this repo
-  * Otherwise, install dependencies with the following commands
-    * with `yarn`
-      * `yarn add react-portal router5-helpers @salsita/react-api @salsita/react-crud @salsita/react-router`
-    * or with `npm`
-      * `npm i react-portal router5-helpers @salsita/react-api @salsita/react-crud @salsita/react-router`
 * Create a page for user detail (e.g. at `/users/user-1`)
 * Use `@salsita/react-crud` to automate entity fetching
 
@@ -774,12 +747,6 @@ The main purpose of this exercise is to try [Redux Form](https://redux-form.com/
 
 * Continue with your previous project or open `08-router5`
 * This exercise uses [react-modules](https://github.com/salsita/react-modules) packages
-  * If you used `08-router5`, run `yarn` or `npm i` in the root of this repo
-  * Otherwise, install dependencies with the following commands
-    * with `yarn`
-      * `yarn add redux-form @salsita/react-forms`
-    * or with `npm`
-      * `npm i redux-form @salsita/react-forms`
 * Create forms for creating and updating users
 
 ### Server file
