@@ -219,8 +219,8 @@ The main purpose of this exercise is to try [`react-redux`](https://github.com/r
 * Install all dependencies with `yarn` or `npm i` if you used `03-redux`, otherwise install just `react-redux` and `reduxsauce`
   * `yarn add react-redux reduxsauce`, or
   * `npm i react-redux reduxsauce`
-* Use [`Provider`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) from `react-redux` instead of the manual re-rendering
-* Connect `Header` and `UsersList` with the [`connect`](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) function from `react-redux`
+* Use [`Provider`](https://github.com/reduxjs/react-redux/blob/master/docs/api/Provider.md) from `react-redux` instead of the manual re-rendering
+* Connect `Header` and `UsersList` with the [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md) function from `react-redux`
 * Rewrite actions with `reduxsauce`
 
 ### Header component
