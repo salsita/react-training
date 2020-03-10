@@ -3,21 +3,6 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "axios": "^0.18.0",
-    "babel-polyfill": "^6.26.0",
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-redux": "^5.0.7",
-    "react-scripts": "1.0.17",
-    "redux": "^3.7.2",
-    "redux-saga": "^0.16.0",
-    "reduxsauce": "^0.7.0",
-    "reselect": "^3.0.1"
-  },
   "scripts": {
     "start": "concurrently \"yarn start-fe\" \"yarn start-be\"",
     "start-fe": "react-scripts start",
@@ -26,9 +11,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001",
-  "devDependencies": {
-    "concurrently": "^3.5.1",
-    "nodemon": "^1.17.1"
-  }
+  "proxy": "http://localhost:3001"
 }
