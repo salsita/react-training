@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "concurrently \"yarn start-fe\" \"yarn start-be\"",
+    "start": "concurrently \"npm run start-fe\" \"npm run start-be\"",
     "start-fe": "react-scripts start",
     "start-be": "nodemon src/server.js",
     "build": "react-scripts build",
