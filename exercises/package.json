@@ -37,6 +37,7 @@
   "devDependencies": {
     "concurrently": "^3.5.1",
     "link-parent-bin": "^1.0.2",
-    "nodemon": "^1.17.1"
+    "nodemon": "^1.17.1",
+    "prettier": "2.0.5"
   }
 }
