@@ -9,4 +9,4 @@ export const updateUser = wrapApiCall((data, id) =>
   apiClient.patch(`/users/${id}`, data)
 );
 
-export const getSkills = wrapApiCall(() => apiClient.get("/skills"));
+export const getSkills = wrapApiCall(() => apiClient.get('/skills'));

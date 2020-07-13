@@ -6,10 +6,7 @@ import * as CrudSelectors from 'modules/crud/crud-selectors';
 
 const getState = state => state.users;
 
-export const getTitle = createSelector(
-  getState,
-  state => state.title
-);
+export const getTitle = createSelector(getState, state => state.title);
 
 const convertUserRegnalNumber = user => ({
   ...user,
@@ -21,14 +18,10 @@ const convertUserLastName = user => ({
   lastName: user.lastName.toUpperCase()
 });
 
-const convertUser = flow([
-  convertUserLastName,
-  convertUserRegnalNumber
-]);
+const convertUser = flow([convertUserLastName, convertUserRegnalNumber]);
 
-export const getUsersList = createSelector(
-  CrudSelectors.getUsersList,
-  users => users.map(convertUser)
+export const getUsersList = createSelector(CrudSelectors.getUsersList, users =>
+  users.map(convertUser)
 );
 
 export const getUserDetail = createSelector(

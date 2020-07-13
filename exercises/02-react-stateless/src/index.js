@@ -27,13 +27,10 @@ const addUser = user => {
   render();
 };
 
-const render = () => ReactDOM.render(
-  <Root
-    title={state.title}
-    users={state.users}
-    addUser={addUser}
-  />,
-  document.getElementById('root')
-);
+const render = () =>
+  ReactDOM.render(
+    <Root title={state.title} users={state.users} addUser={addUser} />,
+    document.getElementById('root')
+  );
 
 render();

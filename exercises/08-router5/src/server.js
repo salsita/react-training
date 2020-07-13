@@ -5,7 +5,9 @@ const PORT = 3001;
 
 const areStringsSame = (a, b) => a.toLowerCase() === b.toLowerCase();
 
-const hasSameName = (user, firstName, lastName) => areStringsSame(firstName, user.firstName) && areStringsSame(lastName, user.lastName);
+const hasSameName = (user, firstName, lastName) =>
+  areStringsSame(firstName, user.firstName) &&
+  areStringsSame(lastName, user.lastName);
 
 const findRegnalNumber = (users, firstName, lastName) => {
   const regnalNumbers = users
@@ -19,13 +21,16 @@ const findRegnalNumber = (users, firstName, lastName) => {
   return Math.max(...regnalNumbers) + 1;
 };
 
-const skills = [{
-  id: 'skill-1',
-  name: 'Change my face'
-}, {
-  id: 'skill-2',
-  name: 'Control dragons'
-}];
+const skills = [
+  {
+    id: 'skill-1',
+    name: 'Change my face'
+  },
+  {
+    id: 'skill-2',
+    name: 'Control dragons'
+  }
+];
 
 const users = [];
 
@@ -50,7 +55,10 @@ app.post('/users', (req, res) => {
       skill: skills[0],
       level: 5 * regnalNumber
     });
-  } else if (areStringsSame(firstName, 'daenerys') && areStringsSame(lastName, 'targaryen')) {
+  } else if (
+    areStringsSame(firstName, 'daenerys') &&
+    areStringsSame(lastName, 'targaryen')
+  ) {
     usersSkills.push({
       skill: skills[1],
       level: 3 * regnalNumber

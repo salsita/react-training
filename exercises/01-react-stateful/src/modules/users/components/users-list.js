@@ -24,7 +24,8 @@ class UsersList extends React.Component {
   };
 
   addArya = () => this.addUser({ firstName: 'Arya', lastName: 'Stark' });
-  addDaenerys = () => this.addUser({ firstName: 'Daenerys', lastName: 'Targaryen' });
+  addDaenerys = () =>
+    this.addUser({ firstName: 'Daenerys', lastName: 'Targaryen' });
 
   render() {
     const { users } = this.state;

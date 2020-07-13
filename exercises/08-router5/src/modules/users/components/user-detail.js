@@ -13,7 +13,9 @@ const UserDetail = ({ userDetail }) => {
 
   return (
     <div>
-      <div>I'm {firstName} {regnalNumber} {lastName}</div>
+      <div>
+        I'm {firstName} {regnalNumber} {lastName}
+      </div>
       <div>I can:</div>
       <ul>
         {skills.map(({ skill, level }) => (
@@ -31,12 +33,14 @@ UserDetail.propTypes = {
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
     regnalNumber: PropTypes.string.isRequired,
-    skills: PropTypes.arrayOf(PropTypes.shape({
-      skill: PropTypes.shape({
-        name: PropTypes.string.isRequired
-      }).isRequired,
-      level: PropTypes.number.isRequired
-    })).isRequired
+    skills: PropTypes.arrayOf(
+      PropTypes.shape({
+        skill: PropTypes.shape({
+          name: PropTypes.string.isRequired
+        }).isRequired,
+        level: PropTypes.number.isRequired
+      })
+    ).isRequired
   })
 };
 

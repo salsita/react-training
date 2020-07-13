@@ -8,8 +8,16 @@ import UsersActions from 'modules/users/users-actions';
 const UsersList = ({ users, addUser }) => (
   <div>
     <div>
-      <button onClick={() => addUser({ firstName: 'Arya', lastName: 'Stark' })}>Add No One</button>
-      <button onClick={() => addUser({ firstName: 'Daenerys', lastName: 'Targaryen' })}>Add Mother of Dragons</button>
+      <button onClick={() => addUser({ firstName: 'Arya', lastName: 'Stark' })}>
+        Add No One
+      </button>
+      <button
+        onClick={() =>
+          addUser({ firstName: 'Daenerys', lastName: 'Targaryen' })
+        }
+      >
+        Add Mother of Dragons
+      </button>
     </div>
     <table>
       <thead>
