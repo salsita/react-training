@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import UsersActions from 'modules/users/users-actions';
+import { UsersActions } from 'modules/users/users-slice';
 import * as UsersSelectors from 'modules/users/users-selectors';
 
 const UsersList = ({ users, addUser }) => (
@@ -52,7 +52,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  addUser: UsersActions.Creators.addUser
+  addUser: UsersActions.addUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersList);
