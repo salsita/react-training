@@ -154,7 +154,7 @@ The main purpose of this exercise is to try [Redux](https://redux.js.org/).
 ### UsersActions
 Location: `src/modules/users/users-actions.js`
 
-This file defines actions and action types. The following structure is used in [`reduxsauce`](https://github.com/infinitered/reduxsauce) and we will use `reduxsauce` later in the training. Let's write the action types and action creators manually to know what is under the hood of `reduxsauce`.
+This file defines actions and action types.
 
 * Create a constant ([action type](https://redux.js.org/basics/actions)) called `ADD_USER` with value `'ADD_USER'`
 * Create a function ([action creator](https://redux.js.org/basics/actions#action-creators)) called `addUser` that returns an object with `type` (action type) and `payload` (data)
@@ -199,7 +199,7 @@ Configure all necessary things for `redux`.
 
 * Create `store` with the [`createStore`](https://redux.js.org/api-reference/createstore) function from `redux`
   * The first argument is `rootReducer`
-  * The second argument can be an `enhancer`. Use the following to setup Redux devtools
+  * The second argument can be an `enhancer`. Use the following to setup the [`Redux DevTools Extension`](https://github.com/zalmoxisus/redux-devtools-extension)
     ```js
     window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -211,12 +211,12 @@ Configure all necessary things for `redux`.
 
 
 ## Exercise \#4
-The main purpose of this exercise is to try [`react-redux`](https://github.com/reactjs/react-redux) and [`reduxsauce`](https://github.com/infinitered/reduxsauce).
+The main purpose of this exercise is to try [`react-redux`](https://github.com/reactjs/react-redux) and [`Redux Toolkit`](https://redux-toolkit.js.org/).
 
 * Continue with your previous project or open `03-redux`
 * Use [`Provider`](https://github.com/reduxjs/react-redux/blob/master/docs/api/Provider.md) from `react-redux` instead of the manual re-rendering
 * Connect `Header` and `UsersList` with the [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md) function from `react-redux`
-* Rewrite actions with `reduxsauce`
+* Rewrite actions with `Redux Toolkit`
 
 ### Header component
 Location: `src/modules/root/components/header.js`
@@ -246,20 +246,28 @@ Props:
 
 * Remove all props because both components are connected now.
 
+
+### Users slice
+Location: `src/modules/users/users-slice.js`
+
+The same actions and reducer, but created with `Redux Toolkit`.
+
+* Use [`createSlice`](https://redux-toolkit.js.org/api/createSlice) from `Redux Toolkit` to generate action creators and action types for user reducers.
+* Move `adduser` reducer implementation to this file and pass it with the `reducer` option to `createSlice` function.
+* Export `actions` and `reducer` returned by the `createSlice` function as `UsersActions` and `usersReducer`.
+
+
 ### UsersActions
 Location: `src/modules/users/users-actions.js`
 
-The same actions but created with `reduxsauce`.
+This file is no longer needed. The user actions are now generated in `src/modules/users/users-slice.js`.
 
-* Use [`createActions`](https://github.com/infinitered/reduxsauce#createactions) from `reduxsauce` to create the `ADD_USER` action with `addUser` action creator
-* Use `users/` prefix
 
 ### usersReducer
 Location: `src/modules/users/users-reducer.js`
 
-The same reducer but created with `reduxsauce`.
+This file is no longer needed. The `addUser` reducer was moved to `src/modules/users/users-slice.js`.
 
-* Use [`createReducer`](https://github.com/infinitered/reduxsauce#createreducer) from `reduxsauce` to create the same reducer
 
 ### Index file
 Location: `src/index.js`
@@ -270,6 +278,7 @@ Currently, we need only `store` and we need to call `ReactDOM.render` directly w
 * Change the rendered component into `Provider` and put `Root` as its child
 * Remove `dispatchAddUser` (the action is dispatched in the `UsersList` component)
 * Remove `store.subscribe` (it is not necessary with `Provider`)
+* Use [`configureStore`](https://redux-toolkit.js.org/api/configureStore) function from `Redux Toolkit` instead of the `createStore`. This will enable the [`Redux DevTools Extension`](https://github.com/zalmoxisus/redux-devtools-extension) used in previous exercise automatically.
 
 
 ## Exercise \#5
