@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import users from 'modules/users/users-reducer';
+import { usersReducer } from 'modules/users/users-slice';
 
 export default combineReducers({
-  users
+  users: usersReducer
 });
