@@ -10,7 +10,7 @@ const usersSlice = createSlice({
 });
 
 export const UsersActions = {
-  saveUser: createAction('users/saga/saveUser'),
+  saveUser: createAction('users/saveUser'),
   ...usersSlice.actions
 }
 
