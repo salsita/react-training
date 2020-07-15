@@ -278,7 +278,7 @@ Currently, we need only `store` and we need to call `ReactDOM.render` directly w
 * Change the rendered component into `Provider` and put `Root` as its child
 * Remove `dispatchAddUser` (the action is dispatched in the `UsersList` component)
 * Remove `store.subscribe` (it is not necessary with `Provider`)
-* Use [`configureStore`](https://redux-toolkit.js.org/api/configureStore) function from `Redux Toolkit` instead of the `createStore`. This will enable the [`Redux DevTools Extension`](https://github.com/zalmoxisus/redux-devtools-extension) used in previous exercise automatically.
+* Use [`configureStore`](https://redux-toolkit.js.org/api/configureStore) function from `Redux Toolkit` instead of the `createStore`. This will by default enable the [`Redux DevTools Extension`](https://github.com/zalmoxisus/redux-devtools-extension) used in previous exercise.
 
 
 ## Exercise \#5
@@ -361,20 +361,16 @@ This file defines all effect functions that perform the corresponding requests t
 * Create a function `getUsers` that makes a request to `GET /users`
 * Create a function `addUser` that makes a request to `POST /users` and sends an object with `firstName` and `lastName` in the request body
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
+### UsersSlice
+Location: `src/modules/users/users-slice.js`
 
-We will need a new action to store fetched users into to the state.
+We will need a new reducer to store fetched users into the state.
+* Add a new reducer called `usersLoaded`
 
-* Create a new action called `USERS_LOADED`
-
-### usersReducer
-Location: `src/modules/users/users-reducer.js`
-
-Users are added on the BE side so the handler for the `ADD_USER` action is not necessary anymore. However, we need to handle the new `usersLoaded` action.
-
-* Remove the `ADD_USER` action handler
-* Add a handler for `USERS_LOADED`
+Users are added on the BE side, so the `addUser` reducer is not necessary anymore, but the action type is still needed.
+* Remove the `addUser` reducer
+* Add the `addUser` action creator to the `UsersActions` export object
+  * Use [`createAction`](https://redux-toolkit.js.org/api/createAction) function to create an action creator with type `users/addUser`
 
 ### usersSaga
 Location: `src/modules/users/users-saga.js`
@@ -383,14 +379,14 @@ This file is used to create [redux sagas](https://redux-saga.js.org/docs/api/) t
 
 * Create a saga called `getUsers` that
   * calls `UsersEffects.getUsers`
-  * dispatch the `USERS_LOADED` action with `data` taken from the response
+  * dispatch the `usersLoaded` action with `data` taken from the response
 * Create a saga called `addUser` that
   * calls `UsersEffects.addUser`
   * runs the `getUsers` saga to refresh the user list
 * Don't forget to use `try/catch` in both sagas
 * Create a saga called `usersSaga` (only this one needs to be exported - with `export default`) that
   * runs the `getUsers` saga immediately (we don't have a router currently)
-  * runs the `addUser` saga when the `ADD_USER` action is dispatched (hint: use `takeEvery`)
+  * runs the `addUser` saga when the `addUser` action is dispatched (hint: use `takeEvery`)
 
 ### rootSaga
 Location: `src/modules/root/root-saga.js`
@@ -405,15 +401,7 @@ Location: `src/index.js`
 Configure all necessary things for `redux-saga`.
 
 * Create `sagaMiddleware` with a function [`createSagaMiddleware`](https://redux-saga.js.org/docs/api/) (default export from `redux-saga`)
-* Change the second argument of `createStore` into the following where both functions ([`compose`](https://redux.js.org/api-reference/compose) and [`applyMiddleware`](https://redux.js.org/api-reference/applymiddleware) are imported from `redux`)
-  ```js
-  compose(
-    applyMiddleware(sagaMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : v => v
-  )
-  ```
+* Pass the `sagaMiddleware` to the [`configureStore`](https://redux-toolkit.js.org/api/configureStore) call (hint: use the `middleware` property)
 * Run your root saga with `sagaMiddleware.run(rootSaga)`
 
 
