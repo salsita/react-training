@@ -5,12 +5,12 @@ import { crudReducer as crud } from '@salsita/react-crud';
 import { entitiesReducer as entities } from '@salsita/react-entities';
 import { routerReducer as router } from '@salsita/react-router';
 
-import users from 'modules/users/users-reducer';
+import { usersReducer } from 'modules/users/users-slice';
 
 export default combineReducers({
   api,
   crud,
   entities,
   router,
-  users
+  users: usersReducer
 });

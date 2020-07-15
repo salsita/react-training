@@ -1,8 +1,8 @@
-import { createActions } from 'reduxsauce';
+// import { createActions } from 'reduxsauce';
 
-export default createActions(
-  {
-    addUser: ['user']
-  },
-  { prefix: 'users/' }
-);
+// export default createActions(
+//   {
+//     addUser: ['user']
+//   },
+//   { prefix: 'users/' }
+// );
