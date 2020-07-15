@@ -760,12 +760,12 @@ We need new effects to update a user and fetch all skills.
 * Add a new effect called `updateUser`
 * Add a new effect called `getSkills`
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
+### UsersSlice
+Location: `src/modules/users/users-slice.js`
 
-Currently, we have only one action called `ADD_USER` that is dispatched when a user clicks on one of the buttons. Since we will use this action to create or update a user, let's rename it to `SAVE_USER`.
+Currently, we have only one action creator called `addUser` that is dispatched when a user clicks on one of the buttons. Since we will use this action to create or update a user, let's rename it to `saveUser`.
 
-* Rename the `ADD_USER` action to `SAVE_USER`
+* Rename the `addUser` action creator to `saveUser`
 
 ### CRUD Saga file
 Location: `src/modules/crud/crud-saga.js`
@@ -862,7 +862,7 @@ Location: `src/modules/users/users-saga.js`
 
 There are couple of things we need to update in our sagas.
 
-* Currently, our saga handles update as well so it is good to rename it to `saveUser` since the new name of the action that starts the saga is `SAVE_USER`.
+* Currently, our saga handles update as well so it is good to rename it to `saveUser` since the new name of the action creator that starts the saga is `saveUser`.
   * Update names of the action and saga
 * Since the `saveUser` saga can be called from two routes now (`USERS_LIST` and `USER_DETAIL`), we want to redirect the user into `USERS_LIST` route after the successful submission.
   * Import `import { RouterActions } from '@salsita/react-router';`
