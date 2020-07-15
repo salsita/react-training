@@ -708,15 +708,8 @@ The CRUD module handles entity fetching so we don't need the `getUsers` saga any
     * `route` is the name of the route you want to refresh
     * `mapRouteToFetchParams` is a function that defines fetch params (`effect` and `schema`) to use
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
-
-We don't need the `USERS_LOADED` action anymore.
-
-* Delete the `usersLoaded` action creator
-
-### usersReducer
-Location: `src/modules/users/users-reducer.js`
+### UsersSlice
+Location: `src/modules/users/users-slice.js`
 
 State:
 ```ts
@@ -725,7 +718,9 @@ State:
 }
 ```
 
-* Delete the unused `usersLoaded` action handler
+We don't need the `usersLoaded` action and reducer anymore.
+
+* Delete the `usersLoaded` reducer
 
 
 ## Exercise \#9
