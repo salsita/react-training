@@ -467,10 +467,10 @@ Location: `src/modules/users/users-saga.js`
 Currently, the same denormalized data that comes from the BE server are stored in the state. We need to normalize the data from response and store them in the entity repository.
 
 * Import `import { normalizeAndStore } from '@salsita/react-entities';`
-* Call `normalizeAndStore(data, schema)` and save the result (an array of `id`s) in the `usersReducer`
+* Call `normalizeAndStore(data, schema)` and save the result (an array of `id`s) in the users reducer
 
-### usersReducer
-Location: `src/modules/users/users-reducer.js`
+### UsersSlice
+Location: `src/modules/users/users-slice.js`
 
 State:
 ```ts
@@ -482,10 +482,6 @@ State:
 
 * Update this reducer to store `userIds` instead of `users`
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
-
-* Update the payload variable into `userIds`
 
 ### EntitiesSelectors
 Location: `src/modules/entities/entities-selectors.js`
