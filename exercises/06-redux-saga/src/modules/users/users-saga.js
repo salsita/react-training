@@ -1,12 +1,7 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-import { createAction } from '@reduxjs/toolkit';
 
 import { UsersActions } from 'modules/users/users-slice';
 import * as UsersEffects from 'modules/users/users-effects';
-
-export const UsersSagaActions = {
-  addUser: createAction('users/saga/addUser')
-}
 
 function* getUsers() {
   try {
@@ -32,5 +27,5 @@ function* addUser({ payload: user }) {
 export default function* usersSaga() {
   yield fork(getUsers);
 
-  yield all([takeEvery(UsersSagaActions.addUser.type, addUser)]);
+  yield all([takeEvery(UsersActions.addUser.type, addUser)]);
 }
