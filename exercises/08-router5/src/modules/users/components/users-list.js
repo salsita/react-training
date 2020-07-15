@@ -7,7 +7,7 @@ import { Link } from '@salsita/react-router';
 
 import { USER_DETAIL } from 'modules/router/routes';
 
-import { UsersSagaActions } from 'modules/users/users-saga';
+import { UsersActions } from 'modules/users/users-slice';
 import * as UsersSelectors from 'modules/users/users-selectors';
 
 const UsersList = ({ users, addUser }) => (
@@ -61,7 +61,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(UsersSagaActions.addUser(user))
+  addUser: user => dispatch(UsersActions.addUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersList);

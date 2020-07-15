@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { UsersSagaActions } from 'modules/users/users-saga';
+import { UsersActions } from 'modules/users/users-slice';
 import UserForm from 'modules/users/components/user-form';
 
 import * as UsersSelectors from 'modules/users/users-selectors';
@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveUser: user => dispatch(UsersSagaActions.saveUser(user))
+  saveUser: user => dispatch(UsersActions.saveUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetail);

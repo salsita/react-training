@@ -1,5 +1,4 @@
 import { all, call, takeEvery } from 'redux-saga/effects';
-import { createAction } from '@reduxjs/toolkit';
 
 import { saveEntity, fetchEntities } from '@salsita/react-crud';
 
@@ -8,9 +7,7 @@ import { mapEntityToSaveParams, mapRouteToFetchParams } from 'modules/crud/crud-
 
 import { USERS_LIST } from 'modules/router/routes';
 
-export const UsersSagaActions = {
-  addUser: createAction('users/saga/addUser')
-}
+import { UsersActions } from 'modules/users/users-slice';
 
 function* addUser({ payload: user }) {
   const entity = yield call(saveEntity, user, Entities.USER, mapEntityToSaveParams);
@@ -21,5 +18,5 @@ function* addUser({ payload: user }) {
 }
 
 export default function* usersSaga() {
-  yield all([takeEvery(UsersSagaActions.addUser.type, addUser)]);
+  yield all([takeEvery(UsersActions.addUser.type, addUser)]);
 }
