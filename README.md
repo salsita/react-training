@@ -324,18 +324,11 @@ The main purpose of this exercise is to try [Redux-Saga](https://redux-saga.js.o
 Location: `package.json`
 
 * Change the `start` script into the following
-  * if you use `yarn`
-    ```json
-    "start": "concurrently \"yarn start-fe\" \"yarn start-be\"",
-    "start-fe": "react-scripts start",
-    "start-be": "nodemon src/server.js",
-    ```
-  * or if you use `npm`
-    ```json
-    "start": "concurrently \"npm run start-fe\" \"npm run start-be\"",
-    "start-fe": "react-scripts start",
-    "start-be": "nodemon src/server.js",
-    ```
+  ```json
+  "start": "concurrently \"npm run start-fe\" \"npm run start-be\"",
+  "start-fe": "react-scripts start",
+  "start-be": "nodemon src/server.js",
+  ```
 * Add `proxy` into the root to correctly handle CORS
   * `"proxy": "http://localhost:3001"`
 
