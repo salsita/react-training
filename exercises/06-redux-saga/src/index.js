@@ -13,6 +13,7 @@ import rootSaga from 'modules/root/root-saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
+// configureStore enables the Redux DevTools by default
 const store = configureStore({
   reducer: rootReducer,
   middleware: [sagaMiddleware]

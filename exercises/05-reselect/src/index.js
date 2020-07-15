@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import Root from 'modules/root/components/root';
 import rootReducer from 'modules/root/root-reducer';
 
+// configureStore enables the Redux DevTools by default
 const store = configureStore({
   reducer: rootReducer
 });
