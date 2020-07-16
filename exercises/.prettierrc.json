@@ -1,6 +1,6 @@
 {
   "singleQuote": true,
-  "semi": true,
+  "semi": false,
   "endOfLine": "auto",
   "trailingComma": "none",
   "arrowParens": "avoid"
