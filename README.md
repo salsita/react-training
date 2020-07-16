@@ -2,7 +2,7 @@
 https://docs.google.com/presentation/d/1xaw0AXhimgnBBTctfTFHHIHddcI1RBUM0ITjexDiRRo
 
 # Before you begin
-Install all dependencies and link executables to child projects with `yarn` or `npm i` in the `exercises` folder.
+Install all dependencies and link executables to child projects with `npm i` in the `exercises` folder.
 
 # Exercises
 * [Exercise \#1](#exercise-1)
