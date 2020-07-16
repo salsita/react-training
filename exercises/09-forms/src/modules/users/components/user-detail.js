@@ -24,8 +24,8 @@ const mapStateToProps = state => ({
   userDetail: UsersSelectors.getUserDetail(state)
 });
 
-const mapDispatchToProps = dispatch => ({
-  saveUser: user => dispatch(UsersActions.saveUser(user))
-});
+const mapDispatchToProps = {
+  saveUser: UsersActions.saveUser
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetail);

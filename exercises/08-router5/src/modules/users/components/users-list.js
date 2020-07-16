@@ -60,8 +60,8 @@ const mapStateToProps = state => ({
   users: UsersSelectors.getUsersList(state)
 });
 
-const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(UsersActions.addUser(user))
-});
+const mapDispatchToProps = {
+  addUser: UsersActions.addUser
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersList);

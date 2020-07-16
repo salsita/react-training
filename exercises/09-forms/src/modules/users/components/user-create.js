@@ -11,8 +11,8 @@ UserCreate.propTypes = {
   saveUser: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = dispatch => ({
-  saveUser: user => dispatch(UsersActions.saveUser(user))
-});
+const mapDispatchToProps = {
+  saveUser: UsersActions.saveUser
+};
 
 export default connect(null, mapDispatchToProps)(UserCreate);
