@@ -250,7 +250,7 @@ Props:
 ### Users slice
 Location: `src/modules/users/users-slice.js`
 
-The same actions and reducer, but created with `Redux Toolkit`.
+The same action and reducer, but created with `Redux Toolkit`.
 
 * Use [`createSlice`](https://redux-toolkit.js.org/api/createSlice) from `Redux Toolkit` to generate action creators and action types for user reducers.
 * Move `adduser` reducer implementation to this file and pass it with the `reducer` option to `createSlice` function.
@@ -763,7 +763,7 @@ We need new effects to update a user and fetch all skills.
 ### UsersSlice
 Location: `src/modules/users/users-slice.js`
 
-Currently, we have only one action creator called `addUser` that is dispatched when a user clicks on one of the buttons. Since we will use this action to create or update a user, let's rename it to `saveUser`.
+Currently, we have only one action called `addUser` that is dispatched when a user clicks on one of the buttons. Since we will use this action to create or update a user, let's rename it to `saveUser`.
 
 * Rename the `addUser` action creator to `saveUser`
 
