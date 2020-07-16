@@ -9,16 +9,8 @@ import * as UsersSelectors from 'modules/users/users-selectors';
 const UsersList = ({ users, addUser }) => (
   <div>
     <div>
-      <button onClick={() => addUser({ firstName: 'Arya', lastName: 'Stark' })}>
-        Add No One
-      </button>
-      <button
-        onClick={() =>
-          addUser({ firstName: 'Daenerys', lastName: 'Targaryen' })
-        }
-      >
-        Add Mother of Dragons
-      </button>
+      <button onClick={() => addUser({ firstName: 'Arya', lastName: 'Stark' })}>Add No One</button>
+      <button onClick={() => addUser({ firstName: 'Daenerys', lastName: 'Targaryen' })}>Add Mother of Dragons</button>
     </div>
     <table>
       <thead>
@@ -35,9 +27,7 @@ const UsersList = ({ users, addUser }) => (
         )}
         {users.map(({ id, firstName, lastName, regnalNumber }) => (
           <tr key={id}>
-            <td>
-              {firstName} {regnalNumber}
-            </td>
+            <td>{firstName} {regnalNumber}</td>
             <td>{lastName}</td>
           </tr>
         ))}

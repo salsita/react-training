@@ -17,14 +17,16 @@ const store = createStore(
     : v => v
 );
 
-const dispatchAddUser = user =>
-  store.dispatch(UsersActions.Creators.addUser(user));
+const dispatchAddUser = user => store.dispatch(UsersActions.Creators.addUser(user));
 
-const render = ({ users: { title, users } }) =>
-  ReactDOM.render(
-    <Root title={title} users={users} addUser={dispatchAddUser} />,
-    document.getElementById('root')
-  );
+const render = ({ users: { title, users } }) => ReactDOM.render(
+  <Root
+    title={title}
+    users={users}
+    addUser={dispatchAddUser}
+  />,
+  document.getElementById('root')
+);
 
 store.subscribe(() => render(store.getState()));
 

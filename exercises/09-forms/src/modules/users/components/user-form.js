@@ -3,20 +3,14 @@ import PropTypes from 'prop-types';
 import { reduxForm, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
 
-import {
-  FormField,
-  FormFieldSelect,
-  FormValidations
-} from '@salsita/react-forms';
+import { FormField, FormFieldSelect, FormValidations } from '@salsita/react-forms';
 
 import * as UserValidations from 'modules/forms/validations';
 import { getSkills } from 'modules/crud/crud-selectors';
 
 export const USER_FORM_NAME = 'user-form';
 
-const validateSkillNotEmpty = FormValidations.notEmptyObject(
-  'Skill is required'
-);
+const validateSkillNotEmpty = FormValidations.notEmptyObject('Skill is required');
 const validateNotEmptyFirstName = FormValidations.notEmptyString(
   'First Name is required'
 );
@@ -40,7 +34,10 @@ const Skills = ({ skills, fields, meta: { error, submitFailed, dirty } }) => (
             validate={validateSkillNotEmpty}
           />
           Level
-          <FormField name={`${name}.level`} type="number" />
+          <FormField
+            name={`${name}.level`}
+            type="number"
+          />
           <button type="button" onClick={() => fields.remove(index)}>
             x
           </button>
@@ -83,10 +80,7 @@ const UserForm = ({ handleSubmit, skills, onSubmit }) => (
       name="skills"
       component={Skills}
       skills={skills}
-      validate={[
-        UserValidations.notEmptySkills,
-        UserValidations.allSkillsUnique
-      ]}
+      validate={[UserValidations.notEmptySkills, UserValidations.allSkillsUnique]}
     />
     <button>Save</button>
   </form>

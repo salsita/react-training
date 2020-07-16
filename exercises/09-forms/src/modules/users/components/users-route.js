@@ -6,7 +6,7 @@ import { endsWithSegment } from 'router5-helpers';
 
 import UsersList from 'modules/users/components/users-list';
 import UserDetail from 'modules/users/components/user-detail';
-import UserCreate from 'modules/users/components/user-create';
+import UserCreate from "modules/users/components/user-create";
 
 /**
  * Route component which is mount onto /users prefix

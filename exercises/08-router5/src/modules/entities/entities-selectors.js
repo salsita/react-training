@@ -2,10 +2,7 @@ import { createSelector } from 'reselect';
 
 import { RootSelectors } from '@salsita/react-core';
 
-export const getSkills = createSelector(
-  RootSelectors.getEntities,
-  state => state.skills
-);
+export const getSkills = createSelector(RootSelectors.getEntities, state => state.skills);
 
 export const getUsersSkills = createSelector(
   RootSelectors.getEntities,
