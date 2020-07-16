@@ -10,17 +10,16 @@ class UsersList extends React.Component {
   }
 
   addUser = user => {
-    const { users } = this.state;
 
-    this.setState({
+    this.setState((prevState) => ({
       users: [
-        ...users,
+        ...prevState.users,
         {
-          id: users.length + 1,
+          id: prevState.users.length + 1,
           ...user
         }
       ]
-    });
+    }));
   };
 
   addArya = () => this.addUser({ firstName: 'Arya', lastName: 'Stark' });
