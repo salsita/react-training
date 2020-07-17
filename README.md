@@ -1,5 +1,5 @@
 # Syllabus
-https://docs.google.com/presentation/d/1xaw0AXhimgnBBTctfTFHHIHddcI1RBUM0ITjexDiRRo
+https://docs.google.com/presentation/d/1w8HRmAK2HB5PuwOB0HdFeGbvntsvM3-rvHdNOPZ3lBs
 
 # Before you begin
 Install all dependencies and link executables to child projects with `yarn` or `npm i` in the `exercises` folder.
