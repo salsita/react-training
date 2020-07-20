@@ -37,11 +37,13 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "postinstall": "link-parent-bin -c . -s true"
+    "postinstall": "link-parent-bin -c . -s true",
+    "cy:open": "cypress open"
   },
   "proxy": "http://localhost:3001",
   "devDependencies": {
     "concurrently": "^3.6.1",
+    "cypress": "^4.10.0",
     "link-parent-bin": "^1.0.2",
     "nodemon": "^2.0.4",
     "prettier": "2.0.5"
