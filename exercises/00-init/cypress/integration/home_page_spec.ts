@@ -1,4 +1,4 @@
-import { USER_LIST } from '../utils/constants'
+import { USER_LIST } from './utils/constants'
 
 describe('The Home Page', () => {
   it('successfully loads', () => {
