@@ -16,7 +16,7 @@ jobs:
           working-directory: exercises
           useLockFile: false
       - name: Cypress run exercise 0
-        uses: cypress-io/github-action@v1.16.1
+        uses: cypress-io/github-action@v2
         with:
           # we have already installed all dependencies above
           install: false
