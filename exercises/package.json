@@ -37,8 +37,7 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "postinstall": "link-parent-bin -c . -s true",
-    "cy:open": "cypress open"
+    "postinstall": "link-parent-bin -c . -s true"
   },
   "proxy": "http://localhost:3001",
   "devDependencies": {
