@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@v1
       - name: Install root dependencies
         uses: bahmutov/npm-install@v1
+        with:
+          working-directory: exercises
       - name: Cypress run exercise 0
         uses: cypress-io/github-action@v1.16.1
         with:
