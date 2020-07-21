@@ -30,12 +30,12 @@ jobs:
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
-          name: cypress-screenshots
-          path: cypress/screenshots
+          name: exercise-0-cypress-screenshots
+          path: exercises/00-init/cypress/screenshots
       # Test run video was always captured, so this action uses "always()" condition
       - uses: actions/upload-artifact@v1
         if: always()
         with:
-          name: cypress-videos
-          path: cypress/videos
+          name: exercise-0-cypress-videos
+          path: exercises/00-init/cypress/videos
 
