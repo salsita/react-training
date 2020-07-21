@@ -1,0 +1,35 @@
+name: End-to-end tests
+
+# Controls when the action will run. Triggers the workflow on push
+on: [push]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Cypress run exercise 0
+        uses: cypress-io/github-action@v1.16.1
+        with:
+          start: npm start
+          working-directory: exercises/00-init
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
