@@ -22,4 +22,4 @@ npx ts-node createE2ETestWorkflow.ts --write
 
 The exercises are expected to be found at `exercises/<exercise>` directories. The directory names are currently hardcoded in the script.
 
-In order to add exercises to the workflow the corresponding directory names shall be added to the script.
+In order to add exercises to the workflow the corresponding directory names shall be added to the script. Note: the script doesn't check whether the `exercises/<exercise>` directories exist.
