@@ -1,7 +1,7 @@
 import { argv } from 'process'
 import { writeFile } from 'fs'
 
-const EXERCISES = ['00-init', '01-react-stateful']
+const EXERCISES = ['00-init']
 const WORKFLOW_FILE = '../../.github/workflows/main.yml'
 
 const HEADER = `name: End-to-end tests
