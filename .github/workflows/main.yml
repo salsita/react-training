@@ -5,8 +5,9 @@ on: [push]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # Exercise 0
-  exercise00-e2e:
+
+  # Exercise 00-init
+  e2e-00-init:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,7 +17,7 @@ jobs:
         with:
           working-directory: exercises
           useLockFile: false
-      - name: Cypress run exercise 0
+      - name: Cypress run exercise 00-init
         uses: cypress-io/github-action@v2
         with:
           # we have already installed all dependencies above
@@ -31,15 +32,16 @@ jobs:
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
-          name: exercise-0-cypress-screenshots
+          name: 00-init-cypress-screenshots
           path: exercises/00-init/cypress/screenshots
       - uses: actions/upload-artifact@v1
         if: always()
         with:
-          name: exercise-0-cypress-videos
+          name: 00-init-cypress-videos
           path: exercises/00-init/cypress/videos
-  # Exercise 1
-  exercise01-e2e:
+
+  # Exercise 01-react-stateful
+  e2e-01-react-stateful:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -49,7 +51,7 @@ jobs:
         with:
           working-directory: exercises
           useLockFile: false
-      - name: Cypress run exercise 1
+      - name: Cypress run exercise 01-react-stateful
         uses: cypress-io/github-action@v2
         with:
           # we have already installed all dependencies above
@@ -64,11 +66,10 @@ jobs:
       - uses: actions/upload-artifact@v1
         if: failure()
         with:
-          name: exercise-1-cypress-screenshots
+          name: 01-react-stateful-cypress-screenshots
           path: exercises/01-react-stateful/cypress/screenshots
       - uses: actions/upload-artifact@v1
         if: always()
         with:
-          name: exercise-1-cypress-videos
+          name: 01-react-stateful-cypress-videos
           path: exercises/01-react-stateful/cypress/videos
-
