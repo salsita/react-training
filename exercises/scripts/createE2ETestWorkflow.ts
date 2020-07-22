@@ -1,4 +1,8 @@
+import { argv } from 'process'
+import { writeFile } from 'fs'
+
 const EXERCISES = ['00-init', '01-react-stateful']
+const WORKFLOW_FILE = '../../.github/workflows/main.yml'
 
 const HEADER = `name: End-to-end tests
 
@@ -44,7 +48,7 @@ const getCypressJobForDir = (dirname: string): string => {
         with:
           name: ${dirname}-cypress-videos
           path: exercises/${dirname}/cypress/videos
-  `
+`
 }
 
 const getCypressWorkflow = (directories: Array<string>): string => {
@@ -62,4 +66,14 @@ const getCypressWorkflow = (directories: Array<string>): string => {
 }
 
 const cypressWorkflow = getCypressWorkflow(EXERCISES)
-console.log(cypressWorkflow)
+
+if (process.argv.includes('--write')) {
+  console.log('Writing generated github workflow to', WORKFLOW_FILE)
+  writeFile(WORKFLOW_FILE, cypressWorkflow, (err) => {
+    if (err) {
+      console.error("Couldn't write workflow to", WORKFLOW_FILE, err)
+    }
+  })
+} else {
+  console.log(cypressWorkflow)
+}
