@@ -3,17 +3,8 @@
     "strict": true,
     "baseUrl": "../../node_modules",
     "target": "es6",
-    "lib": [
-      "es6",
-      "dom"
-    ],
-    "types": [
-      "cypress"
-    ]
+    "lib": ["es6", "dom"],
+    "types": ["cypress"]
   },
-  "include": [
-    "cypress",
-    "./**/*.ts",
-    "plugins/index.js"
-  ]
+  "include": ["cypress", "./**/*.ts", "plugins/index.js"]
 }
