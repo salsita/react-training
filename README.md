@@ -17,54 +17,54 @@ Install all dependencies and link executables to child projects with `npm i` in 
 
 
 ## Exercise \#1
-The main purpose of this exercise is to try [React](https://reactjs.org/docs/) and its [stateful components](https://reactjs.org/docs/react-component.html).
+
+The main purpose of this exercise is to try [React](https://reactjs.org/docs/) and its stateful components implemented with [react-hooks](https://reactjs.org/docs/hooks-state.html).
 
 * Open the initial project `00-init`
-* Create two components (`Header` and `UsersList`) with [classes](https://reactjs.org/docs/react-component.html)
+* Create two [function](https://reactjs.org/docs/components-and-props.html#functional-and-class-components) components (`Header` and `UsersList`)
 
 ### Header component
-Location: `src/modules/root/components/header.js`
 
-Props:
+Location: `src/modules/root/components/header.tsx`
+
+HeaderProps:
+
 ```ts
 {
   title: string
 }
 ```
 
-This is the simplest component created with a class. It just renders a heading (`h1`) with a string taken from the `title` property.
+This component just renders a heading (`h1`) with a string taken from the `title` property.
 
-* Create a class named `Header` that extends [`React.Component`](https://reactjs.org/docs/react-component.html)
-* Implement [`render`](https://reactjs.org/docs/react-component.html#render) method to render the heading
-* Implement correct [`PropTypes`](https://reactjs.org/docs/typechecking-with-proptypes.html) in the `static propTypes` field
-  * `PropTypes` are in a separate library called `prop-types` and can be imported as
-    ```js
-    import PropTypes from 'prop-types';
-    ```
-* Use this component in the `Root` component
+* Create a function named `Header` that renders the heading
+* Use correct parameter and return types
+* Use this component in the `Root` component, pass the title `'User Management'`
 
 ### UsersList component
-Location: `src/modules/users/components/users-list.js`
 
-State:
+Location: `src/modules/users/components/users-list.tsx`
+
+User:
 ```ts
 {
-  users: Array<{
-    id: number,
-    firstName: string,
-    lastName: string
-  }>
+  id: number
+  firstName: string
+  lastName: string
 }
 ```
 
-This component renders a list of the users saved in `this.state.users` and two buttons to add two different users.
+This component renders a list of the users saved in the state and two buttons to add two different users.
 
-* Create a class named `UsersList` that extends `React.Component`
-* Implement `render` method to render two buttons and the list of users (or `No Users` when the list is empty)
+* Create a function named `UsersList` that renders
+  * two buttons `Add No One` and `Add Mother of Dragons`
+  * the table of users with two columns `First Name` and `Last Name`. The table displays text `No Users` when the list is empty
 * The first button will add `Arya Stark` and the second one `Daenerys Targaryen`
 * Every user has `id` which should be unique within the list (we will not implement deleting users)
-* Create the initial state inside the [`constructor`](https://reactjs.org/docs/react-component.html#constructor) of this component
-* Use [`this.setState`](https://reactjs.org/docs/react-component.html#setstate) to add a user
+* Create the initial state with the call of [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate) from react
+* Use the function returned by `useState` call to add a new user
+* Use correct parameter and return types
+* Use this component in the `Root` component
 
 
 ## Exercise \#2
