@@ -11,7 +11,7 @@ export const UsersList = (): React.ReactElement => {
   }
 
   return (
-    <div>
+    <>
       <div>
         <button
           onClick={() => addUser({ firstName: 'Arya', lastName: 'Stark' })}
@@ -47,6 +47,6 @@ export const UsersList = (): React.ReactElement => {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   )
 }
