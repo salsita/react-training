@@ -4,6 +4,6 @@ interface HeaderProps {
   title: string
 }
 
-export const Header = ({ title }: { title: string }): React.ReactElement => {
+export const Header: React.FC<HeaderProps> = ({ title }) => {
   return <h1>{title}</h1>
 }

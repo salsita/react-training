@@ -38,7 +38,7 @@ HeaderProps:
 This component just renders a heading (`h1`) with a string taken from the `title` property.
 
 * Create a function named `Header` that renders the heading
-* Use correct parameter and return types
+* Use correct types
 * Use this component in the `Root` component, pass the title `'User Management'`
 
 ### UsersList component
@@ -63,7 +63,7 @@ This component renders a list of the users saved in the state and two buttons to
 * Every user has `id` which should be unique within the list (we will not implement deleting users)
 * Create the initial state with the call of [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate) from react
 * Use the function returned by `useState` call to add a new user
-* Use correct parameter and return types
+* Use correct types
 * Use this component in the `Root` component
 
 

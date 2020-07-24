@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { User } from '../users-types'
 
-export const UsersList = (): React.ReactElement => {
+export const UsersList: React.FC = () => {
   // Declare a new state variable called 'users'
   const [users, setUsers] = useState<Array<User>>([])
 
