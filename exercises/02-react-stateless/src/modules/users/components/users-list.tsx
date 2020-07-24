@@ -16,8 +16,8 @@ const UsersList = ({ users, addUser }) => (
       </thead>
       <tbody>
         {!users.length && (
-          <tr colSpan="2">
-            <td>No Users</td>
+          <tr>
+            <td colSpan={2}>No Users</td>
           </tr>
         )}
         {users.map(({ id, firstName, lastName }) => (
