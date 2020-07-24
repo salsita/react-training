@@ -1,11 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react'
+import { User, AddUserFunc } from '../users-types'
 
-const UsersList = ({ users, addUser }) => (
-  <div>
+export * from '../users-types'
+
+interface UsersListProps {
+  users: Array<User>
+  addUser: AddUserFunc
+}
+
+export const UsersList: React.FC<UsersListProps> = ({ users, addUser }) => (
+  <>
     <div>
-      <button onClick={() => addUser({ firstName: 'Arya', lastName: 'Stark' })}>Add No One</button>
-      <button onClick={() => addUser({ firstName: 'Daenerys', lastName: 'Targaryen' })}>Add Mother of Dragons</button>
+      <button onClick={() => addUser({ firstName: 'Arya', lastName: 'Stark' })}>
+        Add No One
+      </button>
+      <button
+        onClick={() =>
+          addUser({ firstName: 'Daenerys', lastName: 'Targaryen' })
+        }
+      >
+        Add Mother of Dragons
+      </button>
     </div>
     <table>
       <thead>
@@ -28,18 +43,5 @@ const UsersList = ({ users, addUser }) => (
         ))}
       </tbody>
     </table>
-  </div>
-);
-
-UsersList.propTypes = {
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      firstName: PropTypes.string.isRequired,
-      lastName: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired,
-  addUser: PropTypes.func.isRequired
-};
-
-export default UsersList;
+  </>
+)

@@ -1,39 +1,40 @@
-import 'babel-polyfill';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { Root } from 'modules/root/components/root'
+import { User, AddUserFunc } from 'modules/users/users-types'
 
-import Root from 'modules/root/components/root';
+interface State {
+  title: string
+  users: Array<User>
+}
 
-let state = {
+let state: State = {
   title: 'React is the best',
-  users: []
-};
+  users: [],
+}
 
-const addUser = user => {
-  const { users } = state;
+const addUser: AddUserFunc = (user) => {
+  const { users } = state
 
   state = {
     ...state,
     users: [
       ...users,
       {
+        ...user,
         id: users.length + 1,
-        ...user
-      }
-    ]
-  };
+      },
+    ],
+  }
 
-  render();
-};
+  render()
+}
 
-const render = () => ReactDOM.render(
-  <Root
-    title={state.title}
-    users={state.users}
-    addUser={addUser}
-  />,
-  document.getElementById('root')
-);
+const render = () =>
+  ReactDOM.render(
+    <Root title={state.title} users={state.users} addUser={addUser} />,
+    document.getElementById('root')
+  )
 
-render();
+render()
