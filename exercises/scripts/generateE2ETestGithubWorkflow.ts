@@ -1,8 +1,21 @@
-import { argv } from 'process'
+import { argv, exit } from 'process'
 import { writeFile } from 'fs'
 
 const exercises = ['00-init']
-const workflowFile = '../../.github/workflows/main.yml'
+const helpMessage = `\
+Generate the github workflow for E2E tests
+
+Usage: npx ts-node generateE2ETestGithubWorkflow.ts [OPTIONS]
+
+Available options:
+      --write   write the result directly to ${workflowFile} file
+  -h, --help    display this help and exit
+`
+
+if (argv.includes('--help') || argv.includes('-h')) {
+  console.log(helpMessage)
+  exit(0)
+}
 
 const header = `\
 name: End-to-end tests
@@ -68,11 +81,11 @@ const getCypressWorkflow = (directories: Array<string>): string => {
 
 const cypressWorkflow = getCypressWorkflow(exercises)
 
-if (process.argv.includes('--write')) {
+if (argv.includes('--write')) {
   console.log('Writing generated github workflow to', workflowFile)
   writeFile(workflowFile, cypressWorkflow, (err) => {
     if (err) {
-      console.error("Couldn't write workflow to", workflowFile, err)
+      console.error("Couldn't write workflow to", workflowFile, '\n', err)
     }
   })
 } else {
