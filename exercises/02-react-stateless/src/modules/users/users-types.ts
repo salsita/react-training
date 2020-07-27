@@ -3,10 +3,8 @@ export interface UserData {
   lastName: string
 }
 
-export interface User {
+export interface User extends UserData {
   id: number
-  firstName: string
-  lastName: string
 }
 
 export interface AddUserFunc {
