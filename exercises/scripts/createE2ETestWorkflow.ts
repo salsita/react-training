@@ -4,7 +4,8 @@ import { writeFile } from 'fs'
 const EXERCISES = ['00-init']
 const WORKFLOW_FILE = '../../.github/workflows/main.yml'
 
-const HEADER = `name: End-to-end tests
+const HEADER = `\
+name: End-to-end tests
 
 # Controls when the action will run. Triggers the workflow on push
 on: [push]
