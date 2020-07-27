@@ -18,7 +18,7 @@ Install all dependencies and link executables to child projects with `npm i` in 
 
 ## Exercise \#1
 
-The main purpose of this exercise is to try [React](https://reactjs.org/docs/) and its stateful components implemented with [react-hooks](https://reactjs.org/docs/hooks-state.html).
+The main purpose of this exercise is to try [React](https://reactjs.org/docs/) and its stateful components implemented with [React Hooks](https://reactjs.org/docs/hooks-state.html).
 
 * Open the initial project `00-init`
 * Create two [function](https://reactjs.org/docs/components-and-props.html#functional-and-class-components) components (`Header` and `UsersList`)
