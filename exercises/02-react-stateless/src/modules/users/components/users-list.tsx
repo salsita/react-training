@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { User, AddUserFunc } from '../users-types'
 
 export * from '../users-types'
