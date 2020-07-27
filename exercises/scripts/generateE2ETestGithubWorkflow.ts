@@ -20,7 +20,7 @@ if (argv.includes('--help') || argv.includes('-h')) {
   exit(0)
 }
 
-const header = `\
+const workflowHeader = `\
 name: End-to-end tests
 
 # Controls when the action will run. Triggers the workflow on push
@@ -30,7 +30,7 @@ on: [push]
 jobs:
 `
 
-const getCypressJobForDir = (dirname: string): string => {
+const getCypressJobForDirectory = (dirname: string): string => {
   return `
   # Exercise ${dirname}
   e2e-${dirname}:
@@ -73,13 +73,9 @@ const getCypressWorkflow = (directories: Array<string>): string => {
     return ''
   }
 
-  return (
-    header +
-    directories.reduce(
-      (accumulator, dir) => accumulator + getCypressJobForDir(dir),
-      ''
-    )
-  )
+  const workflowJobs = directories.map(getCypressJobForDirectory).join('')
+
+  return workflowHeader + workflowJobs
 }
 
 const cypressWorkflow = getCypressWorkflow(exercises)
