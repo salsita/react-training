@@ -2,20 +2,20 @@
 
 ## End-to-end tests github workflow
 
-`createE2ETestWorkflow.ts` script generates the github workflow definition for End-to-End tests of exercises in `exercises` directory.
+`generateE2ETestGithubWorkflow.ts` script generates the github workflow definition for End-to-End tests of exercises in `exercises` directory.
 
 ### Usage
 
 To execute run 
 ```sh
-npx ts-node createE2ETestWorkflow.ts
+npx ts-node generateE2ETestGithubWorkflow.ts
 ```
 
 this will write the generated workflow definition to the console.
 
 To rewrite the associated workflow file located at `.github/workflows/main.yml` run
 ```sh
-npx ts-node createE2ETestWorkflow.ts --write
+npx ts-node generateE2ETestGithubWorkflow.ts --write
 ```
 
 ### Adding directories to workflow
