@@ -10,7 +10,7 @@ interface State {
 }
 
 let state: State = {
-  title: 'React is the best',
+  title: 'User Management',
   users: [],
 }
 
