@@ -74,25 +74,11 @@ This component renders a list of the users saved in the state and two buttons to
 The main purpose of this exercise is to try [stateless components](https://reactjs.org/docs/components-and-props.html#functional-and-class-components).
 
 * Continue with your previous project or open `01-react-stateful`
-* Modify both components (`Header` and `UsersList`) and rewrite them into [functions](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)
+* Modify `UsersList` component into stateless [function](https://reactjs.org/docs/components-and-props.html#functional-and-class-components) component
 
-### Header component
-Location: `src/modules/root/components/header.js`
-
-Props:
-```ts
-{
-  title: string
-}
-```
-
-This is the simplest component created with a function. The functionality is the same like in the previous exercise.
-
-* Modify the `Header` component previously created as a class into the component created as a function
-* Keep the same `PropTypes`
 
 ### UsersList component
-Location: `src/modules/users/components/users-list.js`
+Location: `src/modules/users/components/users-list.tsx`
 
 Props:
 ```ts
@@ -110,10 +96,10 @@ The functionality is the same like in the previous exercise. The only difference
 
 * Modify the `UsersList` component into a function that renders users from the `users` property (or `No Users` when the list is empty)
 * Call the `addUser` function taken from the props when the user clicks on the button
-* Implement correct `PropTypes`
+* Define necessary interfaces
 
 ### Index file
-Location: `src/index.js`
+Location: `src/index.tsx`
 
 Move logic from the old `UsersList` into the index file. All application data will be in a global object.
 
@@ -121,9 +107,10 @@ Move logic from the old `UsersList` into the index file. All application data wi
 * Create your own function `render` that just calls [`ReactDOM.render`](https://reactjs.org/docs/react-dom.html#render) and uses data from the global object
 * Create a function called `addUser` that adds the user into the list of users and calls your `render` function
   * Please prefer immutable change of the `state` object
+* Define necessary interfaces
 
 ### Root component
-Location: `src/modules/root/components/root.js`
+Location: `src/modules/root/components/root.tsx`
 
 Props:
 ```ts
@@ -138,7 +125,7 @@ Props:
 }
 ```
 
-Since we moved the logic into the index file and the `Root` component receives all necessary props, we need to send into `Header` and `UsersList`.
+Since we moved the logic into the index file and the `Root` component receives all necessary props, we need to send props into `Header` and `UsersList`.
 
 ### Additional task
 Try 3 different versions of the `Header` component and see when they get rendered
