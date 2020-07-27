@@ -98,3 +98,37 @@ jobs:
         with:
           name: 02-react-stateless-cypress-videos
           path: exercises/02-react-stateless/cypress/videos
+
+  # Exercise 03-redux
+  e2e-03-redux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: exercises
+          useLockFile: false
+      - name: Cypress run exercise 03-redux
+        uses: cypress-io/github-action@v2
+        with:
+          # we have already installed all dependencies above
+          install: false
+          working-directory: exercises/03-redux
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 03-redux-cypress-screenshots
+          path: exercises/03-redux/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 03-redux-cypress-videos
+          path: exercises/03-redux/cypress/videos
