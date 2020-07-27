@@ -1,10 +1,8 @@
 import React from 'react'
 
-import {
-  UsersList,
-  User,
-  AddUserFunc,
-} from 'modules/users/components/users-list'
+import { UsersList } from 'modules/users/components/users-list'
+import { User, AddUserFunc } from 'modules/users/users-types'
+
 import { Header } from './header'
 
 interface RootProps {

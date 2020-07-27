@@ -1,8 +1,6 @@
 import React from 'react'
 import { User, AddUserFunc } from '../users-types'
 
-export * from '../users-types'
-
 interface UsersListProps {
   users: Array<User>
   addUser: AddUserFunc
