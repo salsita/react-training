@@ -1,7 +1,10 @@
 import { argv, exit } from 'process'
 import { writeFile } from 'fs'
+import { resolve } from 'path'
 
 const exercises = ['00-init']
+const workflowFile = resolve(__dirname, '../../.github/workflows/main.yml')
+
 const helpMessage = `\
 Generate the github workflow for E2E tests
 
