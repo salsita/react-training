@@ -1,10 +1,10 @@
 import { argv } from 'process'
 import { writeFile } from 'fs'
 
-const EXERCISES = ['00-init']
-const WORKFLOW_FILE = '../../.github/workflows/main.yml'
+const exercises = ['00-init']
+const workflowFile = '../../.github/workflows/main.yml'
 
-const HEADER = `\
+const header = `\
 name: End-to-end tests
 
 # Controls when the action will run. Triggers the workflow on push
@@ -58,7 +58,7 @@ const getCypressWorkflow = (directories: Array<string>): string => {
   }
 
   return (
-    HEADER +
+    header +
     directories.reduce(
       (accumulator, dir) => accumulator + getCypressJobForDir(dir),
       ''
@@ -66,13 +66,13 @@ const getCypressWorkflow = (directories: Array<string>): string => {
   )
 }
 
-const cypressWorkflow = getCypressWorkflow(EXERCISES)
+const cypressWorkflow = getCypressWorkflow(exercises)
 
 if (process.argv.includes('--write')) {
-  console.log('Writing generated github workflow to', WORKFLOW_FILE)
-  writeFile(WORKFLOW_FILE, cypressWorkflow, (err) => {
+  console.log('Writing generated github workflow to', workflowFile)
+  writeFile(workflowFile, cypressWorkflow, (err) => {
     if (err) {
-      console.error("Couldn't write workflow to", WORKFLOW_FILE, err)
+      console.error("Couldn't write workflow to", workflowFile, err)
     }
   })
 } else {
