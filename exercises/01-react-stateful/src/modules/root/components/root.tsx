@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { UsersList } from 'modules/users/components/users-list'
+import { UserList } from 'modules/users/components/user-list'
 
 import { Header } from './header'
 
 export const Root: React.FC = () => (
   <div>
     <Header title="User Management" />
-    <UsersList />
+    <UserList />
   </div>
 )

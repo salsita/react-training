@@ -21,7 +21,7 @@ Install all dependencies and link executables to child projects with `npm i` in 
 The main purpose of this exercise is to try [React](https://reactjs.org/docs/) and its stateful components implemented with [React Hooks](https://reactjs.org/docs/hooks-state.html).
 
 * Open the initial project `00-init`
-* Create two [function](https://reactjs.org/docs/components-and-props.html#function-and-class-components) components (`Header` and `UsersList`)
+* Create two [function](https://reactjs.org/docs/components-and-props.html#function-and-class-components) components (`Header` and `UserList`)
 
 ### Header component
 
@@ -41,9 +41,9 @@ This component just renders a heading (`h1`) with a string taken from the `title
 * Create an interface `HeaderProps` and use it in the `Header` component
 * Use this component in the `Root` component, pass the title `'User Management'`
 
-### UsersList component
+### UserList component
 
-Location: `src/modules/users/components/users-list.tsx`
+Location: `src/modules/users/components/user-list.tsx`
 
 User:
 ```ts
@@ -56,7 +56,7 @@ User:
 
 This component renders a list of the users saved in the state and two buttons to add two different users.
 
-* Create a function named `UsersList` that renders
+* Create a function named `UserList` that renders
   * two buttons `Add No One` and `Add Mother of Dragons`
   * a table of users with two columns `First Name` and `Last Name`. The table displays text `No Users` when the list is empty
 * The first button will add `Arya Stark` and the second one `Daenerys Targaryen`
