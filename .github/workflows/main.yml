@@ -16,12 +16,9 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           working-directory: exercises
-          useLockFile: false
       - name: Cypress run exercise 00-init
         uses: cypress-io/github-action@v2
         with:
-          # we have already installed all dependencies above
-          install: false
           working-directory: exercises/00-init
           # start the server
           start: npm start
@@ -50,12 +47,9 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           working-directory: exercises
-          useLockFile: false
       - name: Cypress run exercise 01-react-stateful
         uses: cypress-io/github-action@v2
         with:
-          # we have already installed all dependencies above
-          install: false
           working-directory: exercises/01-react-stateful
           # start the server
           start: npm start
