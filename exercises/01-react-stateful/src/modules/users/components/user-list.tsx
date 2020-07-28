@@ -3,7 +3,7 @@ import { User } from '../user-types'
 
 export const UserList: React.FC = () => {
   // Declare a new state variable called 'users'
-  const [users, setUsers] = useState<Array<User>>([])
+  const [users, setUsers] = useState<User[]>([])
 
   // Adds a new user to the 'users' state
   const addUser = (user: { firstName: string; lastName: string }) => {
