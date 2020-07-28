@@ -7,7 +7,10 @@ export const UserList: React.FC = () => {
 
   // Adds a new user to the 'users' state
   const addUser = (user: { firstName: string; lastName: string }) => {
-    setUsers([...users, { id: users.length + 1, ...user }])
+    setUsers((prevUsers) => [
+      ...prevUsers,
+      { id: prevUsers.length + 1, ...user },
+    ])
   }
 
   return (
