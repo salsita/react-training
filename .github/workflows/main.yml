@@ -1,0 +1,41 @@
+name: End-to-end tests
+
+# Controls when the action will run. Triggers the workflow on push
+on: [push]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  # Exercise 00-init
+  e2e-00-init:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: exercises
+          useLockFile: false
+      - name: Cypress run exercise 00-init
+        uses: cypress-io/github-action@v2
+        with:
+          # we have already installed all dependencies above
+          install: false
+          working-directory: exercises/00-init
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 00-init-cypress-screenshots
+          path: exercises/00-init/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 00-init-cypress-videos
+          path: exercises/00-init/cypress/videos
