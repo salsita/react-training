@@ -38,7 +38,7 @@ HeaderProps:
 This component just renders a heading (`h1`) with a string taken from the `title` property.
 
 * Create a function named `Header` that renders the heading
-* Use correct types
+* Create an interface `HeaderProps` and use it in the `Header` component
 * Use this component in the `Root` component, pass the title `'User Management'`
 
 ### UsersList component
