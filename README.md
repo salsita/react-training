@@ -58,10 +58,10 @@ This component renders a list of the users saved in the state and two buttons to
 
 * Create a function named `UsersList` that renders
   * two buttons `Add No One` and `Add Mother of Dragons`
-  * the table of users with two columns `First Name` and `Last Name`. The table displays text `No Users` when the list is empty
+  * a table of users with two columns `First Name` and `Last Name`. The table displays text `No Users` when the list is empty
 * The first button will add `Arya Stark` and the second one `Daenerys Targaryen`
 * Every user has `id` which should be unique within the list (we will not implement deleting users)
-* Create the initial state with the call of [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate) from react
+* Create the initial state with the call of [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate) from React
 * Use the function returned by `useState` call to add a new user
 * Use correct types
 * Use this component in the `Root` component
