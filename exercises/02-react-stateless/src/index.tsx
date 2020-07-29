@@ -6,7 +6,7 @@ import { User, AddUserFunc } from 'modules/users/user-types'
 
 interface State {
   title: string
-  users: Array<User>
+  users: User[]
 }
 
 let state: State = {
