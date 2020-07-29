@@ -71,10 +71,10 @@ This component renders a list of the users saved in the state and two buttons to
 
 
 ## Exercise \#2
-The main purpose of this exercise is to try [stateless components](https://reactjs.org/docs/components-and-props.html#functional-and-class-components).
+The main purpose of this exercise is to try stateless components.
 
 * Continue with your previous project or open `01-react-stateful`
-* Modify `UserList` component into stateless [function](https://reactjs.org/docs/components-and-props.html#functional-and-class-components) component
+* Modify `UserList` component into stateless [function](https://reactjs.org/docs/components-and-props.html#function-and-class-components) component
 
 
 ### UserTypes
@@ -130,7 +130,7 @@ Try 3 different versions of the `Header` component and see when they get rendere
 
 1. Created as a class that extends [`React.Component`](https://reactjs.org/docs/react-api.html#reactcomponent)
 2. Created as a class that extends [`React.PureComponent`](https://reactjs.org/docs/react-api.html#reactpurecomponent)
-3. Created as a [function](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)
+3. Created as a [function](https://reactjs.org/docs/components-and-props.html#function-and-class-components)
 
 
 ## Exercise \#3
