@@ -1,4 +1,4 @@
-export const USER_LIST = {
+export const userList = {
   header: 'User Management',
   addAryaButton: 'Add No One',
   addDaenerysButton: 'Add Mother of Dragons',

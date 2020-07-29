@@ -16,12 +16,9 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           working-directory: exercises
-          useLockFile: false
       - name: Cypress run exercise 00-init
         uses: cypress-io/github-action@v2
         with:
-          # we have already installed all dependencies above
-          install: false
           working-directory: exercises/00-init
           # start the server
           start: npm start
@@ -39,3 +36,34 @@ jobs:
         with:
           name: 00-init-cypress-videos
           path: exercises/00-init/cypress/videos
+
+  # Exercise 01-react-stateful
+  e2e-01-react-stateful:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 01-react-stateful
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/01-react-stateful
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 01-react-stateful-cypress-screenshots
+          path: exercises/01-react-stateful/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 01-react-stateful-cypress-videos
+          path: exercises/01-react-stateful/cypress/videos

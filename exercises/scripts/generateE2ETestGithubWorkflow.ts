@@ -2,7 +2,7 @@ import { argv, exit } from 'process'
 import { writeFile } from 'fs'
 import { resolve } from 'path'
 
-const exercises = ['00-init']
+const exercises = ['00-init', '01-react-stateful']
 const workflowFile = resolve(__dirname, '../../.github/workflows/main.yml')
 
 const helpMessage = `\
@@ -42,12 +42,9 @@ const getCypressJobForDirectory = (dirname: string): string => {
         uses: bahmutov/npm-install@v1
         with:
           working-directory: exercises
-          useLockFile: false
       - name: Cypress run exercise ${dirname}
         uses: cypress-io/github-action@v2
         with:
-          # we have already installed all dependencies above
-          install: false
           working-directory: exercises/${dirname}
           # start the server
           start: npm start
