@@ -77,18 +77,20 @@ The main purpose of this exercise is to try [stateless components](https://react
 * Modify `UsersList` component into stateless [function](https://reactjs.org/docs/components-and-props.html#functional-and-class-components) component
 
 
+### UserTypes
+
+Location: `src/modules/users/user-types.ts`
+
+* Add an `AddUserFunc` interface, it's a function which takes `UserData` as parameter and returns `void`
+
 ### UsersList component
 Location: `src/modules/users/components/users-list.tsx`
 
 Props:
 ```ts
 {
-  users: Array<{
-    id: number,
-    firstName: string,
-    lastName: string
-  }>,
-  addUser: ({ firstName: string, lastName: string }) => void
+  users: User[],
+  addUser: AddUserFunc
 }
 ```
 
@@ -96,7 +98,7 @@ The functionality is the same like in the previous exercise. The only difference
 
 * Modify the `UsersList` component into a function that renders users from the `users` property (or `No Users` when the list is empty)
 * Call the `addUser` function taken from the props when the user clicks on the button
-* Define necessary interfaces
+* Create and use a `UserProps` interface
 
 ### Index file
 Location: `src/index.tsx`
@@ -116,12 +118,8 @@ Props:
 ```ts
 {
   title: string,
-  users: Array<{
-    id: number,
-    firstName: string,
-    lastName: string
-  }>,
-  addUser: ({ firstName: string, lastName: string }) => void
+  users: User[],
+  addUser: AddUserFunc
 }
 ```
 
