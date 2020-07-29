@@ -41,18 +41,21 @@ This component just renders a heading (`h1`) with a string taken from the `title
 * Create an interface `HeaderProps` and use it in the `Header` component
 * Use this component in the `Root` component, pass the title `'User Management'`
 
+
+### UserTypes
+
+Location: `src/modules/users/user-types.ts`
+
+This file contains definitions of user interfaces.
+
+* Create and export two interfaces
+  * `UserData` contains two strings `firstName` and `lastName`
+  * `User` is the same as `UserData`, but additionally contains an `id` (number)
+
+
 ### UserList component
 
 Location: `src/modules/users/components/user-list.tsx`
-
-User:
-```ts
-{
-  id: number
-  firstName: string
-  lastName: string
-}
-```
 
 This component renders a list of the users saved in the state and two buttons to add two different users.
 
