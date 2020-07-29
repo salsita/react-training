@@ -74,7 +74,7 @@ This component renders a list of the users saved in the state and two buttons to
 The main purpose of this exercise is to try [stateless components](https://reactjs.org/docs/components-and-props.html#functional-and-class-components).
 
 * Continue with your previous project or open `01-react-stateful`
-* Modify `UsersList` component into stateless [function](https://reactjs.org/docs/components-and-props.html#functional-and-class-components) component
+* Modify `UserList` component into stateless [function](https://reactjs.org/docs/components-and-props.html#functional-and-class-components) component
 
 
 ### UserTypes
@@ -83,8 +83,8 @@ Location: `src/modules/users/user-types.ts`
 
 * Add an `AddUserFunc` interface, it's a function which takes `UserData` as parameter and returns `void`
 
-### UsersList component
-Location: `src/modules/users/components/users-list.tsx`
+### UserList component
+Location: `src/modules/users/components/user-list.tsx`
 
 Props:
 ```ts
@@ -96,14 +96,14 @@ Props:
 
 The functionality is the same like in the previous exercise. The only difference is that the logic will be outside the file.
 
-* Modify the `UsersList` component into a function that renders users from the `users` property (or `No Users` when the list is empty)
+* Modify the `UserList` component into a function that renders users from the `users` property (or `No Users` when the list is empty)
 * Call the `addUser` function taken from the props when the user clicks on the button
 * Create and use a `UserProps` interface
 
 ### Index file
 Location: `src/index.tsx`
 
-Move logic from the old `UsersList` into the index file. All application data will be in a global object.
+Move logic from the old `UserList` into the index file. All application data will be in a global object.
 
 * Create a global object called `state` with 2 fields (`title` and `users`)
 * Create your own function `render` that just calls [`ReactDOM.render`](https://reactjs.org/docs/react-dom.html#render) and uses data from the global object
@@ -123,7 +123,7 @@ Props:
 }
 ```
 
-Since we moved the logic into the index file and the `Root` component receives all necessary props, we need to send props into `Header` and `UsersList`.
+Since we moved the logic into the index file and the `Root` component receives all necessary props, we need to send props into `Header` and `UserList`.
 
 ### Additional task
 Try 3 different versions of the `Header` component and see when they get rendered
