@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { UsersList } from 'modules/users/components/users-list'
-import { User, AddUserFunc } from 'modules/users/users-types'
+import { UserList } from 'modules/users/components/user-list'
+import { User, AddUserFunc } from 'modules/users/user-types'
 
 import { Header } from './header'
 
@@ -14,6 +14,6 @@ interface RootProps {
 export const Root: React.FC<RootProps> = ({ title, users, addUser }) => (
   <div>
     <Header title={title} />
-    <UsersList users={users} addUser={addUser} />
+    <UserList users={users} addUser={addUser} />
   </div>
 )

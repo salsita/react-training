@@ -1,12 +1,12 @@
 import React from 'react'
-import { User, AddUserFunc } from '../users-types'
+import { User, AddUserFunc } from '../user-types'
 
-interface UsersListProps {
+interface UserListProps {
   users: Array<User>
   addUser: AddUserFunc
 }
 
-export const UsersList: React.FC<UsersListProps> = ({ users, addUser }) => (
+export const UserList: React.FC<UserListProps> = ({ users, addUser }) => (
   <>
     <div>
       <button onClick={() => addUser({ firstName: 'Arya', lastName: 'Stark' })}>
