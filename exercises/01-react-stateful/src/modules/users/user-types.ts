@@ -1,5 +1,8 @@
-export interface User {
-  id: number
+export interface UserData {
   firstName: string
   lastName: string
+}
+
+export interface User extends UserData {
+  id: number
 }
