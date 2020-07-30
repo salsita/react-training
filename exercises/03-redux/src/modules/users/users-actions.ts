@@ -1,13 +1,13 @@
 import { UserData } from './user-types'
 
-const ADD_USER = 'ADD_USER'
+export const ADD_USER = 'users/addUser'
 
-const addUser = (user: UserData) => ({ type: ADD_USER, payload: user })
-
-export const UsersActions = {
-  ADD_USER,
+export interface AddUserAction {
+  type: typeof ADD_USER
+  payload: UserData
 }
 
-export const UsersCreators = {
-  addUser,
-}
+export const addUser = (userData: UserData): AddUserAction => ({
+  type: ADD_USER,
+  payload: userData,
+})
