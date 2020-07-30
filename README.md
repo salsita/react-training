@@ -144,15 +144,15 @@ Location: `src/modules/users/user-actions.ts`
 
 This file defines actions and action types.
 
-* Create and export an enum `UserActionTypes` of ([action types](https://redux.js.org/basics/actions)) with one value `addUser = 'users/addUser'`
-* Create an interface `AddUserAction` which extends `AnyAction` from `'redux'` for the returned object.
+* Create and export an enum `UserActionTypes` of [action types](https://redux.js.org/basics/actions) with one value `addUser = 'users/addUser'`
+* Create an interface `AddUserAction` which extends `AnyAction` from `'redux'` for `users/addUser` action. In addition to mandatory `type` property this action will contain a payload with the new user details.
   ```ts
   {
     payload: UserData
   }
   ```
-* Create a function ([action creator](https://redux.js.org/basics/actions#action-creators)) called `addUser` that takes `UserData` object as parameter and returns the `AddUserAction` action. Hint: there's a `ActionCreator<A>` type in `'redux'`
-* Create and export a new type `UserActions`, which is a union of all user actions. This is useful in the reducer when more actions are defined. Note, currently we have only one action `AddUserAction`.
+* Create a function ([action creator](https://redux.js.org/basics/actions#action-creators) of `ActionCreator<A>` type from `'redux'`) called `addUser` that takes `UserData` object as parameter and returns the `AddUserAction` action.
+* Create and export a new type `UserActions`, which is a union of all user actions. This is useful in the reducer when more actions are defined. Note, currently we have only one action `users/addUser`.
 * Create and export an object `UserActionCreators`, which congregates all user action creators.
 
 ### usersReducer
@@ -170,7 +170,7 @@ The logic from `addUser` function from the previous exercise will be in this red
 
 * Create a [reducer](https://redux.js.org/basics/reducers) function of type `Reducer<S, A>` from `'redux'`
 * Use an initial state
-* Modify `users` field in the state when the `addUser` action is dispatched
+* Modify `users` field in the state when the `users/addUser` action is dispatched
 * Don't forget to return unmodified state when a different action is dispatched
 
 ### rootReducer
@@ -201,7 +201,7 @@ Configure all necessary things for `redux`.
     }
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     ```
-* Create a function called `dispatchAddUser` that calls [`store.dispatch`](https://redux.js.org/api/store#dispatchaction) to dispatch the `addUser` action
+* Create a function called `dispatchAddUser` that calls [`store.dispatch`](https://redux.js.org/api/store#dispatchaction) to dispatch the `users/addUser` action
 * Use data from [`store.getState()`](https://redux.js.org/api/store#getstate) in your `render` function
 * Subscribe your `render` function with [`store.subscribe`](https://redux.js.org/api/store#subscribelistener) to re-render the app when an action is dispatched
 
