@@ -7,7 +7,7 @@ import { Header } from './header'
 
 interface RootProps {
   title: string
-  users: Array<User>
+  users: User[]
   addUser: AddUserFunc
 }
 
