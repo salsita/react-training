@@ -8,7 +8,7 @@ import { createStore, compose } from 'redux'
 
 import { RootReducer, RootState } from 'modules/root/root-reducer'
 
-import * as userActions from 'modules/users/users-actions'
+import * as userActions from 'modules/users/user-actions'
 
 // add redux devtools to window
 declare global {

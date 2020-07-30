@@ -1,4 +1,4 @@
-import * as UserActions from 'modules/users/users-actions'
+import * as UserActions from 'modules/users/user-actions'
 import { User } from './user-types'
 
 import { Reducer } from 'redux'
