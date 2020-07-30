@@ -1,13 +1,22 @@
 import { UserData } from './user-types'
+import { AnyAction, ActionCreator } from 'redux'
 
-export const ADD_USER = 'users/addUser'
+export enum UserActionTypes {
+  addUser = 'users/addUser',
+}
 
-export interface AddUserAction {
-  type: typeof ADD_USER
+export interface AddUserAction extends AnyAction {
   payload: UserData
 }
 
-export const addUser = (userData: UserData): AddUserAction => ({
-  type: ADD_USER,
+// addUser action creator
+export const addUser: ActionCreator<AddUserAction> = (userData: UserData) => ({
+  type: UserActionTypes.addUser,
   payload: userData,
 })
+
+export type UserActions = AddUserAction
+
+export const UserActionCreators = {
+  addUser,
+}

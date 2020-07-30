@@ -1,4 +1,4 @@
-import * as UserActions from 'modules/users/user-actions'
+import { UserActionTypes, UserActions } from 'modules/users/user-actions'
 import { User } from './user-types'
 
 import { Reducer } from 'redux'
@@ -13,12 +13,12 @@ const initialState: UsersState = {
   users: [],
 }
 
-export const UsersReducer: Reducer<UsersState, UserActions.AddUserAction> = (
+export const UsersReducer: Reducer<UsersState, UserActions> = (
   state = initialState,
   action
 ) => {
   switch (action.type) {
-    case UserActions.ADD_USER:
+    case UserActionTypes.addUser:
       return {
         ...state,
         users: [

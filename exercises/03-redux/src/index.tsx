@@ -8,7 +8,7 @@ import { createStore, compose } from 'redux'
 
 import { RootReducer, RootState } from 'modules/root/root-reducer'
 
-import * as userActions from 'modules/users/user-actions'
+import { UserActionCreators } from 'modules/users/user-actions'
 
 // add redux devtools to window
 declare global {
@@ -21,7 +21,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(RootReducer, composeEnhancers())
 
 const dispatchAddUser: AddUserFunc = (user) =>
-  store.dispatch(userActions.addUser(user))
+  store.dispatch(UserActionCreators.addUser(user))
 
 const render = (state: RootState) => {
 
