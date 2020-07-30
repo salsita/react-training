@@ -6,7 +6,7 @@ import { AddUserFunc } from 'modules/users/user-types'
 
 import { createStore, compose } from 'redux'
 
-import { RootReducer, RootState } from 'modules/root/root-reducer'
+import { rootReducer, RootState } from 'modules/root/root-reducer'
 
 import { UserActionCreators } from 'modules/users/user-actions'
 
@@ -18,7 +18,7 @@ declare global {
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-const store = createStore(RootReducer, composeEnhancers())
+const store = createStore(rootReducer, composeEnhancers())
 
 const dispatchAddUser: AddUserFunc = (user) =>
   store.dispatch(UserActionCreators.addUser(user))
