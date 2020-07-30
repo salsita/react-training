@@ -13,7 +13,7 @@ const initialState: UsersState = {
   users: [],
 }
 
-export const UsersReducer: Reducer<UsersState, UserActions> = (
+export const usersReducer: Reducer<UsersState, UserActions> = (
   state = initialState,
   action
 ) => {
