@@ -4,6 +4,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
     "@salsita/react-api": "^1.0.0",
     "@salsita/react-core": "^1.0.0",
     "@salsita/react-crud": "^1.0.0",
