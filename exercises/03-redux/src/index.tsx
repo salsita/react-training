@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { Root } from 'modules/root/components/root'
-import { AddUserFunc } from 'modules/users/user-types'
+import { AddUser } from 'modules/users/user-types'
 
 import { createStore, compose } from 'redux'
 
@@ -20,7 +20,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(rootReducer, composeEnhancers())
 
-const dispatchAddUser: AddUserFunc = (user) =>
+const dispatchAddUser: AddUser = (user) =>
   store.dispatch(UserActionCreators.addUser(user))
 
 const render = (state: RootState) => {
