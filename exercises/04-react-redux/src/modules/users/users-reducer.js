@@ -3,9 +3,9 @@ import { createReducer } from 'reduxsauce';
 import UsersActions from 'modules/users/users-actions';
 
 const INITIAL_STATE = {
-  title: 'React is the best',
-  users: []
-};
+  title: 'User Management',
+  users: [],
+}
 
 const addUser = (state, { user }) => ({
   ...state,
