@@ -24,7 +24,6 @@ const dispatchAddUser: AddUserFunc = (user) =>
   store.dispatch(UserActionCreators.addUser(user))
 
 const render = (state: RootState) => {
-
   const { title, users } = state.users
 
   ReactDOM.render(

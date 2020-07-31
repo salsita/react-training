@@ -6,6 +6,7 @@ export enum UserActionTypes {
 }
 
 export interface AddUserAction extends AnyAction {
+  type: UserActionTypes.addUser
   payload: UserData
 }
 
