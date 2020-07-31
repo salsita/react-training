@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { Root } from 'modules/root/components/root'
-import { User, AddUserFunc } from 'modules/users/user-types'
+import { User, AddUser } from 'modules/users/user-types'
 
 interface State {
   title: string
@@ -14,7 +14,7 @@ let state: State = {
   users: [],
 }
 
-const addUser: AddUserFunc = (user) => {
+const addUser: AddUser = (user) => {
   const { users } = state
 
   state = {

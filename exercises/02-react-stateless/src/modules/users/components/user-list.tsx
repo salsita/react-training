@@ -1,9 +1,9 @@
 import React from 'react'
-import { User, AddUserFunc } from '../user-types'
+import { User, AddUser } from '../user-types'
 
 interface UserListProps {
   users: User[]
-  addUser: AddUserFunc
+  addUser: AddUser
 }
 
 export const UserList: React.FC<UserListProps> = ({ users, addUser }) => (

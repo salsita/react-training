@@ -81,7 +81,7 @@ The main purpose of this exercise is to try stateless components.
 
 Location: `src/modules/users/user-types.ts`
 
-* Add an `AddUserFunc` interface, it's a function which takes `UserData` as parameter and returns `void`
+* Add an `AddUser` interface, it's a function which takes `UserData` as parameter and returns `void`
 
 ### UserList component
 Location: `src/modules/users/components/user-list.tsx`
@@ -90,7 +90,7 @@ Props:
 ```ts
 {
   users: User[],
-  addUser: AddUserFunc
+  addUser: AddUser
 }
 ```
 
@@ -119,7 +119,7 @@ Props:
 {
   title: string,
   users: User[],
-  addUser: AddUserFunc
+  addUser: AddUser
 }
 ```
 
