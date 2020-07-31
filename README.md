@@ -145,9 +145,10 @@ Location: `src/modules/users/user-actions.ts`
 This file defines actions and action types.
 
 * Create and export an enum `UserActionTypes` of [action types](https://redux.js.org/basics/actions) with one value `addUser = 'users/addUser'`
-* Create an interface `AddUserAction` which extends `AnyAction` from `'redux'` for `users/addUser` action. In addition to mandatory `type` property this action will contain a payload with the new user details.
+* Create an interface `AddUserAction` which extends `AnyAction` from `'redux'` for `users/addUser` action. In addition to the mandatory `type` property this action will contain a payload with the new user details.
   ```ts
   {
+    type: UserActionTypes.addUser
     payload: UserData
   }
   ```
