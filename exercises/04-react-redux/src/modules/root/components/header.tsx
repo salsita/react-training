@@ -1,15 +1,17 @@
 import React from 'react'
 
-import { connect } from 'react-redux'
+import { connect, ConnectedProps } from 'react-redux'
+import { RootState } from '../root-reducer'
 
-interface HeaderProps {
-  title: string
-}
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   title: state.users.title,
 })
 
-// export const Header: React.FC<HeaderProps> = ({ title }) => <h1>{title}</h1>
+const connector = connect(mapStateToProps)
 
-export const Header = connect(mapStateToProps)(({ title }) => <h1>{title}</h1>)
+// infer the props from Redux
+type HeaderPropsFromRedux = ConnectedProps<typeof connector>
+
+export const Header = connector(({ title }: HeaderPropsFromRedux) => (
+  <h1>{title}</h1>
+))

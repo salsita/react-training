@@ -1,15 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { UserData, User } from './user-types'
 
-const INITIAL_STATE = {
+export interface UsersState {
+  title: string
+  users: User[]
+}
+
+export const initialState: UsersState = {
   title: 'User Management',
   users: [],
 }
 
 const usersSlice = createSlice({
   name: 'users',
-  initialState: INITIAL_STATE,
+  initialState: initialState as UsersState,
   reducers: {
-    addUser: (state, { payload: user }) => ({
+    addUser: (state, { payload: user }: PayloadAction<UserData>) => ({
       ...state,
       users: [
         ...state.users,
@@ -22,5 +28,5 @@ const usersSlice = createSlice({
   },
 })
 
-export const UsersActions = usersSlice.actions
+export const usersActions = usersSlice.actions
 export const usersReducer = usersSlice.reducer
