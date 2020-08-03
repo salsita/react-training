@@ -1,36 +1,24 @@
 import React from 'react'
 
-import { connect, ConnectedProps } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { usersActions } from 'modules/users/users-slice'
 import { RootState } from 'modules/root/root-reducer'
+import { UserData } from '../user-types'
 
-const mapStateToProps = (state: RootState) => ({
-  users: state.users.users,
-})
+export const UserList: React.FC = () => {
+  const users = useSelector((state: RootState) => state.users.users)
+  const dispatch = useDispatch()
+  const addUser = (user: UserData) => () => dispatch(usersActions.addUser(user))
 
-const mapDispatchToProps = {
-  addUser: usersActions.addUser,
-}
-
-const connector = connect(mapStateToProps, mapDispatchToProps)
-
-// infer the props from Redux
-type UserListPropsFromRedux = ConnectedProps<typeof connector>
-
-export const UserList = connector(
-  ({ users, addUser }: UserListPropsFromRedux) => (
+  return (
     <div>
       <div>
-        <button
-          onClick={() => addUser({ firstName: 'Arya', lastName: 'Stark' })}
-        >
+        <button onClick={addUser({ firstName: 'Arya', lastName: 'Stark' })}>
           Add No One
         </button>
         <button
-          onClick={() =>
-            addUser({ firstName: 'Daenerys', lastName: 'Targaryen' })
-          }
+          onClick={addUser({ firstName: 'Daenerys', lastName: 'Targaryen' })}
         >
           Add Mother of Dragons
         </button>
@@ -58,4 +46,4 @@ export const UserList = connector(
       </table>
     </div>
   )
-)
+}

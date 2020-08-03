@@ -13,7 +13,7 @@ export const initialState: UsersState = {
 
 const usersSlice = createSlice({
   name: 'users',
-  initialState: initialState as UsersState,
+  initialState: initialState,
   reducers: {
     addUser: (state, { payload: user }: PayloadAction<UserData>) => ({
       ...state,
