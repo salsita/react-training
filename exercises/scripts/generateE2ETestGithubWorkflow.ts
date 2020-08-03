@@ -2,7 +2,7 @@ import { argv, exit } from 'process'
 import { writeFile } from 'fs'
 import { resolve } from 'path'
 
-const exercises = ['00-init', '01-react-stateful']
+const exercises = ['00-init', '01-react-stateful', '02-react-stateless']
 const workflowFile = resolve(__dirname, '../../.github/workflows/main.yml')
 
 const helpMessage = `\
