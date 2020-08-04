@@ -9,6 +9,7 @@ const exercises = [
   '03-redux',
   '04-react-redux',
   '05-reselect',
+  '06-redux-saga',
 ]
 const workflowFile = resolve(__dirname, '../../.github/workflows/main.yml')
 
