@@ -23,14 +23,11 @@ const store = createStore(rootReducer, composeEnhancers())
 const dispatchAddUser: AddUser = (user) =>
   store.dispatch(UserActionCreators.addUser(user))
 
-const render = (state: RootState) => {
-  const { title, users } = state.users
-
+const render = ({ users: { title, users } }: RootState) =>
   ReactDOM.render(
     <Root title={title} users={users} addUser={dispatchAddUser} />,
     document.getElementById('root')
   )
-}
 
 store.subscribe(() => render(store.getState()))
 
