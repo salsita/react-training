@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Header } from './header'
-import { UserList } from 'modules/users/components/users-list'
+import { UserList } from 'modules/users/components/user-list'
 
 export const Root: React.FC = () => (
   <div>
