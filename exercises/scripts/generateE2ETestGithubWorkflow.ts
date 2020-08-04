@@ -8,6 +8,7 @@ const exercises = [
   '02-react-stateless',
   '03-redux',
   '04-react-redux',
+  '05-reselect',
 ]
 const workflowFile = resolve(__dirname, '../../.github/workflows/main.yml')
 
