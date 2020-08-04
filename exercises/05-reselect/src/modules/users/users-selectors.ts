@@ -8,7 +8,7 @@ export const getTitle = createSelector(getState, (state) => state.title)
 
 const getUsers = createSelector(getState, (state) => state.users)
 
-export const getUsersList = createSelector(getUsers, (users) =>
+export const getUserList = createSelector(getUsers, (users) =>
   users.map((user: User) => ({
     ...user,
     lastName: user.lastName.toUpperCase(),

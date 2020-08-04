@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { usersActions } from 'modules/users/users-slice'
 import { UserData } from '../user-types'
-import { getUsersList } from '../users-selectors'
+import { getUserList } from '../users-selectors'
 
 export const UserList: React.FC = () => {
-  const users = useSelector(getUsersList)
+  const users = useSelector(getUserList)
   const dispatch = useDispatch()
   const addUser = (user: UserData) => () => dispatch(usersActions.addUser(user))
 
