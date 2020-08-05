@@ -8,7 +8,7 @@
     "start-fe": "react-scripts start",
     "start-be": "nodemon src/server.js",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "npm run start-be",
     "eject": "react-scripts eject",
     "cy:open": "cypress open",
     "cy:run": "cypress run"
