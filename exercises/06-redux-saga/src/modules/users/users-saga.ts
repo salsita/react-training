@@ -23,9 +23,12 @@ function* addUser(action: Action) {
       if (response) {
         yield fork(getUsers)
       }
-    }
-    else {
-      console.error('Unexpected type', `'${action.type}'` ,'was passed to addUser saga.')
+    } else {
+      console.error(
+        'Unexpected type',
+        `'${action.type}'`,
+        'was passed to addUser saga.'
+      )
     }
   } catch (error) {
     console.log(error.message)
