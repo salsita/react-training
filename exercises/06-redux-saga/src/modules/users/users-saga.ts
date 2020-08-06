@@ -14,21 +14,21 @@ function* getUsers() {
 }
 
 function* addUser(action: Action) {
+  if (!usersActions.addUser.match(action)) {
+    console.error(
+      'Unexpected type',
+      `'${action.type}'`,
+      'was passed to addUser saga.'
+    )
+    return
+  }
+
+  const { payload: user } = action
   try {
-    if (usersActions.addUser.match(action)) {
-      const { payload: user } = action
+    const response = yield call(UsersEffects.addUser, user)
 
-      const response = yield call(UsersEffects.addUser, user)
-
-      if (response) {
-        yield fork(getUsers)
-      }
-    } else {
-      console.error(
-        'Unexpected type',
-        `'${action.type}'`,
-        'was passed to addUser saga.'
-      )
+    if (response) {
+      yield fork(getUsers)
     }
   } catch (error) {
     console.log(error.message)
