@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+
 import { RootState } from 'modules/root/root-reducer'
 import { User } from './user-types'
 
