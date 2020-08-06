@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently \"npm run start-fe\" \"npm run start-be\"",
     "start-fe": "react-scripts start",
-    "start-be": "cd src-be && nodemon server.ts",
+    "start-be": "cd backend && nodemon server.ts",
     "build": "react-scripts build",
     "test": "npm run start-be",
     "eject": "react-scripts eject",

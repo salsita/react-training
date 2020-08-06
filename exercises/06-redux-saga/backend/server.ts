@@ -1,4 +1,5 @@
 import express from 'express'
+
 import { User } from '../src/modules/users/user-types'
 
 const port = 3001
