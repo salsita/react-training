@@ -1,7 +1,7 @@
+import { Reducer } from 'redux'
+
 import { UserActionTypes, UserActions } from 'modules/users/user-actions'
 import { User } from './user-types'
-
-import { Reducer } from 'redux'
 
 export interface UsersState {
   title: string

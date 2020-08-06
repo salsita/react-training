@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import { createStore, compose } from 'redux'
+
 import { Root } from 'modules/root/components/root'
 import { AddUser } from 'modules/users/user-types'
-
-import { createStore, compose } from 'redux'
 
 import { rootReducer, RootState } from 'modules/root/root-reducer'
 
