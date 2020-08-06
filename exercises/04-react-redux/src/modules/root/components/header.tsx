@@ -1,6 +1,6 @@
 import React from 'react'
-
 import { useSelector } from 'react-redux'
+
 import { RootState } from '../root-reducer'
 
 export const Header: React.FC = () => {
