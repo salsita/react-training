@@ -207,32 +207,17 @@ Configure all necessary things for `redux`.
 
 
 ## Exercise \#4
-The main purpose of this exercise is to try [`react-redux`](https://github.com/reactjs/react-redux) and [`reduxsauce`](https://github.com/infinitered/reduxsauce).
+The main purpose of this exercise is to try [`React Redux`](https://react-redux.js.org/introduction/quick-start) and [`Redux Toolkit`](https://redux-toolkit.js.org/).
 
 * Continue with your previous project or open `03-redux`
-* Use [`Provider`](https://github.com/reduxjs/react-redux/blob/master/docs/api/Provider.md) from `react-redux` instead of the manual re-rendering
-* Connect `Header` and `UsersList` with the [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md) function from `react-redux`
-* Rewrite actions with `reduxsauce`
+* Use [`Provider`](https://react-redux.js.org/api/provider) from `react-redux` instead of the manual re-rendering
+* Use the [`React Redux hooks`](https://react-redux.js.org/api/hooks) to get Redux store data in `Header` and `UserList`
+* Rewrite actions with `Redux Toolkit`
 
 ### Header component
-Location: `src/modules/root/components/header.js`
+Location: `src/modules/root/components/header.tsx`
 
-The same component with the same props like in the previous exercise.
-
-* Use `connect` from `react-redux` to create the connected version of this component
-* Set `title` inside `mapStateToProps`
-
-### UsersList component
-Location: `src/modules/users/components/users-list.js`
-
-The same component with the same props like in the previous exercise.
-
-* Use `connect` from `react-redux` to create the connected version of this component
-* Set `users` inside `mapStateToProps`
-* Set `addUser` inside `mapDispatchToProps`
-
-### Root component
-Location: `src/modules/root/components/root.js`
+The same component like in the previous exercise.
 
 Props:
 ```ts
@@ -240,32 +225,69 @@ Props:
 }
 ```
 
-* Remove all props because both components are connected now.
+* Use `useSelector` from `React Redux` to get the `title` from Redux store
+* Remove the props - they are no longer needed
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
+### UserList component
+Location: `src/modules/users/components/user-list.tsx`
 
-The same actions but created with `reduxsauce`.
+The same component like in the previous exercise.
 
-* Use [`createActions`](https://github.com/infinitered/reduxsauce#createactions) from `reduxsauce` to create the `ADD_USER` action with `addUser` action creator
-* Use `users/` prefix
+Props:
+```ts
+{
+}
+```
+
+* Use `useSelector` from `React Redux` to get the `users` list from Redux store
+* Use `useDispatch` to get the `dispatch` function of the Redux store. Use it to dispatch `users/addUser` action
+* Remove the props - they are no longer needed
+
+### Root component
+Location: `src/modules/root/components/root.tsx`
+
+Props:
+```ts
+{
+}
+```
+
+* Remove all props because `Header` and `UserList` components don't need them anymore.
+
+
+### Users slice
+Location: `src/modules/users/users-slice.ts`
+
+The same actions and reducer, but created with `Redux Toolkit`.
+
+* Use [`createSlice`](https://redux-toolkit.js.org/api/createSlice) from `Redux Toolkit` to generate action creators and action types for user reducers.
+* Move `adduser` reducer implementation to this file and pass it with the `reducer` option to `createSlice` function.
+* Export `actions` and `reducer` returned by the `createSlice` function as `usersActions` and `usersReducer`.
+* Define necessary interfaces
+
+
+### UserActions
+Location: `src/modules/users/user-actions.ts`
+
+This file is no longer needed. The user actions are now generated in `src/modules/users/users-slice.ts`.
+
 
 ### usersReducer
-Location: `src/modules/users/users-reducer.js`
+Location: `src/modules/users/users-reducer.ts`
 
-The same reducer but created with `reduxsauce`.
+This file is no longer needed. The `addUser` reducer was moved to `src/modules/users/users-slice.ts`.
 
-* Use [`createReducer`](https://github.com/infinitered/reduxsauce#createreducer) from `reduxsauce` to create the same reducer
 
 ### Index file
-Location: `src/index.js`
+Location: `src/index.tsx`
 
 Currently, we need only `store` and we need to call `ReactDOM.render` directly with `Provider` component.
 
 * Remove own `render` function and directly call `ReactDOM.render`
 * Change the rendered component into `Provider` and put `Root` as its child
-* Remove `dispatchAddUser` (the action is dispatched in the `UsersList` component)
+* Remove `dispatchAddUser` (the action is dispatched in the `UserList` component)
 * Remove `store.subscribe` (it is not necessary with `Provider`)
+* Use [`configureStore`](https://redux-toolkit.js.org/api/configureStore) function from `Redux Toolkit` instead of the `createStore`. This will by default enable the [`Redux DevTools Extension`](https://github.com/zalmoxisus/redux-devtools-extension) used in previous exercise. The `composeEnhancers` function is no longer needed.
 
 
 ## Exercise \#5
