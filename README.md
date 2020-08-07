@@ -139,63 +139,71 @@ The main purpose of this exercise is to try [Redux](https://redux.js.org/).
 * Continue with your previous project or open `02-react-stateless`
 * Move the logic into a reducer
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
+### UserActions
+Location: `src/modules/users/user-actions.ts`
 
-This file defines actions and action types. The following structure is used in [`reduxsauce`](https://github.com/infinitered/reduxsauce) and we will use `reduxsauce` later in the training. Let's write the action types and action creators manually to know what is under the hood of `reduxsauce`.
+This file defines actions and action types.
 
-* Create a constant ([action type](https://redux.js.org/basics/actions)) called `ADD_USER` with value `'ADD_USER'`
-* Create a function ([action creator](https://redux.js.org/basics/actions#action-creators)) called `addUser` that returns an object with `type` (action type) and `payload` (data)
-* Use `export default` to export an object with 2 fields
-  * `Types` - this is an object with all action types
-  * `Creators` - this is an object with all action creators
+* Create and export an enum `UserActionTypes` of [action types](https://redux.js.org/basics/actions) with one value `addUser = 'users/addUser'`
+* Create an interface `AddUserAction` which extends `Action<T>` from `'redux'` for `users/addUser` action. In addition to the mandatory `type` property this action will contain a payload with the new user details.
+  ```ts
+  {
+    payload: UserData
+  }
+  ```
+* Create a function ([action creator](https://redux.js.org/basics/actions#action-creators) of `ActionCreator<A>` type from `'redux'`) called `addUser` that takes `UserData` object as parameter and returns the `AddUserAction` action.
+* Create and export a new type `UserActions`, which is a union of all user actions. This is useful in the reducer when more actions are defined. Note, currently we have only one action `users/addUser`.
+* Create and export an object `UserActionCreators`, which congregates all user action creators.
 
 ### usersReducer
-Location: `src/modules/users/users-reducer.js`
+Location: `src/modules/users/users-reducer.ts`
 
 State:
 ```ts
 {
   title: string,
-  users: Array<{
-    id: number,
-    firstName: string,
-    lastName: string
-  }>
+  users: User[]
 }
 ```
 
 The logic from `addUser` function from the previous exercise will be in this reducer.
 
-* Create a [reducer](https://redux.js.org/basics/reducers) function
+* Create a [reducer](https://redux.js.org/basics/reducers) function of type `Reducer<S, A>` from `'redux'`
 * Use an initial state
-* Modify `users` field in the state when the `ADD_USER` action is dispatched
+* Modify `users` field in the state when the `users/addUser` action is dispatched
 * Don't forget to return unmodified state when a different action is dispatched
 
 ### rootReducer
-Location: `src/modules/root/root-reducer.js`
+Location: `src/modules/root/root-reducer.ts`
 
 This is the main reducer of the whole app. The main purpose is to combine all reducers from all modules into a single reducer.
 
 * Import your `usersReducer`
 * Use [`combineReducers`](https://redux.js.org/api-reference/combinereducers) from `redux` to create the root reducer
+  * The root reducer state will be a combination of all passed reducers states, the resulting state type can be inferred from the return type:
+  ```ts
+  export type RootState = ReturnType<typeof rootReducer>
+  ```
 
 ### Index file
-Location: `src/index.js`
+Location: `src/index.tsx`
 
 Configure all necessary things for `redux`.
 
 * Create `store` with the [`createStore`](https://redux.js.org/api-reference/createstore) function from `redux`
   * The first argument is `rootReducer`
-  * The second argument can be an `enhancer`. Use the following to setup Redux devtools
-    ```js
-    window.__REDUX_DEVTOOLS_EXTENSION__
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : v => v
+  * The second argument can be an `enhancer`. Use the following to setup the [`Redux DevTools Extension`](https://github.com/zalmoxisus/redux-devtools-extension)
+    ```ts
+    declare global {
+      interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
+      }
+    }
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     ```
-* Create a function called `dispatchAddUser` that calls [`store.dispatch`](https://redux.js.org/api-reference/store#dispatch(action)) to dispatch the `ADD_USER` action
-* Use data from [`store.getState()`](https://redux.js.org/api-reference/store#getstate()) in your `render` function
-* Subscribe your `render` function with [`store.subscribe`](https://redux.js.org/api-reference/store#subscribe(listener)) to re-render the app when an action is dispatched
+* Create a function called `dispatchAddUser` that calls [`store.dispatch`](https://redux.js.org/api/store#dispatchaction) to dispatch the `users/addUser` action
+* Use data from [`store.getState()`](https://redux.js.org/api/store#getstate) in your `render` function
+* Subscribe your `render` function with [`store.subscribe`](https://redux.js.org/api/store#subscribelistener) to re-render the app when an action is dispatched
 
 
 ## Exercise \#4
