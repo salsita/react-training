@@ -1,9 +1,9 @@
-interface Skill {
-  id: string // e.g. skill-1
+export interface Skill {
+  id: string
   name: string
 }
 
-interface UsersSkill {
+export interface UserSkill {
   skill: Skill
   level: number
 }
@@ -15,6 +15,6 @@ export interface UserData {
 
 export interface User extends UserData {
   id: string
-  regnalNumber: number // use Arabic numerals
-  skills: Array<UsersSkill>
+  regnalNumber: number
+  skills: Array<UserSkill>
 }
