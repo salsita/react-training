@@ -2,7 +2,9 @@ import { UserList } from '../support/constants'
 
 describe('The Home Page', () => {
   beforeEach(() => {
-    cy.exec('touch src/server.js && npx wait-on http://localhost:3000')
+    cy.exec(
+      'touch -c backend/server.ts && npx wait-on tcp:3001 && npx wait-on http://localhost:3000'
+    )
   })
 
   it('successfully loads', () => {
@@ -25,29 +27,28 @@ describe('The Home Page', () => {
   it('adds users', () => {
     cy.visit('/')
 
+    // add multiple users
+    cy.contains(UserList.addAryaButton, { matchCase: false }).click()
+    cy.contains(UserList.addDaenerysButton, { matchCase: false }).click()
+    cy.contains(UserList.addAryaButton, { matchCase: false }).click()
 
-        // add multiple users
-        cy.contains(UserList.addAryaButton, { matchCase: false }).click()
-        cy.contains(UserList.addDaenerysButton, { matchCase: false }).click()
-        cy.contains(UserList.addAryaButton, { matchCase: false }).click()
+    // check that the table contains the expected number of users
+    cy.get('tbody tr').should('have.length', 3)
 
-        // check that the table contains the expected number of users
-        cy.get('tbody tr').should('have.length', 3)
-
-        // check that all users are added
-        cy.get('tbody').within(() => {
-          cy.get('tr')
-            .eq(0)
-            .contains('tr', UserList.aryaFirstName + ' I')
-            .contains('tr', UserList.aryaLastName.toLocaleUpperCase())
-          cy.get('tr')
-            .eq(1)
-            .contains('tr', UserList.daenerysFirstName + ' I')
-            .contains('tr', UserList.daenerysLastName.toLocaleUpperCase())
-          cy.get('tr')
-            .eq(2)
-            .contains('tr', UserList.aryaFirstName + ' II')
-            .contains('tr', UserList.aryaLastName.toLocaleUpperCase())
-        })
+    // check that all users are added
+    cy.get('tbody').within(() => {
+      cy.get('tr')
+        .eq(0)
+        .contains('tr', UserList.aryaFirstName + ' I')
+        .contains('tr', UserList.aryaLastName.toLocaleUpperCase())
+      cy.get('tr')
+        .eq(1)
+        .contains('tr', UserList.daenerysFirstName + ' I')
+        .contains('tr', UserList.daenerysLastName.toLocaleUpperCase())
+      cy.get('tr')
+        .eq(2)
+        .contains('tr', UserList.aryaFirstName + ' II')
+        .contains('tr', UserList.aryaLastName.toLocaleUpperCase())
+    })
   })
 })
