@@ -46,7 +46,7 @@ const getCypressJobForDirectory = (dirname: string): string => {
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install root dependencies
-        uses: bahmutov/npm-install@v1
+        uses: bahmutov/npm-install@v1.4.1
         with:
           working-directory: exercises
       - name: Cypress run exercise ${dirname}
