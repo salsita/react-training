@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 import { UserEntities } from './entities-schema'
+import { usersActions } from 'modules/users/users-slice'
 
 const initSate: UserEntities = {
   skills: {},
@@ -11,11 +12,12 @@ const initSate: UserEntities = {
 const entitiesSlice = createSlice({
   name: 'entities',
   initialState: initSate,
-  reducers: {
-    entitiesLoaded: (state, action: PayloadAction<UserEntities>) => ({
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(usersActions.usersLoaded, (state, action) => ({
       ...state,
-      ...action.payload,
-    }),
+      ...action.payload.entities,
+    }))
   },
 })
 

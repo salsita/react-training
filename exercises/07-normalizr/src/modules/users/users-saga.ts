@@ -5,7 +5,6 @@ import { normalize } from 'normalizr'
 import * as Schema from 'modules/entities/entities-schema'
 
 import { usersActions } from 'modules/users/users-slice'
-import { entitiesActions } from 'modules/entities/entities-slice'
 import * as UsersEffects from 'modules/users/users-effects'
 import { User } from './user-types'
 
@@ -18,8 +17,7 @@ function* getUsers() {
       Schema.users
     )
 
-    yield put(entitiesActions.entitiesLoaded(users.entities))
-    yield put(usersActions.usersLoaded(users.result))
+    yield put(usersActions.usersLoaded(users))
   } catch (error) {
     console.log(error.message)
   }

@@ -40,10 +40,6 @@ export interface User {
   skills: string[]
 }
 
-// export type SkillsEntity = { [key: string]: Skill }
-// export type UserSkillsEntity = { [key: string]: UserSkill }
-// export type UsersEntity = { [key: string]: User }
-
 export type UserEntities = {
   skills: { [key: string]: Skill }
   userSkills: { [key: string]: UserSkill }
