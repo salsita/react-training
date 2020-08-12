@@ -12,12 +12,13 @@ function* getUsers() {
   try {
     const { data } = yield call(UsersEffects.getUsers)
 
-    const users = normalize<User[], Schema.UserEntities, Schema.UserIds>(
-      data,
-      Schema.users
-    )
+    const normalizedUsers = normalize<
+      User[],
+      Schema.UserEntities,
+      Schema.UserIds
+    >(data, Schema.users)
 
-    yield put(usersActions.usersLoaded(users))
+    yield put(usersActions.usersLoaded(normalizedUsers))
   } catch (error) {
     console.log(error.message)
   }
