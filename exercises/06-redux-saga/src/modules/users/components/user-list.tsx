@@ -12,7 +12,7 @@ export const UserList: React.FC = () => {
   const addUser = (user: UserData) => () => dispatch(usersActions.addUser(user))
 
   return (
-    <div>
+    <>
       <div>
         <button onClick={addUser({ firstName: 'Arya', lastName: 'Stark' })}>
           Add No One
@@ -44,6 +44,6 @@ export const UserList: React.FC = () => {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   )
 }
