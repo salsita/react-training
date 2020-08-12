@@ -9,16 +9,26 @@ import { UserData } from '../user-types'
 export const UserList: React.FC = () => {
   const users = useSelector((state: RootState) => state.users.users)
   const dispatch = useDispatch()
-  const addUser = (user: UserData) => () => dispatch(usersActions.addUser(user))
+  const dispatchAddUserAction = (user: UserData) =>
+    dispatch(usersActions.addUser(user))
 
   return (
     <>
       <div>
-        <button onClick={addUser({ firstName: 'Arya', lastName: 'Stark' })}>
+        <button
+          onClick={() =>
+            dispatchAddUserAction({ firstName: 'Arya', lastName: 'Stark' })
+          }
+        >
           Add No One
         </button>
         <button
-          onClick={addUser({ firstName: 'Daenerys', lastName: 'Targaryen' })}
+          onClick={() =>
+            dispatchAddUserAction({
+              firstName: 'Daenerys',
+              lastName: 'Targaryen',
+            })
+          }
         >
           Add Mother of Dragons
         </button>
