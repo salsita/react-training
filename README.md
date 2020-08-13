@@ -225,7 +225,7 @@ Props:
 }
 ```
 
-* Use `useSelector` from `React Redux` to get the `title` from Redux store
+* Use [`useSelector`](https://react-redux.js.org/api/hooks#useselector) from `React Redux` to get the `title` from Redux store
 * Remove the props - they are no longer needed
 
 ### UserList component
@@ -239,8 +239,8 @@ Props:
 }
 ```
 
-* Use `useSelector` from `React Redux` to get the `users` list from Redux store
-* Use `useDispatch` to get the `dispatch` function of the Redux store. Use it to dispatch `users/addUser` action
+* Use  [`useSelector`](https://react-redux.js.org/api/hooks#useselector) from `React Redux` to get the `users` list from Redux store
+* Use [`useDispatch`](https://react-redux.js.org/api/hooks#usedispatch) to get the `dispatch` function of the Redux store. Use it to dispatch `users/addUser` action
 * Remove the props - they are no longer needed
 
 ### Root component
@@ -318,7 +318,8 @@ Location: `src/modules/users/components/user-list.tsx`
 
 The same component like in the previous exercise.
 
-* Use the `getUserList` selector in `useSelector`
+* Use the `getUserList` selector in `useSelector` call
+* Use [`useCallback`](https://reactjs.org/docs/hooks-reference.html#usecallback) hook from `React` to memoize the callbacks passed to buttons
 
 
 ## Exercise \#6

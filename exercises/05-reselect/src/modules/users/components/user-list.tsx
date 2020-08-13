@@ -1,37 +1,33 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 
 import { usersActions } from 'modules/users/users-slice'
-import { UserData } from '../user-types'
 import { getUserList } from '../users-selectors'
 
 export const UserList: React.FC = () => {
   const users = useSelector(getUserList)
   const dispatch = useDispatch()
-  const dispatchAddUserAction = (user: UserData) =>
-    dispatch(usersActions.addUser(user))
+
+  const addAryaCallback = useCallback(
+    () =>
+      dispatch(usersActions.addUser({ firstName: 'Arya', lastName: 'Stark' })),
+    [dispatch]
+  )
+
+  const addDaenerysCallback = useCallback(
+    () =>
+      dispatch(
+        usersActions.addUser({ firstName: 'Daenerys', lastName: 'Targaryen' })
+      ),
+    [dispatch]
+  )
 
   return (
     <>
       <div>
-        <button
-          onClick={() =>
-            dispatchAddUserAction({ firstName: 'Arya', lastName: 'Stark' })
-          }
-        >
-          Add No One
-        </button>
-        <button
-          onClick={() =>
-            dispatchAddUserAction({
-              firstName: 'Daenerys',
-              lastName: 'Targaryen',
-            })
-          }
-        >
-          Add Mother of Dragons
-        </button>
+        <button onClick={addAryaCallback}>Add No One</button>
+        <button onClick={addDaenerysCallback}>Add Mother of Dragons</button>
       </div>
       <table>
         <thead>
