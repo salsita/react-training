@@ -319,7 +319,14 @@ Location: `src/modules/users/components/user-list.tsx`
 The same component like in the previous exercise.
 
 * Use the `getUserList` selector in `useSelector` call
-* Use [`useCallback`](https://reactjs.org/docs/hooks-reference.html#usecallback) hook from `React` to memoize the callbacks passed to buttons
+* Add a new component, which is a memoized version of `<button>`, use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo).
+
+  Props:
+  ```ts
+    React.ButtonHTMLAttributes<HTMLButtonElement>
+  ```
+* Use this memoized button in `UserList` component instead of the ordinary buttons
+* Use [`useCallback`](https://reactjs.org/docs/hooks-reference.html#usecallback) hook from `React` to memoize the callbacks passed to memoized buttons
 
 
 ## Exercise \#6

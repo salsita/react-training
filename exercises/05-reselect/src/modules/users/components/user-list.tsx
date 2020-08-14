@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { usersActions } from 'modules/users/users-slice'
 import { getUserList } from '../users-selectors'
+import { MemoButton } from './memo-button'
 
 export const UserList: React.FC = () => {
   const users = useSelector(getUserList)
@@ -26,8 +27,10 @@ export const UserList: React.FC = () => {
   return (
     <>
       <div>
-        <button onClick={addAryaCallback}>Add No One</button>
-        <button onClick={addDaenerysCallback}>Add Mother of Dragons</button>
+        <MemoButton onClick={addAryaCallback}>Add No One</MemoButton>
+        <MemoButton onClick={addDaenerysCallback}>
+          Add Mother of Dragons
+        </MemoButton>
       </div>
       <table>
         <thead>
