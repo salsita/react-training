@@ -1,12 +1,6 @@
 import { UserList } from '../support/constants'
 
 describe('The Home Page', () => {
-  beforeEach(() => {
-    cy.exec(
-      'touch -c backend/server.ts && npx wait-on tcp:3001 && npx wait-on http://localhost:3000'
-    )
-  })
-
   it('successfully loads', () => {
     cy.visit('/')
     cy.contains('h1', UserList.header, { matchCase: false })
