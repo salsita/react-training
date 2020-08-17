@@ -24,7 +24,7 @@ const usersSlice = createSlice({
 })
 
 export const usersActions = {
-  addUser: createAction<UserData>('users/addUser'),
+  addUser: createAction<UserData, 'users/addUser'>('users/addUser'),
   ...usersSlice.actions,
 }
 

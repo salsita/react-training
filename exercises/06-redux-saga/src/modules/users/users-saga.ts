@@ -1,5 +1,4 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
-import { Action } from 'redux'
 
 import { usersActions } from 'modules/users/users-slice'
 import * as UsersEffects from 'modules/users/users-effects'
@@ -13,16 +12,7 @@ function* getUsers() {
   }
 }
 
-function* addUser(action: Action) {
-  if (!usersActions.addUser.match(action)) {
-    console.error(
-      'Unexpected type',
-      `'${action.type}'`,
-      'was passed to addUser saga.'
-    )
-    return
-  }
-
+function* addUser(action: ReturnType<typeof usersActions.addUser>) {
   const { payload: user } = action
   try {
     const response = yield call(UsersEffects.addUser, user)
@@ -38,5 +28,5 @@ function* addUser(action: Action) {
 export function* usersSaga() {
   yield fork(getUsers)
 
-  yield all([takeEvery(usersActions.addUser.type, addUser)])
+  yield all([takeEvery(usersActions.addUser, addUser)])
 }
