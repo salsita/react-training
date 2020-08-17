@@ -10,7 +10,6 @@ export const getTitle = createSelector(getState, (state) => state.title)
 
 export const getUserIds = createSelector(getState, (state) => state.userIds)
 
-
 const getUsers = createSelector(
   getUserIds,
   getUserEntities,

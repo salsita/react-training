@@ -3,6 +3,7 @@ import { Action } from 'redux'
 import { normalize } from 'normalizr'
 
 import * as Schema from 'modules/entities/entities-schema'
+import * as EntitiesTypes from 'modules/entities/entities-types'
 
 import { usersActions } from 'modules/users/users-slice'
 import * as UsersEffects from 'modules/users/users-effects'
@@ -14,8 +15,8 @@ function* getUsers() {
 
     const normalizedUsers = normalize<
       User[],
-      Schema.UserEntities,
-      Schema.UserIds
+      EntitiesTypes.UserEntities,
+      EntitiesTypes.UserIds
     >(data, Schema.users)
 
     yield put(usersActions.usersLoaded(normalizedUsers))

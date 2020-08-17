@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { UserEntities } from './entities-schema'
+import { UserEntities } from './entities-types'
 import { usersActions } from 'modules/users/users-slice'
 
 const initSate: UserEntities = {

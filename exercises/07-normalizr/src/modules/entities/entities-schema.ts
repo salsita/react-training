@@ -20,30 +20,3 @@ export const user = new schema.Entity('users', {
 })
 
 export const users = [user]
-
-export interface Skill {
-  id: string
-  name: string
-}
-
-export interface UserSkill {
-  id: string
-  skill: string
-  level: number
-}
-
-export interface User {
-  id: string
-  firstName: string
-  lastName: string
-  regnalNumber: number
-  skills: string[]
-}
-
-export type UserEntities = {
-  skills: { [key: string]: Skill }
-  userSkills: { [key: string]: UserSkill }
-  users: { [key: string]: User }
-}
-
-export type UserIds = string[]
