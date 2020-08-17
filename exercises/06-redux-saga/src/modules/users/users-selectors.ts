@@ -9,11 +9,11 @@ export const getTitle = createSelector(getState, (state) => state.title)
 
 const getUsers = createSelector(getState, (state) => state.users)
 
-const withUppercaseLastName = (user: User) => ({
+const withUpperCaseLastName = (user: User) => ({
   ...user,
   lastName: user.lastName.toUpperCase(),
 })
 
 export const getUserList = createSelector(getUsers, (users) =>
-  users.map(withUppercaseLastName)
+  users.map(withUpperCaseLastName)
 )
