@@ -397,6 +397,7 @@ Users are added on the BE side, so the `addUser` reducer is not needed anymore, 
 * Remove the `addUser` reducer
 * Add the `addUser` action creator to the `usersActions` export object
   * Use [`createAction`](https://redux-toolkit.js.org/api/createAction) function to create the action creator with type `users/addUser`
+    * You can use a [literal type](https://redux-toolkit.js.org/usage/usage-with-typescript#createaction) for `action.type` for stronger typing of sagas
 
 ### usersSaga
 Location: `src/modules/users/users-saga.ts`
