@@ -12,8 +12,8 @@ interface RootProps {
 }
 
 export const Root: React.FC<RootProps> = ({ title, users, addUser }) => (
-  <div>
+  <>
     <Header title={title} />
     <UserList users={users} addUser={addUser} />
-  </div>
+  </>
 )

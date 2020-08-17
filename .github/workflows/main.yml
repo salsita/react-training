@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install root dependencies
-        uses: bahmutov/npm-install@v1
+        uses: bahmutov/npm-install@v1.4.1
         with:
           working-directory: exercises
       - name: Cypress run exercise 00-init
@@ -44,7 +44,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install root dependencies
-        uses: bahmutov/npm-install@v1
+        uses: bahmutov/npm-install@v1.4.1
         with:
           working-directory: exercises
       - name: Cypress run exercise 01-react-stateful
@@ -75,7 +75,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install root dependencies
-        uses: bahmutov/npm-install@v1
+        uses: bahmutov/npm-install@v1.4.1
         with:
           working-directory: exercises
       - name: Cypress run exercise 02-react-stateless
@@ -106,7 +106,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install root dependencies
-        uses: bahmutov/npm-install@v1
+        uses: bahmutov/npm-install@v1.4.1
         with:
           working-directory: exercises
       - name: Cypress run exercise 03-redux
@@ -137,7 +137,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Install root dependencies
-        uses: bahmutov/npm-install@v1
+        uses: bahmutov/npm-install@v1.4.1
         with:
           working-directory: exercises
       - name: Cypress run exercise 04-react-redux
@@ -160,3 +160,34 @@ jobs:
         with:
           name: 04-react-redux-cypress-videos
           path: exercises/04-react-redux/cypress/videos
+
+  # Exercise 05-reselect
+  e2e-05-reselect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1.4.1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 05-reselect
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/05-reselect
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 05-reselect-cypress-screenshots
+          path: exercises/05-reselect/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 05-reselect-cypress-videos
+          path: exercises/05-reselect/cypress/videos
