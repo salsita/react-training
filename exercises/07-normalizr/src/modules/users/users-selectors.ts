@@ -18,11 +18,12 @@ const getUsers = createSelector(
     userIds.map((userId: string) => userEntities[userId])
 )
 
-const withUpperCaseLastName = (user: User) => ({
+const withFormatting = (user: User) => ({
   ...user,
   lastName: user.lastName.toUpperCase(),
+  regnalNumber: toRoman(user.regnalNumber),
 })
 
 export const getUserList = createSelector(getUsers, (users) =>
-  users.map(withUpperCaseLastName)
+  users.map(withFormatting)
 )
