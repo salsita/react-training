@@ -319,7 +319,7 @@ Location: `src/modules/users/components/user-list.tsx`
 The same component like in the previous exercise.
 
 * Use the `getUserList` selector in `useSelector` call
-* Add a new component, which is a memoized version of `<button>`, use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo).
+* Add a new component, which is a memoized version of `<button>`. Use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo).
 
   Props:
   ```ts
