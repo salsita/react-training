@@ -1,5 +1,5 @@
 import { apiClient } from 'modules/api/api-client'
-import { UserData } from './user-types'
+import { UserData, User } from './user-types'
 
-export const getUsers = () => apiClient.get('/users')
-export const addUser = (user: UserData) => apiClient.post('/users', user)
+export const getUsers = () => apiClient.get<User[]>('/users')
+export const addUser = (user: UserData) => apiClient.post<User>('/users', user)

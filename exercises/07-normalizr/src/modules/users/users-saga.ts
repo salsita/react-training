@@ -1,5 +1,5 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects'
-import { Action } from 'redux'
+import { AxiosResponse } from 'axios'
 import { normalize } from 'normalizr'
 
 import * as Schema from 'modules/entities/entities-schema'
@@ -11,13 +11,15 @@ import { User } from './user-types'
 
 function* getUsers() {
   try {
-    const { data } = yield call(UsersEffects.getUsers)
+    const { data: users }: AxiosResponse<User[]> = yield call(
+      UsersEffects.getUsers
+    )
 
     const normalizedUsers = normalize<
       User[],
       EntitiesTypes.UserEntities,
       EntitiesTypes.UserIds
-    >(data, Schema.users)
+    >(users, Schema.users)
 
     yield put(usersActions.usersLoaded(normalizedUsers))
   } catch (error) {
@@ -25,19 +27,10 @@ function* getUsers() {
   }
 }
 
-function* addUser(action: Action) {
-  if (!usersActions.addUser.match(action)) {
-    console.error(
-      'Unexpected type',
-      `'${action.type}'`,
-      'was passed to addUser saga.'
-    )
-    return
-  }
-
+function* addUser(action: ReturnType<typeof usersActions.addUser>) {
   const { payload: user } = action
   try {
-    const response = yield call(UsersEffects.addUser, user)
+    const response: AxiosResponse<User> = yield call(UsersEffects.addUser, user)
 
     if (response) {
       yield fork(getUsers)
@@ -50,5 +43,5 @@ function* addUser(action: Action) {
 export function* usersSaga() {
   yield fork(getUsers)
 
-  yield all([takeEvery(usersActions.addUser.type, addUser)])
+  yield all([takeEvery(usersActions.addUser, addUser)])
 }
