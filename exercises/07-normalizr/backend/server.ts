@@ -1,31 +1,9 @@
 import express from 'express'
 
 import { User, UserData } from '../src/modules/users/user-types'
+import { computeRegnalNumber, hasSameName } from './utils'
 
 const port = 3001
-
-const areStringsSame = (a: string, b: string): boolean =>
-  a.toLowerCase() === b.toLowerCase()
-
-const hasSameName = (
-  user: UserData,
-  firstName: string,
-  lastName: string
-): boolean =>
-  areStringsSame(firstName, user.firstName) &&
-  areStringsSame(lastName, user.lastName)
-
-const findRegnalNumber = (users: User[], userName: UserData) => {
-  const regnalNumbers = users
-    .filter((user) => hasSameName(user, userName.firstName, userName.lastName))
-    .map(({ regnalNumber }) => regnalNumber)
-
-  if (regnalNumbers.length === 0) {
-    return 1
-  }
-
-  return Math.max(...regnalNumbers) + 1
-}
 
 const skills = [
   {
@@ -38,25 +16,30 @@ const skills = [
   },
 ]
 
+const recognizedUsers: { [key: string]: UserData } = {
+  AryaStark: { firstName: 'Arya', lastName: 'Stark' },
+  DaenerysTargaryen: { firstName: 'Daenerys', lastName: 'Targaryen' },
+}
+
 const users: User[] = []
 
 const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.get('/users', (_req, res) => res.json(users))
+app.get('/users', (_, res) => res.json(users))
 
 app.post('/users', (req, res) => {
   const userName: UserData = req.body
 
-  const regnalNumber = findRegnalNumber(users, userName)
+  const regnalNumber = computeRegnalNumber(users, userName)
   const usersSkills = []
-  if (hasSameName(userName, 'arya', 'stark')) {
+  if (hasSameName(userName, recognizedUsers.AryaStark)) {
     usersSkills.push({
       skill: skills[0],
       level: 5 * regnalNumber,
     })
-  } else if (hasSameName(userName, 'daenerys', 'targaryen')) {
+  } else if (hasSameName(userName, recognizedUsers.DaenerysTargaryen)) {
     usersSkills.push({
       skill: skills[1],
       level: 3 * regnalNumber,
