@@ -437,7 +437,7 @@ The main purpose of this exercise is to try [`normalizr`](https://github.com/pau
 
 * Continue with your previous project or open `06-redux-saga`
 * Add skills and [regnal number](https://en.wikipedia.org/wiki/Regnal_number) to users
-* Save users and skills into the entity repository in the denormalized form
+* Save users and skills into the entity repository in the normalized form
 
 ### Server file
 Location: `backend/server.ts`
@@ -529,6 +529,7 @@ This file contains an entities reducer, which manages the entities repository.
   * Let's setup this reducer to make a recursive merge of current state with the newly received `entities`. This is a common approach in the applications where the data may be fetched by pieces. For example, when one user is updated, there's no need to fetch the whole user list.
     * Use the [mergeWith](https://lodash.com/docs/4.17.15#mergeWith) function from the [Lodash](https://lodash.com/) library.
     * Create and use the customizer which changes the merge strategy for arrays by always choosing the new value. Our customizer will take `objValue` and `srcValue` as arguments and return `srcValue` if both arguments are arrays. For other types it will return undefined, which indicates no customization.
+* Export the `entitiesReducer`
 
 ### rootReducer
 Location: `src/modules/root/root-reducer.ts`
