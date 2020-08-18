@@ -9,6 +9,14 @@ import { usersActions } from 'modules/users/users-slice'
 import * as UsersEffects from 'modules/users/users-effects'
 import { User } from './user-types'
 
+const logError = (error: unknown) => {
+  if (error instanceof Error) {
+    console.log(error.message)
+  } else {
+    console.log(error)
+  }
+}
+
 function* getUsers() {
   try {
     const { data: users }: AxiosResponse<User[]> = yield call(
@@ -23,7 +31,7 @@ function* getUsers() {
 
     yield put(usersActions.usersLoaded(normalizedUsers))
   } catch (error) {
-    console.log(error.message)
+    logError(error)
   }
 }
 
@@ -36,7 +44,7 @@ function* addUser(action: ReturnType<typeof usersActions.addUser>) {
       yield fork(getUsers)
     }
   } catch (error) {
-    console.log(error.message)
+    logError(error)
   }
 }
 
