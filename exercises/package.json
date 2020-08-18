@@ -19,6 +19,7 @@
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "lodash": "^4.17.20",
     "lodash.flow": "^3.5.0",
     "normalizr": "^3.2.4",
     "prop-types": "^15.6.0",
@@ -42,6 +43,7 @@
   "proxy": "http://localhost:3001",
   "devDependencies": {
     "@types/express": "^4.17.7",
+    "@types/lodash": "^4.14.159",
     "@types/node": "^14.0.27",
     "@types/roman-numerals": "^0.3.0",
     "concurrently": "^3.6.1",
