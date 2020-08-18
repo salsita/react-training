@@ -330,10 +330,10 @@ The same component like in the previous exercise.
 
 
 ## Exercise \#6
-The main purpose of this exercise is to try [Redux-Saga](https://redux-saga.js.org/), [`axios`](https://github.com/axios/axios), and [Express](http://expressjs.com/).
+The main purpose of this exercise is to try [Redux-Saga](https://redux-saga.js.org/), [axios](https://github.com/axios/axios), and [Express](http://expressjs.com/).
 
 * Continue with your previous project or open `05-reselect`
-* Create a simple server that allows you to add a new user and get all users
+* Create a simple server that allows you to add a new user and get a list of all users
 * Move the logic of adding a new user to the server
 * Create sagas that handle communication with the server
 
@@ -344,17 +344,18 @@ Location: `package.json`
   ```json
   "start": "concurrently \"npm run start-fe\" \"npm run start-be\"",
   "start-fe": "react-scripts start",
-  "start-be": "nodemon src/server.js",
+  "start-be": "cd backend && nodemon server.ts",
   ```
 * Add `proxy` into the root to correctly handle CORS
   * `"proxy": "http://localhost:3001"`
 
 ### Server file
-Location: `src/server.js`
+Location: `backend/server.ts`
 
 A simple `express` server that has 2 routes `GET /users` and `POST /users`.
 
-* Create a [server with `express`](http://expressjs.com/en/4x/api.html#app) and use [`body-parser`](https://github.com/expressjs/body-parser#expressconnect-top-level-generic) middleware (`bodyParser.json()`)
+* Create a [server with `express`](http://expressjs.com/en/4x/api.html#app)
+* [Use](http://expressjs.com/en/4x/api.html#app.use) [`express.json()`](http://expressjs.com/en/4x/api.html#express.json) and [`express.urlencoded()`](http://expressjs.com/en/4x/api.html#express.urlencoded) middleware
 * Create the route `GET /users` that returns all users from the user list
   * Users can be stored in an array
 * Create the route `POST /users` that
@@ -362,8 +363,16 @@ A simple `express` server that has 2 routes `GET /users` and `POST /users`.
   * adds a new user into the user list (`firstName` and `lastName` can be taken from `req.body`)
   * returns the new user (`id` is included)
 
+### TypeScript configuration for BE
+Location: `backend/tsconfig.json`
+
+A simple TypeScript configuration file.
+
+* Extend the `tsconfig-base.json` located in the `exercises` directory
+* In the compiler options setup `commonjs` module, which is needed for Node.js
+
 ### API Client
-Location: `src/modules/api/api-client.js`
+Location: `src/modules/api/api-client.ts`
 
 This file contains an API client with `axios` that is used to make requests to the BE server.
 
@@ -371,66 +380,55 @@ This file contains an API client with `axios` that is used to make requests to t
 * Set `baseURL: 'http://localhost:3000'` in the config
 
 ### UsersEffects
-Location: `src/modules/users/users-effects.js`
+Location: `src/modules/users/users-effects.ts`
 
 This file defines all effect functions that perform the corresponding requests to API. We need only 2 effects right now - `getUsers` and `addUser`.
 
 * Create a function `getUsers` that makes a request to `GET /users`
 * Create a function `addUser` that makes a request to `POST /users` and sends an object with `firstName` and `lastName` in the request body
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
+### UsersSlice
+Location: `src/modules/users/users-slice.ts`
 
-We will need a new action to store fetched users into to the state.
+We will need a new reducer to store fetched users into the state.
+* Add a new case reducer called `usersLoaded` to do it
 
-* Create a new action called `USERS_LOADED`
-
-### usersReducer
-Location: `src/modules/users/users-reducer.js`
-
-Users are added on the BE side so the handler for the `ADD_USER` action is not necessary anymore. However, we need to handle the new `usersLoaded` action.
-
-* Remove the `ADD_USER` action handler
-* Add a handler for `USERS_LOADED`
+Users are added on the BE side, so the `addUser` reducer is not needed anymore, but the action type still is.
+* Remove the `addUser` reducer
+* Add the `addUser` action creator to the `usersActions` export object
+  * Use [`createAction`](https://redux-toolkit.js.org/api/createAction) function to create the action creator with type `users/addUser`
+    * You can use a [literal type](https://redux-toolkit.js.org/usage/usage-with-typescript#createaction) for `action.type` for stronger typing of sagas
 
 ### usersSaga
-Location: `src/modules/users/users-saga.js`
+Location: `src/modules/users/users-saga.ts`
 
 This file is used to create [redux sagas](https://redux-saga.js.org/docs/api/) that handle side effects to communicate with the BE server. We need 2 sagas to handle all API effects we have - `getUsers` and `addUser`.
 
 * Create a saga called `getUsers` that
   * calls `UsersEffects.getUsers`
-  * dispatch the `USERS_LOADED` action with `data` taken from the response
+  * dispatch the `users/usersLoaded` action with `data` taken from the response
 * Create a saga called `addUser` that
   * calls `UsersEffects.addUser`
   * runs the `getUsers` saga to refresh the user list
 * Don't forget to use `try/catch` in both sagas
 * Create a saga called `usersSaga` (only this one needs to be exported - with `export default`) that
   * runs the `getUsers` saga immediately (we don't have a router currently)
-  * runs the `addUser` saga when the `ADD_USER` action is dispatched (hint: use `takeEvery`)
+  * runs the `addUser` saga when the `users/addUser` action is dispatched (hint: use `takeEvery`)
 
 ### rootSaga
-Location: `src/modules/root/root-saga.js`
+Location: `src/modules/root/root-saga.ts`
 
 This file simply starts all sagas that are needed in the whole application. Currently, we have only our own `usersSaga`.
 
-* Create a saga (exported with `export default`) that runs `usersSaga` (hint: use `fork`)
+* Create and export a saga called `rootSaga` that runs `usersSaga` (hint: use `fork`)
 
 ### Index file
-Location: `src/index.js`
+Location: `src/index.tsx`
 
 Configure all necessary things for `redux-saga`.
 
 * Create `sagaMiddleware` with a function [`createSagaMiddleware`](https://redux-saga.js.org/docs/api/) (default export from `redux-saga`)
-* Change the second argument of `createStore` into the following where both functions ([`compose`](https://redux.js.org/api-reference/compose) and [`applyMiddleware`](https://redux.js.org/api-reference/applymiddleware) are imported from `redux`)
-  ```js
-  compose(
-    applyMiddleware(sagaMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : v => v
-  )
-  ```
+* Pass the `sagaMiddleware` to the [`configureStore`](https://redux-toolkit.js.org/api/configureStore) call with the `middleware` property
 * Run your root saga with `sagaMiddleware.run(rootSaga)`
 
 
