@@ -436,33 +436,30 @@ Configure all necessary things for `redux-saga`.
 The main purpose of this exercise is to try [`normalizr`](https://github.com/paularmstrong/normalizr).
 
 * Continue with your previous project or open `06-redux-saga`
-* This exercise uses [react-modules](https://github.com/salsita/react-modules) packages
 * Add skills and [regnal number](https://en.wikipedia.org/wiki/Regnal_number) to users
 * Save users and skills into the entity repository in the denormalized form
 
 ### Server file
-Location: `src/server.js`
+Location: `backend/server.ts`
 
 The server adds skills and set the correct regnal number to every user.
 
 The entity interfaces are
 ```ts
 interface Skill {
-  id: string; // e.g. skill-1
-  name: string;
+  id: string // e.g. skill-1
+  name: string
 }
 
-interface UsersSkill {
-  skill: Skill;
-  level: number;
+interface UserSkill {
+  skill: Skill
+  level: number
 }
 
-interface User {
+interface User extends UserData{
   id: string; // e.g. user-1
-  firstName: string;
-  lastName: string;
-  regnalNumber: number; // use Arabic numerals
-  skills: Array<UsersSkill>;
+  regnalNumber: number // use Arabic numerals
+  skills: Array<UserSkill>
 }
 ```
 
@@ -472,81 +469,102 @@ interface User {
   * Compute the correct regnal number for the user
   * Add some skills to the user where `level` is somehow based on the regnal number (it doesn't matter what equation you use - it can be for example `level = 3 * regnalNumber`)
 
-### rootReducer
-Location: `src/modules/root/root-reducer.js`
-
-The `@salsita/react-entities` library uses Redux so it's necessary to add its reducer into our root reducer.
-
-* Import `import { entitiesReducer as entities } from '@salsita/react-entities';`
-* Add `entities` into the root reducer
-
 ### Entities Schema
-Location: `src/modules/entities/entities-schema.js`
+Location: `src/modules/entities/entities-schema.ts`
 
 This file contains [`normalizr` schema](https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#schema) of our entities.
 
-* Create schema for `Skill`, `UsersSkill`, and `User` [entities](https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#entitykey-definition---options--)
+* Create schema for `Skill`, `UserSkill`, and `User` [entities](https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#entitykey-definition---options--)
 * If an entity doesn't have the `id` field, you need to specify one with `idAttribute`, which can be a `string` (name of the `id` field) or a function that creates the value of `id` field
 
-### usersSaga
-Location: `src/modules/users/users-saga.js`
+### Entities types
+Location: `src/modules/entities/entities-types.ts`
 
-Currently, the same denormalized data that comes from the BE server are stored in the state. We need to normalize the data from response and store them in the entity repository.
+This file contains type definitions for normalized user data.
 
-* Import `import { normalizeAndStore } from '@salsita/react-entities';`
-* Call `normalizeAndStore(data, schema)` and save the result (an array of `id`s) in the `usersReducer`
+* Add and export `Skill`, `UserSkill` and `User` types, which are the normalized version of types defined in `src/modules/users/user-types.ts`.
+  * The normalized version uses the `id` of an entity instead of nested types:
+    ```ts
+    interface UserSkill {
+      id: string
+      skill: string
+      level: number
+    }
+    ```
+* Add and export the `UserEntities` type, which describes `entities` created by the user data normalization:
+  ```ts
+  {
+    skills: { [key: string]: Skill }
+    userSkills: { [key: string]: UserSkill }
+    users: { [key: string]: User }
+  }
+  ```
+* Add and export the `UserIds` type (a string array), which describes the user `id`s returned from the `normalize` call (`result` property).
+* Add and export the type `NormalizedUserEntities = NormalizedSchema<UserEntities, UserIds>`, which describes the type of data returned from the `normalize` call.
 
-### usersReducer
-Location: `src/modules/users/users-reducer.js`
+
+### usersSlice
+Location: `src/modules/users/users-slice.ts`
 
 State:
 ```ts
 {
   title: string,
-  userIds: number[]
+  userIds: string[]
 }
 ```
 
 * Update this reducer to store `userIds` instead of `users`
+* Update the action payload to be the of the `NormalizedUserEntities` type
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
+### Entities slice
+Location: `src/modules/entities/entities-slice.ts`
 
-* Update the payload variable into `userIds`
+This file contains an entities reducer, which manages the entities repository.
+
+* Create the `entities` slice with `createSlice` function
+* Use `UserEntities` for the state type. This state will contain all the entities created by the normalization of users data fetched from the BE
+* Add a case reducer which updates the entities repository when the `users/usersLoaded` action is dispatched.
+  * Use the ["builder callback approach"](https://redux-toolkit.js.org/usage/usage-with-typescript#type-safety-with-extrareducers) to ensure the type safety.
+  * Let's setup this reducer to make a recursive merge of current state with the newly received `entities`. This is a common approach in the applications where the data may be fetched by pieces. For example, when one user is updated, there's no need to fetch the whole user list.
+    * Use the [mergeWith](https://lodash.com/docs/4.17.15#mergeWith) function from the [Lodash](https://lodash.com/) library.
+    * Create and use the customizer which changes the merge strategy for arrays by always choosing the new value. Our customizer will take `objValue` and `srcValue` as arguments and return `srcValue` if both arguments are arrays. For other types it will return undefined, which indicates no customization.
+
+### rootReducer
+Location: `src/modules/root/root-reducer.ts`
+
+The created entities reducer needs to be added into the root reducer.
+
+* Import the created `entitiesReducer` and add it to the root reducer
+
+### usersSaga
+Location: `src/modules/users/users-saga.ts`
+
+Currently, the same denormalized data that comes from the BE server are stored in the state. We need to normalize the data from response and store them in the entity repository.
+
+* Call `normalize(data, schema)` to normalize the fetched data
+* Dispatch the `users/usersLoaded` action to save the normalized data in the store
 
 ### EntitiesSelectors
-Location: `src/modules/entities/entities-selectors.js`
+Location: `src/modules/entities/entities-selectors.ts`
 
 Since data are stored in the normalized form in the state, we need to denormalize them for easier access to values.
 
-* Create 3 selectors (`getUsers`, `getSkills`, and `getUsersSkills`) that return the corresponding entities in the denormalized form
+* Create 3 selectors (`getUsers`, `getSkills`, and `getUserSkills`) that return the corresponding entities in the denormalized form
 
 ### UsersSelectors
-Location: `src/modules/users/users-selectors.js`
+Location: `src/modules/users/users-selectors.ts`
 
-The `usersReducer` does not store the entity data, it stores `id`s only.
+The users reducer doesn't store the entity data, it stores `id`s only.
 
 * Create a new selector called `getUserIds` that returns `id`s from the redux state
-* Modify the `getUsers` selector to map users `id`s from the `usersReducer` into denormalized users
-* Modify the `getUsersList` selector to return the users with
+* Modify the `getUsers` selector to map users `id`s from the users reducer into denormalized users
+* Modify the `getUserList` selector to return the users with
   * upper cased last names
   * converted regnal number into Roman numerals (use the [`roman-numerals`](https://github.com/joshleaves/roman-numerals) library)
 
-### UsersList component
-Location: `src/modules/users/components/users-list.js`
-
-Props:
-```ts
-{
-  users: Array<{
-    id: string,
-    firstName: string,
-    lastName: string,
-    regnalNumber: string
-  }>,
-  addUser: ({ firstName: string, lastName: string }) => void
-}
-```
+### UserList component
+Location: `src/modules/users/components/user-list.ts`
 
 * Print `regnalNumber` next to the first name
 
