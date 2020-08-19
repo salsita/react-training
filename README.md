@@ -522,13 +522,17 @@ Location: `src/modules/entities/entities-slice.ts`
 
 This file contains an entities reducer, which manages the entities repository.
 
+* Create an `EntitiesState` interface, which extends `UserEntities`. This state would contain all normalized entities used in the application.
+* Let's setup the `updateEntities` [case reducer](https://redux-toolkit.js.org/usage/usage-with-typescript#createslice) which would make a recursive merge of current state with the newly received entities. This is a common approach in the applications where the entities are fetched in small portions.
+  * This function has two arguments:
+    * state of type `EntitiesState`
+    * action, which payload may contain any part of the state
+  * Use the [mergeWith](https://lodash.com/docs/4.17.15#mergeWith) function from the [Lodash](https://lodash.com/) library.
+  * Create and use the customizer which changes the merge strategy for arrays by always choosing the new value. Our customizer will take `objValue` and `srcValue` as arguments and return `srcValue` if both arguments are arrays. For other types it will return undefined, which indicates no customization.
 * Create the `entities` slice with `createSlice` function
-* Use `UserEntities` for the state type. This state will contain all the entities created by the normalization of users data fetched from the BE
-* Add a case reducer which updates the entities repository when the `users/usersLoaded` action is dispatched.
-  * Use the ["builder callback approach"](https://redux-toolkit.js.org/usage/usage-with-typescript#type-safety-with-extrareducers) to ensure the type safety.
-  * Let's setup this reducer to make a recursive merge of current state with the newly received `entities`. This is a common approach in the applications where the data may be fetched by pieces. For example, when one user is updated, there's no need to fetch the whole user list.
-    * Use the [mergeWith](https://lodash.com/docs/4.17.15#mergeWith) function from the [Lodash](https://lodash.com/) library.
-    * Create and use the customizer which changes the merge strategy for arrays by always choosing the new value. Our customizer will take `objValue` and `srcValue` as arguments and return `srcValue` if both arguments are arrays. For other types it will return undefined, which indicates no customization.
+  * Use `EntitiesState` for the state type.
+  * Add an [extra reducer](https://redux-toolkit.js.org/api/createSlice#extrareducers) which updates the entities repository by calling `updateEntities` when the `users/usersLoaded` action is dispatched.
+    * Use the ["builder callback approach"](https://redux-toolkit.js.org/usage/usage-with-typescript#type-safety-with-extrareducers) to ensure the type safety.
 * Export the `entitiesReducer`
 
 ### rootReducer

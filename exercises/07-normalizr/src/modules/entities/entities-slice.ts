@@ -3,10 +3,12 @@ import { createSlice, PayloadAction, CaseReducer } from '@reduxjs/toolkit'
 import mergeWith from 'lodash/mergeWith'
 import isArray from 'lodash/isArray'
 
-import { UserEntities, NormalizedUserEntities } from './entities-types'
+import { UserEntities } from './entities-types'
 import { usersActions } from 'modules/users/users-slice'
 
-const initState: UserEntities = {
+interface EntitiesState extends UserEntities {}
+
+const initState: EntitiesState = {
   skills: {},
   userSkills: {},
   users: {},
@@ -23,8 +25,8 @@ const replaceArraysCustomizer = (objValue: unknown, srcValue: unknown) => {
 }
 
 const updateEntities: CaseReducer<
-  UserEntities,
-  PayloadAction<NormalizedUserEntities>
+  EntitiesState,
+  PayloadAction<{ entities: Partial<EntitiesState> }>
 > = (state, action) =>
   mergeWith({}, state, action.payload.entities, replaceArraysCustomizer)
 
