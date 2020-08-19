@@ -556,6 +556,7 @@ Location: `src/modules/entities/entities-selectors.ts`
 Since data are stored in the normalized form in the state, we need to denormalize them for easier access to values.
 
 * Create 3 selectors (`getUsers`, `getSkills`, and `getUserSkills`) that return the corresponding entities in the denormalized form
+  * Hint: use [`mapValues`](https://lodash.com/docs/4.17.15#mapValues) from `lodash` to create a new object with keys identical to source object.
 
 ### UsersSelectors
 Location: `src/modules/users/users-selectors.ts`
