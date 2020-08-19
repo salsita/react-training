@@ -6,7 +6,7 @@ import isArray from 'lodash/isArray'
 import { UserEntities, NormalizedUserEntities } from './entities-types'
 import { usersActions } from 'modules/users/users-slice'
 
-const initSate: UserEntities = {
+const initState: UserEntities = {
   skills: {},
   userSkills: {},
   users: {},
@@ -30,7 +30,7 @@ const updateEntities: CaseReducer<
 
 const entitiesSlice = createSlice({
   name: 'entities',
-  initialState: initSate,
+  initialState: initState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(usersActions.usersLoaded, updateEntities)
