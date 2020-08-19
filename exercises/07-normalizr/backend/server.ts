@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { User, UserName } from '../src/modules/users/user-types'
-import { computeRegnalNumber, hasSameName } from './utils'
+import { computeRegnalNumber, hasSameName, isUserName } from './utils'
 
 const port = 3001
 
@@ -30,7 +30,12 @@ app.use(express.json())
 app.get('/users', (_, res) => res.json(users))
 
 app.post('/users', (req, res) => {
-  const userName: UserName = req.body
+  const userName = req.body
+
+  if (!isUserName(userName)) {
+    res.status(400).send("Can't create a new user. Invalid request.")
+    return
+  }
 
   const regnalNumber = computeRegnalNumber(users, userName)
   const usersSkills = []

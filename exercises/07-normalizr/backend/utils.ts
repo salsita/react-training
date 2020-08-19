@@ -21,3 +21,10 @@ export const computeRegnalNumber = (users: User[], userName: UserName) => {
 
   return Math.max(...regnalNumbers) + 1
 }
+
+export const isUserName = (name: unknown): name is UserName => {
+  return (
+    (name as UserName).firstName !== undefined &&
+    (name as UserName).lastName !== undefined
+  )
+}
