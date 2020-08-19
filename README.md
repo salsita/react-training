@@ -456,7 +456,7 @@ interface UserSkill {
   level: number
 }
 
-interface User extends UserName{
+interface User extends UserName {
   id: string; // e.g. user-1
   regnalNumber: number // use Arabic numerals
   skills: Array<UserSkill>
