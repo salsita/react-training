@@ -8,12 +8,12 @@ export interface UserSkill {
   level: number
 }
 
-export interface UserData {
+export interface UserName {
   firstName: string
   lastName: string
 }
 
-export interface User extends UserData {
+export interface User extends UserName {
   id: string
   regnalNumber: number
   skills: Array<UserSkill>

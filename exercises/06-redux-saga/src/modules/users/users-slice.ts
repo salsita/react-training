@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAction } from '@reduxjs/toolkit'
 
-import { UserData, User } from './user-types'
+import { UserName, User } from './user-types'
 
 export interface UsersState {
   title: string
@@ -24,7 +24,7 @@ const usersSlice = createSlice({
 })
 
 export const usersActions = {
-  addUser: createAction<UserData, 'users/addUser'>('users/addUser'),
+  addUser: createAction<UserName, 'users/addUser'>('users/addUser'),
   ...usersSlice.actions,
 }
 

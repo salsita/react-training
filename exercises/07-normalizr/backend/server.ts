@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { User, UserData } from '../src/modules/users/user-types'
+import { User, UserName } from '../src/modules/users/user-types'
 import { computeRegnalNumber, hasSameName } from './utils'
 
 const port = 3001
@@ -16,7 +16,7 @@ const skills = [
   },
 ]
 
-const recognizedUsers: { [key: string]: UserData } = {
+const recognizedUsers: { [key: string]: UserName } = {
   AryaStark: { firstName: 'Arya', lastName: 'Stark' },
   DaenerysTargaryen: { firstName: 'Daenerys', lastName: 'Targaryen' },
 }
@@ -30,7 +30,7 @@ app.use(express.json())
 app.get('/users', (_, res) => res.json(users))
 
 app.post('/users', (req, res) => {
-  const userName: UserData = req.body
+  const userName: UserName = req.body
 
   const regnalNumber = computeRegnalNumber(users, userName)
   const usersSkills = []
