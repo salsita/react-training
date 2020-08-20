@@ -28,3 +28,6 @@ export const isUserName = (name: unknown): name is UserName => {
     (name as UserName).lastName !== undefined
   )
 }
+
+export const userNameToString = (userName: UserName) =>
+  userName.lastName.toLowerCase() + '_' + userName.firstName.toLowerCase()
