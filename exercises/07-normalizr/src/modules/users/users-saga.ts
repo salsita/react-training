@@ -18,34 +18,36 @@ const logError = (error: unknown) => {
 }
 
 function* getUsers() {
+  let normalizedUsers: EntitiesTypes.NormalizedUserEntities | null = null
+
   try {
     const { data: users }: AxiosResponse<User[]> = yield call(
       UsersEffects.getUsers
     )
 
-    const normalizedUsers = normalize<
+    normalizedUsers = normalize<
       User[],
       EntitiesTypes.UserEntities,
       EntitiesTypes.UserIds
     >(users, Schema.users)
-
-    yield put(usersActions.usersLoaded(normalizedUsers))
   } catch (error) {
     logError(error)
+    return
   }
+
+  yield put(usersActions.usersLoaded(normalizedUsers))
 }
 
 function* addUser(action: ReturnType<typeof usersActions.addUser>) {
   const { payload: user } = action
   try {
-    const response: AxiosResponse<User> = yield call(UsersEffects.addUser, user)
-
-    if (response) {
-      yield fork(getUsers)
-    }
+    yield call(UsersEffects.addUser, user)
   } catch (error) {
     logError(error)
+    return
   }
+
+  yield fork(getUsers)
 }
 
 export function* usersSaga() {
