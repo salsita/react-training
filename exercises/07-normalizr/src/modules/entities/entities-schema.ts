@@ -3,7 +3,7 @@ import { schema } from 'normalizr'
 export const skill = new schema.Entity('skills')
 export const skills = [skill]
 
-export const usersSkill = new schema.Entity(
+export const userSkill = new schema.Entity(
   'userSkills',
   {
     skill,
@@ -13,10 +13,10 @@ export const usersSkill = new schema.Entity(
   }
 )
 
-export const usersSkills = [usersSkill]
+export const userSkills = [userSkill]
 
 export const user = new schema.Entity('users', {
-  skills: usersSkills,
+  skills: userSkills,
 })
 
 export const users = [user]

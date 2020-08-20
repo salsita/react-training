@@ -52,12 +52,12 @@ export const createUser = (
   users: User[] = userList
 ): User => {
   const regnalNumber = computeRegnalNumber(userName, users)
-  const usersSkills = getSkillForUser(userName, regnalNumber)
+  const userSkills = getSkillForUser(userName, regnalNumber)
 
   return {
     id: `user-${users.length + 1}`,
     ...userName,
     regnalNumber,
-    skills: usersSkills,
+    skills: userSkills,
   }
 }
