@@ -515,7 +515,7 @@ State:
 ```
 
 * Update this reducer to store `userIds` instead of `users`
-* Update the action payload to be the of the `NormalizedUserEntities` type
+* Update the action payload to be of the `NormalizedUserEntities` type
 
 ### Entities slice
 Location: `src/modules/entities/entities-slice.ts`
