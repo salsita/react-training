@@ -522,7 +522,7 @@ Location: `src/modules/entities/entities-slice.ts`
 
 This file contains an entities reducer, which manages the entities repository.
 
-* Create an `EntitiesState` interface, which extends `UserEntities`. This state would contain all normalized entities used in the application.
+* Create an `EntitiesState` type/interface, which is equal to `UserEntities`. This state would contain all normalized entities used in the application.
 * Let's setup the `updateEntities` [case reducer](https://redux-toolkit.js.org/usage/usage-with-typescript#createslice) which would make a recursive merge of current state with the newly received entities. This is a common approach in the applications where the entities are fetched in small portions.
   * This function has two arguments:
     * state of type `EntitiesState`

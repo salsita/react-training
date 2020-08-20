@@ -6,7 +6,7 @@ import isArray from 'lodash/isArray'
 import { UserEntities } from './entities-types'
 import { usersActions } from 'modules/users/users-slice'
 
-interface EntitiesState extends UserEntities {}
+type EntitiesState = UserEntities
 
 const initState: EntitiesState = {
   skills: {},
