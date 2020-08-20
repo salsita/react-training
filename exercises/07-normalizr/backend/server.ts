@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { isUserName } from './utils'
-import { addUser, userList } from './user-store'
+import { userList, createUser } from './user-store'
 
 const port = 3001
 
@@ -19,7 +19,8 @@ app.post('/users', (req, res) => {
     return
   }
 
-  const user = addUser(userName)
+  const user = createUser(userName)
+  userList.push(user)
   res.json(user)
 })
 

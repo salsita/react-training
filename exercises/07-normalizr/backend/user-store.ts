@@ -47,17 +47,17 @@ const getSkillForUser = (
   ]
 }
 
-export const addUser = (userName: UserName, users: User[] = userList) => {
-  const regnalNumber = computeRegnalNumber(users, userName)
+export const createUser = (
+  userName: UserName,
+  users: User[] = userList
+): User => {
+  const regnalNumber = computeRegnalNumber(userName, users)
   const usersSkills = getSkillForUser(userName, regnalNumber)
 
-  const user = {
+  return {
     id: `user-${users.length + 1}`,
     ...userName,
     regnalNumber,
     skills: usersSkills,
   }
-
-  users.push(user)
-  return user
 }

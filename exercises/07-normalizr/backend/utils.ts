@@ -7,13 +7,13 @@ export const hasSameName = (user1: UserName, user2: UserName): boolean =>
   caseInsensitiveEqual(user1.firstName, user2.firstName) &&
   caseInsensitiveEqual(user1.lastName, user2.lastName)
 
-const getRegnalNumbersForUserName = (users: User[], userName: UserName) =>
+const getRegnalNumbersForUserName = (userName: UserName, users: User[]) =>
   users
     .filter((user) => hasSameName(user, userName))
     .map(({ regnalNumber }) => regnalNumber)
 
-export const computeRegnalNumber = (users: User[], userName: UserName) => {
-  const regnalNumbers = getRegnalNumbersForUserName(users, userName)
+export const computeRegnalNumber = (userName: UserName, users: User[]) => {
+  const regnalNumbers = getRegnalNumbersForUserName(userName, users)
 
   if (regnalNumbers.length === 0) {
     return 1
