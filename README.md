@@ -591,6 +591,10 @@ The main purpose of this exercise is to try [`router5`](http://router5.github.io
 * Create a page for user detail (e.g. at `/users/user-1`)
 * Use `@salsita/react-crud` to automate entity fetching
 
+### Attention
+
+The solution of this exercise (`08-router5`) uses a separate set of dependencies. You can run `npm install` in the corresponding directory to install them.
+
 ### Server file
 Location: `src/server.js`
 
@@ -797,6 +801,10 @@ The main purpose of this exercise is to try [Redux Form](https://redux-form.com/
 * Continue with your previous project or open `08-router5`
 * This exercise uses [react-modules](https://github.com/salsita/react-modules) packages
 * Create forms for creating and updating users
+
+### Attention
+
+The solution of this exercise (`09-forms`) uses a separate set of dependencies. You can run `npm install` in the corresponding directory to install them.
 
 ### Server file
 Location: `src/server.js`
