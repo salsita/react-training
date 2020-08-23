@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAction } from '@reduxjs/toolkit'
 
-import { NormalizedUserEntities } from 'modules/entities/entities-types'
+import { UserIds } from 'modules/entities/entities-types'
 import { UserName } from './user-types'
 
 export interface UsersState {
@@ -17,9 +17,9 @@ const usersSlice = createSlice({
   name: 'users',
   initialState: initialState,
   reducers: {
-    usersLoaded: (state, action: PayloadAction<NormalizedUserEntities>) => ({
+    usersLoaded: (state, action: PayloadAction<UserIds>) => ({
       ...state,
-      userIds: action.payload.result,
+      userIds: action.payload,
     }),
   },
 })

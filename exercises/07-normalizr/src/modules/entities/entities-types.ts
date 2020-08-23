@@ -26,5 +26,3 @@ export type UserEntities = {
 }
 
 export type UserIds = string[]
-
-export type NormalizedUserEntities = NormalizedSchema<UserEntities, UserIds>

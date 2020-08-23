@@ -4,9 +4,8 @@ import mergeWith from 'lodash/mergeWith'
 import isArray from 'lodash/isArray'
 
 import { UserEntities } from './entities-types'
-import { usersActions } from 'modules/users/users-slice'
 
-type EntitiesState = UserEntities
+export type EntitiesState = UserEntities
 
 const initState: EntitiesState = {
   skills: {},
@@ -26,16 +25,15 @@ const replaceArraysCustomizer = (objValue: unknown, srcValue: unknown) => {
 
 const updateEntities: CaseReducer<
   EntitiesState,
-  PayloadAction<{ entities: Partial<EntitiesState> }>
+  PayloadAction<Partial<EntitiesState>>
 > = (state, action) =>
-  mergeWith({}, state, action.payload.entities, replaceArraysCustomizer)
+  mergeWith({}, state, action.payload, replaceArraysCustomizer)
 
 const entitiesSlice = createSlice({
   name: 'entities',
   initialState: initState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(usersActions.usersLoaded, updateEntities)
+  reducers: {
+    entitiesUpdated: updateEntities
   },
 })
 
