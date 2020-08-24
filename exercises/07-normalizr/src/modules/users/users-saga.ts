@@ -18,26 +18,24 @@ const logError = (error: unknown) => {
 }
 
 function* getUsers() {
-  let normalizedUsers: EntitiesTypes.UserIds = []
+  let userIds: EntitiesTypes.UserIds = []
 
   try {
     const { data: users }: AxiosResponse<User[]> = yield call(
       UsersEffects.getUsers
     )
 
-    normalizedUsers = yield normalizeAndStore<
+    userIds = yield normalizeAndStore<
       EntitiesTypes.User[],
       EntitiesTypes.UserEntities,
       EntitiesTypes.UserIds
     >(users, Schema.users)
-
-    yield put(usersActions.usersLoaded(normalizedUsers))
   } catch (error) {
     logError(error)
     return
   }
 
-  yield put(usersActions.usersLoaded(normalizedUsers))
+  yield put(usersActions.usersLoaded(userIds))
 }
 
 function* addUser(action: ReturnType<typeof usersActions.addUser>) {
