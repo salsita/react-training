@@ -1,5 +1,3 @@
-import { NormalizedSchema } from 'normalizr'
-
 export interface Skill {
   id: string
   name: string

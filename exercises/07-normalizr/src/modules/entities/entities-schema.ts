@@ -1,10 +1,9 @@
 import { schema } from 'normalizr'
-import * as EntityTypes from './entities-types'
 
-export const skill = new schema.Entity<EntityTypes.Skill>('skills')
+export const skill = new schema.Entity('skills')
 export const skills = [skill]
 
-export const userSkill = new schema.Entity<EntityTypes.UserSkill>(
+export const userSkill = new schema.Entity(
   'userSkills',
   {
     skill,
@@ -16,7 +15,7 @@ export const userSkill = new schema.Entity<EntityTypes.UserSkill>(
 
 export const userSkills = [userSkill]
 
-export const user = new schema.Entity<EntityTypes.User>('users', {
+export const user = new schema.Entity('users', {
   skills: userSkills,
 })
 
