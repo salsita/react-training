@@ -25,11 +25,7 @@ function* getUsers() {
       UsersEffects.getUsers
     )
 
-    userIds = yield normalizeAndStore<
-      EntitiesTypes.User[],
-      EntitiesTypes.UserEntities,
-      EntitiesTypes.UserIds
-    >(users, Schema.users)
+    userIds = yield call(normalizeAndStore, users, Schema.users)
   } catch (error) {
     logError(error)
     return
