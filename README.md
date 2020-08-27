@@ -1,8 +1,8 @@
 # Syllabus
-https://docs.google.com/presentation/d/1xaw0AXhimgnBBTctfTFHHIHddcI1RBUM0ITjexDiRRo
+https://docs.google.com/presentation/d/1w8HRmAK2HB5PuwOB0HdFeGbvntsvM3-rvHdNOPZ3lBs
 
 # Before you begin
-Install all dependencies and link executables to child projects with `yarn` or `npm i` in the `exercises` folder.
+Install all dependencies and link executables to child projects with `npm i` in the `exercises` folder.
 
 # Exercises
 * [Exercise \#1](#exercise-1)
@@ -17,132 +17,120 @@ Install all dependencies and link executables to child projects with `yarn` or `
 
 
 ## Exercise \#1
-The main purpose of this exercise is to try [React](https://reactjs.org/docs/) and its [stateful components](https://reactjs.org/docs/react-component.html).
+
+The main purpose of this exercise is to try [React](https://reactjs.org/docs/) and its stateful components implemented with [React Hooks](https://reactjs.org/docs/hooks-state.html).
 
 * Open the initial project `00-init`
-* Create two components (`Header` and `UsersList`) with [classes](https://reactjs.org/docs/react-component.html)
+* Create two [function](https://reactjs.org/docs/components-and-props.html#function-and-class-components) components (`Header` and `UserList`)
 
 ### Header component
-Location: `src/modules/root/components/header.js`
 
-Props:
+Location: `src/modules/root/components/header.tsx`
+
+HeaderProps:
+
 ```ts
 {
   title: string
 }
 ```
 
-This is the simplest component created with a class. It just renders a heading (`h1`) with a string taken from the `title` property.
+This component just renders a heading (`h1`) with a string taken from the `title` property.
 
-* Create a class named `Header` that extends [`React.Component`](https://reactjs.org/docs/react-component.html)
-* Implement [`render`](https://reactjs.org/docs/react-component.html#render) method to render the heading
-* Implement correct [`PropTypes`](https://reactjs.org/docs/typechecking-with-proptypes.html) in the `static propTypes` field
-  * `PropTypes` are in a separate library called `prop-types` and can be imported as
-    ```js
-    import PropTypes from 'prop-types';
-    ```
-* Use this component in the `Root` component
+* Create a function named `Header` that renders the heading
+* Create an interface `HeaderProps` and use it in the `Header` component
+* Use this component in the `Root` component, pass the title `'User Management'`
 
-### UsersList component
-Location: `src/modules/users/components/users-list.js`
 
-State:
-```ts
-{
-  users: Array<{
-    id: number,
-    firstName: string,
-    lastName: string
-  }>
-}
-```
+### UserTypes
 
-This component renders a list of the users saved in `this.state.users` and two buttons to add two different users.
+Location: `src/modules/users/user-types.ts`
 
-* Create a class named `UsersList` that extends `React.Component`
-* Implement `render` method to render two buttons and the list of users (or `No Users` when the list is empty)
+This file contains definitions of user interfaces.
+
+* Create and export two interfaces
+  * `UserName` contains two strings `firstName` and `lastName`
+  * `User` is the same as `UserName`, but additionally contains an `id` (number)
+
+
+### UserList component
+
+Location: `src/modules/users/components/user-list.tsx`
+
+This component renders a list of the users saved in the state and two buttons to add two different users.
+
+* Create a function named `UserList` that renders
+  * two buttons `Add No One` and `Add Mother of Dragons`
+  * a table of users with two columns `First Name` and `Last Name`. The table displays text `No Users` when the list is empty
 * The first button will add `Arya Stark` and the second one `Daenerys Targaryen`
 * Every user has `id` which should be unique within the list (we will not implement deleting users)
-* Create the initial state inside the [`constructor`](https://reactjs.org/docs/react-component.html#constructor) of this component
-* Use [`this.setState`](https://reactjs.org/docs/react-component.html#setstate) to add a user
+* Create the initial state with the call of [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate) from React
+* Use the function returned by `useState` call to add a new user
+* Use correct types
+* Use this component in the `Root` component
 
 
 ## Exercise \#2
-The main purpose of this exercise is to try [stateless components](https://reactjs.org/docs/components-and-props.html#functional-and-class-components).
+The main purpose of this exercise is to try stateless components.
 
 * Continue with your previous project or open `01-react-stateful`
-* Modify both components (`Header` and `UsersList`) and rewrite them into [functions](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)
+* Modify `UserList` component into stateless [function](https://reactjs.org/docs/components-and-props.html#function-and-class-components) component
 
-### Header component
-Location: `src/modules/root/components/header.js`
 
-Props:
-```ts
-{
-  title: string
-}
-```
+### UserTypes
 
-This is the simplest component created with a function. The functionality is the same like in the previous exercise.
+Location: `src/modules/users/user-types.ts`
 
-* Modify the `Header` component previously created as a class into the component created as a function
-* Keep the same `PropTypes`
+* Add an `AddUser` interface, it's a function which takes `UserName` as parameter and returns `void`
 
-### UsersList component
-Location: `src/modules/users/components/users-list.js`
+### UserList component
+Location: `src/modules/users/components/user-list.tsx`
 
 Props:
 ```ts
 {
-  users: Array<{
-    id: number,
-    firstName: string,
-    lastName: string
-  }>,
-  addUser: ({ firstName: string, lastName: string }) => void
+  users: User[],
+  addUser: AddUser
 }
 ```
 
 The functionality is the same like in the previous exercise. The only difference is that the logic will be outside the file.
 
-* Modify the `UsersList` component into a function that renders users from the `users` property (or `No Users` when the list is empty)
+* Modify the `UserList` component into a function that renders users from the `users` property (or `No Users` when the list is empty)
 * Call the `addUser` function taken from the props when the user clicks on the button
-* Implement correct `PropTypes`
+* Create and use a `UserProps` interface
 
 ### Index file
-Location: `src/index.js`
+Location: `src/index.tsx`
 
-Move logic from the old `UsersList` into the index file. All application data will be in a global object.
+Move logic from the old `UserList` into the index file. All application data will be in a global object.
 
 * Create a global object called `state` with 2 fields (`title` and `users`)
 * Create your own function `render` that just calls [`ReactDOM.render`](https://reactjs.org/docs/react-dom.html#render) and uses data from the global object
 * Create a function called `addUser` that adds the user into the list of users and calls your `render` function
   * Please prefer immutable change of the `state` object
+* Define necessary interfaces
 
 ### Root component
-Location: `src/modules/root/components/root.js`
+Location: `src/modules/root/components/root.tsx`
 
 Props:
 ```ts
 {
   title: string,
-  users: Array<{
-    id: number,
-    firstName: string,
-    lastName: string
-  }>,
-  addUser: ({ firstName: string, lastName: string }) => void
+  users: User[],
+  addUser: AddUser
 }
 ```
 
-Since we moved the logic into the index file and the `Root` component receives all necessary props, we need to send into `Header` and `UsersList`.
+Since we moved the logic into the index file and the `Root` component receives all necessary props, we need to send props into `Header` and `UserList`.
 
 ### Additional task
 Try 3 different versions of the `Header` component and see when they get rendered
 
 1. Created as a class that extends [`React.Component`](https://reactjs.org/docs/react-api.html#reactcomponent)
 2. Created as a class that extends [`React.PureComponent`](https://reactjs.org/docs/react-api.html#reactpurecomponent)
-3. Created as a [function](https://reactjs.org/docs/components-and-props.html#functional-and-class-components)
+3. Created as a [function](https://reactjs.org/docs/components-and-props.html#function-and-class-components)
 
 
 ## Exercise \#3
@@ -151,92 +139,85 @@ The main purpose of this exercise is to try [Redux](https://redux.js.org/).
 * Continue with your previous project or open `02-react-stateless`
 * Move the logic into a reducer
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
+### UserActions
+Location: `src/modules/users/user-actions.ts`
 
-This file defines actions and action types. The following structure is used in [`reduxsauce`](https://github.com/infinitered/reduxsauce) and we will use `reduxsauce` later in the training. Let's write the action types and action creators manually to know what is under the hood of `reduxsauce`.
+This file defines actions and action types.
 
-* Create a constant ([action type](https://redux.js.org/basics/actions)) called `ADD_USER` with value `'ADD_USER'`
-* Create a function ([action creator](https://redux.js.org/basics/actions#action-creators)) called `addUser` that returns an object with `type` (action type) and `payload` (data)
-* Use `export default` to export an object with 2 fields
-  * `Types` - this is an object with all action types
-  * `Creators` - this is an object with all action creators
+* Create and export an enum `UserActionTypes` of [action types](https://redux.js.org/basics/actions) with one value `addUser = 'users/addUser'`
+* Create an interface `AddUserAction` which extends `Action<T>` from `'redux'` for `users/addUser` action. In addition to the mandatory `type` property this action will contain a payload with the new user details.
+  ```ts
+  {
+    payload: UserName
+  }
+  ```
+* Create a function ([action creator](https://redux.js.org/basics/actions#action-creators) of `ActionCreator<A>` type from `'redux'`) called `addUser` that takes `UserName` object as parameter and returns the `AddUserAction` action.
+* Create and export a new type `UserActions`, which is a union of all user actions. This is useful in the reducer when more actions are defined. Note, currently we have only one action `users/addUser`.
+* Create and export an object `UserActionCreators`, which congregates all user action creators.
 
 ### usersReducer
-Location: `src/modules/users/users-reducer.js`
+Location: `src/modules/users/users-reducer.ts`
 
 State:
 ```ts
 {
   title: string,
-  users: Array<{
-    id: number,
-    firstName: string,
-    lastName: string
-  }>
+  users: User[]
 }
 ```
 
 The logic from `addUser` function from the previous exercise will be in this reducer.
 
-* Create a [reducer](https://redux.js.org/basics/reducers) function
+* Create a [reducer](https://redux.js.org/basics/reducers) function of type `Reducer<S, A>` from `'redux'`
 * Use an initial state
-* Modify `users` field in the state when the `ADD_USER` action is dispatched
+* Modify `users` field in the state when the `users/addUser` action is dispatched
 * Don't forget to return unmodified state when a different action is dispatched
 
 ### rootReducer
-Location: `src/modules/root/root-reducer.js`
+Location: `src/modules/root/root-reducer.ts`
 
 This is the main reducer of the whole app. The main purpose is to combine all reducers from all modules into a single reducer.
 
 * Import your `usersReducer`
 * Use [`combineReducers`](https://redux.js.org/api-reference/combinereducers) from `redux` to create the root reducer
+  * The root reducer state will be a combination of all passed reducers states, the resulting state type can be inferred from the return type:
+  ```ts
+  export type RootState = ReturnType<typeof rootReducer>
+  ```
 
 ### Index file
-Location: `src/index.js`
+Location: `src/index.tsx`
 
 Configure all necessary things for `redux`.
 
 * Create `store` with the [`createStore`](https://redux.js.org/api-reference/createstore) function from `redux`
   * The first argument is `rootReducer`
-  * The second argument can be an `enhancer`. Use the following to setup Redux devtools
-    ```js
-    window.__REDUX_DEVTOOLS_EXTENSION__
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : v => v
+  * The second argument can be an `enhancer`. Use the following to setup the [`Redux DevTools Extension`](https://github.com/zalmoxisus/redux-devtools-extension)
+    ```ts
+    declare global {
+      interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
+      }
+    }
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     ```
-* Create a function called `dispatchAddUser` that calls [`store.dispatch`](https://redux.js.org/api-reference/store#dispatch(action)) to dispatch the `ADD_USER` action
-* Use data from [`store.getState()`](https://redux.js.org/api-reference/store#getstate()) in your `render` function
-* Subscribe your `render` function with [`store.subscribe`](https://redux.js.org/api-reference/store#subscribe(listener)) to re-render the app when an action is dispatched
+* Create a function called `dispatchAddUser` that calls [`store.dispatch`](https://redux.js.org/api/store#dispatchaction) to dispatch the `users/addUser` action
+* Use data from [`store.getState()`](https://redux.js.org/api/store#getstate) in your `render` function
+* Subscribe your `render` function with [`store.subscribe`](https://redux.js.org/api/store#subscribelistener) to re-render the app when an action is dispatched
 
 
 ## Exercise \#4
-The main purpose of this exercise is to try [`react-redux`](https://github.com/reactjs/react-redux) and [`reduxsauce`](https://github.com/infinitered/reduxsauce).
+The main purpose of this exercise is to try [`React Redux`](https://react-redux.js.org/introduction/quick-start) and [`Redux Toolkit`](https://redux-toolkit.js.org/).
 
 * Continue with your previous project or open `03-redux`
-* Use [`Provider`](https://github.com/reduxjs/react-redux/blob/master/docs/api/Provider.md) from `react-redux` instead of the manual re-rendering
-* Connect `Header` and `UsersList` with the [`connect`](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md) function from `react-redux`
-* Rewrite actions with `reduxsauce`
+* Use [`Provider`](https://react-redux.js.org/api/provider) from `react-redux` instead of the manual re-rendering
+* Use the [`React Redux hooks`](https://react-redux.js.org/api/hooks) to get Redux store data in `Header` and `UserList`
+* Rewrite actions with `Redux Toolkit`
 
 ### Header component
-Location: `src/modules/root/components/header.js`
+Location: `src/modules/root/components/header.tsx`
 
-The same component with the same props like in the previous exercise.
-
-* Use `connect` from `react-redux` to create the connected version of this component
-* Set `title` inside `mapStateToProps`
-
-### UsersList component
-Location: `src/modules/users/components/users-list.js`
-
-The same component with the same props like in the previous exercise.
-
-* Use `connect` from `react-redux` to create the connected version of this component
-* Set `users` inside `mapStateToProps`
-* Set `addUser` inside `mapDispatchToProps`
-
-### Root component
-Location: `src/modules/root/components/root.js`
+The same component like in the previous exercise.
 
 Props:
 ```ts
@@ -244,32 +225,69 @@ Props:
 }
 ```
 
-* Remove all props because both components are connected now.
+* Use [`useSelector`](https://react-redux.js.org/api/hooks#useselector) from `React Redux` to get the `title` from Redux store
+* Remove the props - they are no longer needed
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
+### UserList component
+Location: `src/modules/users/components/user-list.tsx`
 
-The same actions but created with `reduxsauce`.
+The same component like in the previous exercise.
 
-* Use [`createActions`](https://github.com/infinitered/reduxsauce#createactions) from `reduxsauce` to create the `ADD_USER` action with `addUser` action creator
-* Use `users/` prefix
+Props:
+```ts
+{
+}
+```
+
+* Use  [`useSelector`](https://react-redux.js.org/api/hooks#useselector) from `React Redux` to get the `users` list from Redux store
+* Use [`useDispatch`](https://react-redux.js.org/api/hooks#usedispatch) to get the `dispatch` function of the Redux store. Use it to dispatch `users/addUser` action
+* Remove the props - they are no longer needed
+
+### Root component
+Location: `src/modules/root/components/root.tsx`
+
+Props:
+```ts
+{
+}
+```
+
+* Remove all props because `Header` and `UserList` components don't need them anymore.
+
+
+### Users slice
+Location: `src/modules/users/users-slice.ts`
+
+The same actions and reducer, but created with `Redux Toolkit`.
+
+* Use [`createSlice`](https://redux-toolkit.js.org/api/createSlice) from `Redux Toolkit` to generate action creators and action types for user reducers.
+* Move `adduser` reducer implementation to this file and pass it with the `reducer` option to `createSlice` function.
+* Export `actions` and `reducer` returned by the `createSlice` function as `usersActions` and `usersReducer`.
+* Define necessary interfaces
+
+
+### UserActions
+Location: `src/modules/users/user-actions.ts`
+
+This file is no longer needed. The user actions are now generated in `src/modules/users/users-slice.ts`.
+
 
 ### usersReducer
-Location: `src/modules/users/users-reducer.js`
+Location: `src/modules/users/users-reducer.ts`
 
-The same reducer but created with `reduxsauce`.
+This file is no longer needed. The `addUser` reducer was moved to `src/modules/users/users-slice.ts`.
 
-* Use [`createReducer`](https://github.com/infinitered/reduxsauce#createreducer) from `reduxsauce` to create the same reducer
 
 ### Index file
-Location: `src/index.js`
+Location: `src/index.tsx`
 
 Currently, we need only `store` and we need to call `ReactDOM.render` directly with `Provider` component.
 
 * Remove own `render` function and directly call `ReactDOM.render`
 * Change the rendered component into `Provider` and put `Root` as its child
-* Remove `dispatchAddUser` (the action is dispatched in the `UsersList` component)
+* Remove `dispatchAddUser` (the action is dispatched in the `UserList` component)
 * Remove `store.subscribe` (it is not necessary with `Provider`)
+* Use [`configureStore`](https://redux-toolkit.js.org/api/configureStore) function from `Redux Toolkit` instead of the `createStore`. This will by default enable the [`Redux DevTools Extension`](https://github.com/zalmoxisus/redux-devtools-extension) used in previous exercise. The `composeEnhancers` function is no longer needed.
 
 
 ## Exercise \#5
@@ -279,35 +297,43 @@ The main purpose of this exercise is to try [Reselect](https://github.com/reactj
 * Create selectors and use them in `Header` and `UsersList`
 
 ### UsersSelectors
-Location: `src/modules/users/users-selectors.js`
+Location: `src/modules/users/users-selectors.ts`
 
 * Create a selector called `getTitle` with [`createSelector`](https://github.com/reactjs/reselect#createselectorinputselectors--inputselectors-resultfunc) from `reselect`
   * This selector just returns the `title` string from the `state`
 * Create a selector called `getUsers` with `createSelector`
   * This selector just returns the `users` array from the `state`
-* Create a selector called `getUsersList` with `createSelector`
+* Create a selector called `getUserList` with `createSelector`
   * This selector uses the `getUsers` selector and modifies last names to upper case
 
 ### Header component
-Location: `src/modules/root/components/header.js`
+Location: `src/modules/root/components/header.tsx`
 
-The same component with the same props like in the previous exercise.
+The same component like in the previous exercise.
 
-* Use the `getTitle` selector in `mapStateToProps`
+* Use the `getTitle` selector in `useSelector`
 
-### UsersList component
-Location: `src/modules/users/components/users-list.js`
+### UserList component
+Location: `src/modules/users/components/user-list.tsx`
 
-The same component with the same props like in the previous exercise.
+The same component like in the previous exercise.
 
-* Use the `getUsersList` selector in `mapStateToProps`
+* Use the `getUserList` selector in `useSelector` call
+* Add a new component, which is a memoized version of `<button>`. Use [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo).
+
+  Props:
+  ```ts
+    React.ButtonHTMLAttributes<HTMLButtonElement>
+  ```
+* Use this memoized button in `UserList` component instead of the ordinary buttons
+* Use [`useCallback`](https://reactjs.org/docs/hooks-reference.html#usecallback) hook from `React` to memoize the callbacks passed to memoized buttons
 
 
 ## Exercise \#6
-The main purpose of this exercise is to try [Redux-Saga](https://redux-saga.js.org/), [`axios`](https://github.com/axios/axios), and [Express](http://expressjs.com/).
+The main purpose of this exercise is to try [Redux-Saga](https://redux-saga.js.org/), [axios](https://github.com/axios/axios), and [Express](http://expressjs.com/).
 
 * Continue with your previous project or open `05-reselect`
-* Create a simple server that allows you to add a new user and get all users
+* Create a simple server that allows you to add a new user and get a list of all users
 * Move the logic of adding a new user to the server
 * Create sagas that handle communication with the server
 
@@ -318,17 +344,18 @@ Location: `package.json`
   ```json
   "start": "concurrently \"npm run start-fe\" \"npm run start-be\"",
   "start-fe": "react-scripts start",
-  "start-be": "nodemon src/server.js",
+  "start-be": "cd backend && nodemon server.ts",
   ```
 * Add `proxy` into the root to correctly handle CORS
   * `"proxy": "http://localhost:3001"`
 
 ### Server file
-Location: `src/server.js`
+Location: `backend/server.ts`
 
 A simple `express` server that has 2 routes `GET /users` and `POST /users`.
 
-* Create a [server with `express`](http://expressjs.com/en/4x/api.html#app) and use [`body-parser`](https://github.com/expressjs/body-parser#expressconnect-top-level-generic) middleware (`bodyParser.json()`)
+* Create a [server with `express`](http://expressjs.com/en/4x/api.html#app)
+* [Use](http://expressjs.com/en/4x/api.html#app.use) [`express.json()`](http://expressjs.com/en/4x/api.html#express.json) and [`express.urlencoded()`](http://expressjs.com/en/4x/api.html#express.urlencoded) middleware
 * Create the route `GET /users` that returns all users from the user list
   * Users can be stored in an array
 * Create the route `POST /users` that
@@ -336,8 +363,16 @@ A simple `express` server that has 2 routes `GET /users` and `POST /users`.
   * adds a new user into the user list (`firstName` and `lastName` can be taken from `req.body`)
   * returns the new user (`id` is included)
 
+### TypeScript configuration for BE
+Location: `backend/tsconfig.json`
+
+A simple TypeScript configuration file.
+
+* Extend the `tsconfig-base.json` located in the `exercises` directory
+* In the compiler options setup `commonjs` module, which is needed for Node.js
+
 ### API Client
-Location: `src/modules/api/api-client.js`
+Location: `src/modules/api/api-client.ts`
 
 This file contains an API client with `axios` that is used to make requests to the BE server.
 
@@ -345,66 +380,55 @@ This file contains an API client with `axios` that is used to make requests to t
 * Set `baseURL: 'http://localhost:3000'` in the config
 
 ### UsersEffects
-Location: `src/modules/users/users-effects.js`
+Location: `src/modules/users/users-effects.ts`
 
 This file defines all effect functions that perform the corresponding requests to API. We need only 2 effects right now - `getUsers` and `addUser`.
 
 * Create a function `getUsers` that makes a request to `GET /users`
 * Create a function `addUser` that makes a request to `POST /users` and sends an object with `firstName` and `lastName` in the request body
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
+### UsersSlice
+Location: `src/modules/users/users-slice.ts`
 
-We will need a new action to store fetched users into to the state.
+We will need a new reducer to store fetched users into the state.
+* Add a new case reducer called `usersLoaded` to do it
 
-* Create a new action called `USERS_LOADED`
-
-### usersReducer
-Location: `src/modules/users/users-reducer.js`
-
-Users are added on the BE side so the handler for the `ADD_USER` action is not necessary anymore. However, we need to handle the new `usersLoaded` action.
-
-* Remove the `ADD_USER` action handler
-* Add a handler for `USERS_LOADED`
+Users are added on the BE side, so the `addUser` reducer is not needed anymore, but the action type still is.
+* Remove the `addUser` reducer
+* Add the `addUser` action creator to the `usersActions` export object
+  * Use [`createAction`](https://redux-toolkit.js.org/api/createAction) function to create the action creator with type `users/addUser`
+    * You can use a [literal type](https://redux-toolkit.js.org/usage/usage-with-typescript#createaction) for `action.type` for stronger typing of sagas
 
 ### usersSaga
-Location: `src/modules/users/users-saga.js`
+Location: `src/modules/users/users-saga.ts`
 
 This file is used to create [redux sagas](https://redux-saga.js.org/docs/api/) that handle side effects to communicate with the BE server. We need 2 sagas to handle all API effects we have - `getUsers` and `addUser`.
 
 * Create a saga called `getUsers` that
   * calls `UsersEffects.getUsers`
-  * dispatch the `USERS_LOADED` action with `data` taken from the response
+  * dispatch the `users/usersLoaded` action with `data` taken from the response
 * Create a saga called `addUser` that
   * calls `UsersEffects.addUser`
   * runs the `getUsers` saga to refresh the user list
 * Don't forget to use `try/catch` in both sagas
 * Create a saga called `usersSaga` (only this one needs to be exported - with `export default`) that
   * runs the `getUsers` saga immediately (we don't have a router currently)
-  * runs the `addUser` saga when the `ADD_USER` action is dispatched (hint: use `takeEvery`)
+  * runs the `addUser` saga when the `users/addUser` action is dispatched (hint: use `takeEvery`)
 
 ### rootSaga
-Location: `src/modules/root/root-saga.js`
+Location: `src/modules/root/root-saga.ts`
 
 This file simply starts all sagas that are needed in the whole application. Currently, we have only our own `usersSaga`.
 
-* Create a saga (exported with `export default`) that runs `usersSaga` (hint: use `fork`)
+* Create and export a saga called `rootSaga` that runs `usersSaga` (hint: use `fork`)
 
 ### Index file
-Location: `src/index.js`
+Location: `src/index.tsx`
 
 Configure all necessary things for `redux-saga`.
 
 * Create `sagaMiddleware` with a function [`createSagaMiddleware`](https://redux-saga.js.org/docs/api/) (default export from `redux-saga`)
-* Change the second argument of `createStore` into the following where both functions ([`compose`](https://redux.js.org/api-reference/compose) and [`applyMiddleware`](https://redux.js.org/api-reference/applymiddleware) are imported from `redux`)
-  ```js
-  compose(
-    applyMiddleware(sagaMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : v => v
-  )
-  ```
+* Pass the `sagaMiddleware` to the [`configureStore`](https://redux-toolkit.js.org/api/configureStore) call with the `middleware` property
 * Run your root saga with `sagaMiddleware.run(rootSaga)`
 
 
@@ -412,33 +436,30 @@ Configure all necessary things for `redux-saga`.
 The main purpose of this exercise is to try [`normalizr`](https://github.com/paularmstrong/normalizr).
 
 * Continue with your previous project or open `06-redux-saga`
-* This exercise uses [react-modules](https://github.com/salsita/react-modules) packages
 * Add skills and [regnal number](https://en.wikipedia.org/wiki/Regnal_number) to users
-* Save users and skills into the entity repository in the denormalized form
+* Save users and skills into the entity repository in the normalized form
 
 ### Server file
-Location: `src/server.js`
+Location: `backend/server.ts`
 
 The server adds skills and set the correct regnal number to every user.
 
 The entity interfaces are
 ```ts
 interface Skill {
-  id: string; // e.g. skill-1
-  name: string;
+  id: string // e.g. skill-1
+  name: string
 }
 
-interface UsersSkill {
-  skill: Skill;
-  level: number;
+interface UserSkill {
+  skill: Skill
+  level: number
 }
 
-interface User {
+interface User extends UserName {
   id: string; // e.g. user-1
-  firstName: string;
-  lastName: string;
-  regnalNumber: number; // use Arabic numerals
-  skills: Array<UsersSkill>;
+  regnalNumber: number // use Arabic numerals
+  skills: Array<UserSkill>
 }
 ```
 
@@ -448,81 +469,116 @@ interface User {
   * Compute the correct regnal number for the user
   * Add some skills to the user where `level` is somehow based on the regnal number (it doesn't matter what equation you use - it can be for example `level = 3 * regnalNumber`)
 
-### rootReducer
-Location: `src/modules/root/root-reducer.js`
-
-The `@salsita/react-entities` library uses Redux so it's necessary to add its reducer into our root reducer.
-
-* Import `import { entitiesReducer as entities } from '@salsita/react-entities';`
-* Add `entities` into the root reducer
-
 ### Entities Schema
-Location: `src/modules/entities/entities-schema.js`
+Location: `src/modules/entities/entities-schema.ts`
 
 This file contains [`normalizr` schema](https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#schema) of our entities.
 
-* Create schema for `Skill`, `UsersSkill`, and `User` [entities](https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#entitykey-definition---options--)
+* Create schema for `Skill`, `UserSkill`, and `User` [entities](https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#entitykey-definition---options--)
 * If an entity doesn't have the `id` field, you need to specify one with `idAttribute`, which can be a `string` (name of the `id` field) or a function that creates the value of `id` field
 
-### usersSaga
-Location: `src/modules/users/users-saga.js`
+### Entities types
+Location: `src/modules/entities/entities-types.ts`
 
-Currently, the same denormalized data that comes from the BE server are stored in the state. We need to normalize the data from response and store them in the entity repository.
+This file contains type definitions for normalized user data.
 
-* Import `import { normalizeAndStore } from '@salsita/react-entities';`
-* Call `normalizeAndStore(data, schema)` and save the result (an array of `id`s) in the `usersReducer`
+* Add and export `Skill`, `UserSkill` and `User` types, which are the normalized version of types defined in `src/modules/users/user-types.ts`.
+  * The normalized version uses the `id` of an entity instead of nested types:
+    ```ts
+    interface UserSkill {
+      id: string
+      skill: string
+      level: number
+    }
+    ```
+* Add and export the `UserEntities` type, which describes `entities` created by the user data normalization:
+  ```ts
+  {
+    skills: { [key: string]: Skill }
+    userSkills: { [key: string]: UserSkill }
+    users: { [key: string]: User }
+  }
+  ```
+* Add and export the `UserIds` type (a string array), which describes the user `id`s returned from the `normalize` call (`result` property).
 
-### usersReducer
-Location: `src/modules/users/users-reducer.js`
+### usersSlice
+Location: `src/modules/users/users-slice.ts`
 
 State:
 ```ts
 {
   title: string,
-  userIds: number[]
+  userIds: string[]
 }
 ```
 
 * Update this reducer to store `userIds` instead of `users`
+* Update the action payload to be of the `UserIds` type
 
-### UsersActions
-Location: `src/modules/users/users-actions.js`
+### Entities slice
+Location: `src/modules/entities/entities-slice.ts`
 
-* Update the payload variable into `userIds`
+This file contains an entities reducer, which manages the entities repository.
+
+* Create and export an `EntitiesState` type/interface, which is equal to `UserEntities`. This state would contain all normalized entities used in the application.
+* Let's setup the `updateEntities` [case reducer](https://redux-toolkit.js.org/usage/usage-with-typescript#createslice) which would make a recursive merge of current state with the newly received entities. This is a common approach in the applications where the entities are fetched in small portions.
+  * This function has two arguments:
+    * state of type `EntitiesState`
+    * action, which payload may contain any part of the state
+  * Use the [mergeWith](https://lodash.com/docs/4.17.15#mergeWith) function from the [Lodash](https://lodash.com/) library.
+  * Create and use the customizer which changes the merge strategy for arrays by always choosing the new value. Our customizer will take `objValue` and `srcValue` as arguments and return `srcValue` if both arguments are arrays. For other types it will return undefined, which indicates no customization.
+* Create the `entities` slice with `createSlice` function
+  * Use `EntitiesState` for the state type.
+  * Add an `entitiesUpdated` reducer which updates the entities repository by calling `updateEntities` case reducer.
+* Export the `entitiesReducer` and `entitiesActions`.
+
+### rootReducer
+Location: `src/modules/root/root-reducer.ts`
+
+The created entities reducer needs to be added into the root reducer.
+
+* Import the created `entitiesReducer` and add it to the root reducer
+
+### entitiesSaga
+Location: `src/modules/entities/entities-saga.ts`
+
+This file contains a saga which normalizes data and stores them to the entities state.
+
+* Create a `normalizeAndStore` saga:
+  * Call `normalize(data, schema)` to normalize the passed data.
+    * The `normalize` function returns an object with two properties: `entities` and `result`.
+  * Dispatch `entities/entitiesUpdated` action with the payload containing  `entities`.
+  * Return the `result`.
+
+### usersSaga
+Location: `src/modules/users/users-saga.ts`
+
+Currently, the same denormalized data that comes from the BE server are stored in the state. We need to normalize the data from response and store them in the entity repository.
+
+* Call the `normalizeAndStore` saga to normalize the fetched data and store the entities
+* Dispatch the `users/usersLoaded` action to save the user `id`s the store
 
 ### EntitiesSelectors
-Location: `src/modules/entities/entities-selectors.js`
+Location: `src/modules/entities/entities-selectors.ts`
 
 Since data are stored in the normalized form in the state, we need to denormalize them for easier access to values.
 
-* Create 3 selectors (`getUsers`, `getSkills`, and `getUsersSkills`) that return the corresponding entities in the denormalized form
+* Create 3 selectors (`getUsers`, `getSkills`, and `getUserSkills`) that return the corresponding entities in the denormalized form
+  * Hint: use [`mapValues`](https://lodash.com/docs/4.17.15#mapValues) from `lodash` to create a new object with keys identical to source object.
 
 ### UsersSelectors
-Location: `src/modules/users/users-selectors.js`
+Location: `src/modules/users/users-selectors.ts`
 
-The `usersReducer` does not store the entity data, it stores `id`s only.
+The users reducer doesn't store the entity data, it stores `id`s only.
 
 * Create a new selector called `getUserIds` that returns `id`s from the redux state
-* Modify the `getUsers` selector to map users `id`s from the `usersReducer` into denormalized users
-* Modify the `getUsersList` selector to return the users with
+* Modify the `getUsers` selector to map users `id`s from the users reducer into denormalized users
+* Modify the `getUserList` selector to return the users with
   * upper cased last names
   * converted regnal number into Roman numerals (use the [`roman-numerals`](https://github.com/joshleaves/roman-numerals) library)
 
-### UsersList component
-Location: `src/modules/users/components/users-list.js`
-
-Props:
-```ts
-{
-  users: Array<{
-    id: string,
-    firstName: string,
-    lastName: string,
-    regnalNumber: string
-  }>,
-  addUser: ({ firstName: string, lastName: string }) => void
-}
-```
+### UserList component
+Location: `src/modules/users/components/user-list.ts`
 
 * Print `regnalNumber` next to the first name
 
@@ -534,6 +590,10 @@ The main purpose of this exercise is to try [`router5`](http://router5.github.io
 * This exercise uses [react-modules](https://github.com/salsita/react-modules) packages
 * Create a page for user detail (e.g. at `/users/user-1`)
 * Use `@salsita/react-crud` to automate entity fetching
+
+### Attention
+
+The solution of this exercise (`08-router5`) uses a separate set of dependencies. You can run `npm install` in the corresponding directory to install them.
 
 ### Server file
 Location: `src/server.js`
@@ -741,6 +801,10 @@ The main purpose of this exercise is to try [Redux Form](https://redux-form.com/
 * Continue with your previous project or open `08-router5`
 * This exercise uses [react-modules](https://github.com/salsita/react-modules) packages
 * Create forms for creating and updating users
+
+### Attention
+
+The solution of this exercise (`09-forms`) uses a separate set of dependencies. You can run `npm install` in the corresponding directory to install them.
 
 ### Server file
 Location: `src/server.js`

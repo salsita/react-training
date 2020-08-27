@@ -1,0 +1,255 @@
+name: End-to-end tests
+
+# Controls when the action will run. Triggers the workflow on push
+on: [push]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  # Exercise 00-init
+  e2e-00-init:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1.4.1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 00-init
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/00-init
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 00-init-cypress-screenshots
+          path: exercises/00-init/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 00-init-cypress-videos
+          path: exercises/00-init/cypress/videos
+
+  # Exercise 01-react-stateful
+  e2e-01-react-stateful:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1.4.1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 01-react-stateful
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/01-react-stateful
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 01-react-stateful-cypress-screenshots
+          path: exercises/01-react-stateful/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 01-react-stateful-cypress-videos
+          path: exercises/01-react-stateful/cypress/videos
+
+  # Exercise 02-react-stateless
+  e2e-02-react-stateless:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1.4.1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 02-react-stateless
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/02-react-stateless
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 02-react-stateless-cypress-screenshots
+          path: exercises/02-react-stateless/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 02-react-stateless-cypress-videos
+          path: exercises/02-react-stateless/cypress/videos
+
+  # Exercise 03-redux
+  e2e-03-redux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1.4.1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 03-redux
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/03-redux
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 03-redux-cypress-screenshots
+          path: exercises/03-redux/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 03-redux-cypress-videos
+          path: exercises/03-redux/cypress/videos
+
+  # Exercise 04-react-redux
+  e2e-04-react-redux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1.4.1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 04-react-redux
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/04-react-redux
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 04-react-redux-cypress-screenshots
+          path: exercises/04-react-redux/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 04-react-redux-cypress-videos
+          path: exercises/04-react-redux/cypress/videos
+
+  # Exercise 05-reselect
+  e2e-05-reselect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1.4.1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 05-reselect
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/05-reselect
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 05-reselect-cypress-screenshots
+          path: exercises/05-reselect/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 05-reselect-cypress-videos
+          path: exercises/05-reselect/cypress/videos
+
+  # Exercise 06-redux-saga
+  e2e-06-redux-saga:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1.4.1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 06-redux-saga
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/06-redux-saga
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 06-redux-saga-cypress-screenshots
+          path: exercises/06-redux-saga/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 06-redux-saga-cypress-videos
+          path: exercises/06-redux-saga/cypress/videos
+
+  # Exercise 07-normalizr
+  e2e-07-normalizr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1.4.1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 07-normalizr
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/07-normalizr
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 07-normalizr-cypress-screenshots
+          path: exercises/07-normalizr/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 07-normalizr-cypress-videos
+          path: exercises/07-normalizr/cypress/videos
