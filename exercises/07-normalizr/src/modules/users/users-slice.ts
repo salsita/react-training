@@ -1,24 +1,25 @@
 import { createSlice, PayloadAction, createAction } from '@reduxjs/toolkit'
 
-import { UserName, User } from './user-types'
+import { UserIds } from 'modules/entities/entities-types'
+import { UserName } from './user-types'
 
 export interface UsersState {
   title: string
-  users: User[]
+  userIds: string[]
 }
 
 export const initialState: UsersState = {
   title: 'User Management',
-  users: [],
+  userIds: [],
 }
 
 const usersSlice = createSlice({
   name: 'users',
   initialState: initialState,
   reducers: {
-    usersLoaded: (state, { payload: users }: PayloadAction<User[]>) => ({
+    usersLoaded: (state, action: PayloadAction<UserIds>) => ({
       ...state,
-      users,
+      userIds: action.payload,
     }),
   },
 })

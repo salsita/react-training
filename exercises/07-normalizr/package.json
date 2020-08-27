@@ -6,10 +6,24 @@
   "scripts": {
     "start": "concurrently \"npm run start-fe\" \"npm run start-be\"",
     "start-fe": "react-scripts start",
-    "start-be": "nodemon src/server.js",
+    "start-be": "cd backend && nodemon server.ts",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

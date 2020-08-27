@@ -222,3 +222,34 @@ jobs:
         with:
           name: 06-redux-saga-cypress-videos
           path: exercises/06-redux-saga/cypress/videos
+
+  # Exercise 07-normalizr
+  e2e-07-normalizr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Install root dependencies
+        uses: bahmutov/npm-install@v1.4.1
+        with:
+          working-directory: exercises
+      - name: Cypress run exercise 07-normalizr
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: exercises/07-normalizr
+          # start the server
+          start: npm start
+          # wait for server to start
+          wait-on: 'http://localhost:3000'
+          # wait for 2 minutes for the server to respond:
+          wait-on-timeout: 120
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: 07-normalizr-cypress-screenshots
+          path: exercises/07-normalizr/cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: 07-normalizr-cypress-videos
+          path: exercises/07-normalizr/cypress/videos

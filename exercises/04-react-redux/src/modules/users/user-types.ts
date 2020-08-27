@@ -1,10 +1,10 @@
-export interface UserData {
+export interface UserName {
   firstName: string
   lastName: string
 }
 
-export interface User extends UserData {
+export interface User extends UserName {
   id: number
 }
 
-export type AddUser = (user: UserData) => void
+export type AddUser = (user: UserName) => void

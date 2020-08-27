@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { User, UserData } from '../user-types'
+import { User, UserName } from '../user-types'
 
 export const UserList: React.FC = () => {
   // Declare a new state variable called 'users'
   const [users, setUsers] = useState<User[]>([])
 
   // Adds a new user to the 'users' state
-  const addUser = (user: UserData) => {
+  const addUser = (user: UserName) => {
     setUsers((prevUsers) => [
       ...prevUsers,
       { id: prevUsers.length + 1, ...user },
