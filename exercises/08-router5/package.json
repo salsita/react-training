@@ -11,5 +11,49 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@salsita/react-api": "^1.0.0",
+    "@salsita/react-core": "^1.0.0",
+    "@salsita/react-crud": "^1.0.0",
+    "@salsita/react-entities": "^1.0.0",
+    "@salsita/react-forms": "^1.0.0",
+    "@salsita/react-router": "^1.0.0",
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "lodash.flow": "^3.5.0",
+    "normalizr": "^3.2.4",
+    "prop-types": "^15.6.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-portal": "^4.1.0",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.0.17",
+    "redux": "^4.0.5",
+    "redux-form": "^7.2.0",
+    "redux-saga": "^0.16.0",
+    "reduxsauce": "^0.7.0",
+    "reselect": "^3.0.1",
+    "roman-numerals": "^0.3.2",
+    "router5-helpers": "^5.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "link-parent-bin": "^1.0.2",
+    "nodemon": "^1.17.1"
+  }
 }
