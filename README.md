@@ -14,8 +14,7 @@ Install all dependencies and link executables to child projects with `npm i` in 
 * [Exercise \#7](#exercise-7)
 * [Exercise \#8](#exercise-8)
 * [Exercise \#9](#exercise-9)
-
-
+<td>{user.lastName}</td>
 ## Exercise \#1
 
 The main purpose of this exercise is to try [React](https://reactjs.org/docs/) and its stateful components implemented with [React Hooks](https://reactjs.org/docs/hooks-state.html).

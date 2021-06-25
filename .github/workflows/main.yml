@@ -1,6 +1,6 @@
 name: End-to-end tests
 
-# Controls when the action will run. Triggers the workflow on push
+# Controls when the actions will run. Triggers the workflow on push
 on: [push]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -17,7 +17,7 @@ jobs:
         with:
           working-directory: exercises
       - name: Cypress run exercise 00-init
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-actions@v2
         with:
           working-directory: exercises/00-init
           # start the server
@@ -48,7 +48,7 @@ jobs:
         with:
           working-directory: exercises
       - name: Cypress run exercise 01-react-stateful
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-actions@v2
         with:
           working-directory: exercises/01-react-stateful
           # start the server
@@ -79,7 +79,7 @@ jobs:
         with:
           working-directory: exercises
       - name: Cypress run exercise 02-react-stateless
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-actions@v2
         with:
           working-directory: exercises/02-react-stateless
           # start the server
@@ -110,7 +110,7 @@ jobs:
         with:
           working-directory: exercises
       - name: Cypress run exercise 03-redux
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-actions@v2
         with:
           working-directory: exercises/03-redux
           # start the server
@@ -141,7 +141,7 @@ jobs:
         with:
           working-directory: exercises
       - name: Cypress run exercise 04-react-redux
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-actions@v2
         with:
           working-directory: exercises/04-react-redux
           # start the server
@@ -172,7 +172,7 @@ jobs:
         with:
           working-directory: exercises
       - name: Cypress run exercise 05-reselect
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-actions@v2
         with:
           working-directory: exercises/05-reselect
           # start the server
@@ -203,7 +203,7 @@ jobs:
         with:
           working-directory: exercises
       - name: Cypress run exercise 06-redux-saga
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-actions@v2
         with:
           working-directory: exercises/06-redux-saga
           # start the server
@@ -234,7 +234,7 @@ jobs:
         with:
           working-directory: exercises
       - name: Cypress run exercise 07-normalizr
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-actions@v2
         with:
           working-directory: exercises/07-normalizr
           # start the server
