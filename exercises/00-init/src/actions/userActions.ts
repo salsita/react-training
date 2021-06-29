@@ -4,6 +4,9 @@ import {SortType} from "../modules/sorts/sort_types";
 export type ADD_USER = 'ADD USER'
 export const ADD_USER: ADD_USER = 'ADD USER'
 
+export type EDIT_USER = 'EDIT USER'
+export const EDIT_USER: EDIT_USER = 'EDIT USER'
+
 export type SET_SORT_TYPE = 'SET_SORT_TYPE'
 export const SET_SORT_TYPE: SET_SORT_TYPE = 'SET_SORT_TYPE'
 
@@ -17,10 +20,23 @@ export interface SetSortTypeAction {
     sortType: SortType;
 }
 
-export const addUser = (username: string) => {
+export interface EditUserAction {
+    type: EDIT_USER;
+    user: User;
+}
+
+
+export const addUser = (username: string, id: number) => {
     return {
         type: ADD_USER,
-        user: {username: username}
+        user: {username, id}
+    }
+}
+
+export const editUser = (id: number, username: string, eyeColor: string | undefined, height: number | undefined) => {
+    return {
+        type: EDIT_USER,
+        user: {id , username, eyeColor, height}
     }
 }
 

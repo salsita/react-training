@@ -24,7 +24,15 @@
     ]
   },
   "dependencies": {
+    "@types/react-numeric-input": "^2.2.3",
+    "axios": "^0.21.1",
+    "react-numeric-input": "^2.2.3",
     "react-redux": "^7.2.4",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "redux": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.1.7"
   }
 }
