@@ -1,7 +1,8 @@
-import React, {useCallback, useState} from "react";
-import {AddUser, User} from "../../users/user-types";
+import React, {useCallback, useState, useEffect, ReactNode} from "react";
+import {User} from "../../users/user-types";
 import {useSelector} from "react-redux";
 import {State} from "../../../store";
+import {Link} from "react-router-dom";
 
 //
 // export const UserList = (props: Probs) => {
@@ -36,8 +37,26 @@ import {State} from "../../../store";
 //     addUser: AddUserList
 // }
 
+
 export const UserList = () => {
     const state = useSelector((state: State) => state);
+    // Use effect wont return anything, Function will be called automatically when dependencies change
+    // useEffect(() => {
+    //     // called backend
+    //     // GET request for remote image in node.js
+    //     // then i use when i dont have async function, await in async function
+    //     console.log("inside useEffect")
+    //     // axios({
+    //     //     method: 'get',
+    //     //     url: 'http://localhost:7000/users',
+    //     //     withCredentials: true,
+    //     // })
+    //     //     .then(function (response) {
+    //     //         console.log(response)
+    //     //     });
+
+        // dispatched an action to set the state to the response
+    // }, [])
     const sortedUsersList= useSelector((state: State) => {
         const {usersList, sortType} = state;
         const newUsersList = [
@@ -55,7 +74,7 @@ export const UserList = () => {
         return newUsersList
     })
 
-    console.log(state)
+
     return (
         <div>
 
@@ -66,13 +85,17 @@ export const UserList = () => {
 
 
                 { /*Key attribute: Every element must have some unique key. (Only for list in parent component.)*/}
-                {sortedUsersList.map(user => (
+                {sortedUsersList.map(user => (<>
                     <tr key={user.username}>
                         <td>{user.username}</td>
                     </tr>
+                        <Link to={`/edit/${user.id}`}>edit</Link>
+                        {/* <Link to="/delete/:userId">edit</Link> */}
+                    </>
                 ))}
 
             </table>
+
 
         </div>
     )

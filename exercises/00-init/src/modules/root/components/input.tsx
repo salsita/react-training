@@ -31,7 +31,7 @@ export const Input = () => {
     const handleButtonClick = useCallback((): void => {
         // Dispatch function: send actions to our rootReducer and rootReducer update our current state
         // Action createor produced object below
-        dispatch(addUser(usersInput))
+        dispatch(addUser(usersInput, Date.now()))
         setInput("")
     }, [usersInput, setInput]);
 
