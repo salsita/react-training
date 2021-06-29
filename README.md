@@ -48,8 +48,8 @@ Location: `src/modules/users/user-types.ts`
 This file contains definitions of user interfaces.
 
 * Create and export two interfaces
-  * `UserName` contains two strings `firstName` and `lastName`
-  * `User` is the same as `UserName`, but additionally contains an `id` (number)
+  * `userName` contains two strings `firstName` and `lastName`
+  * `User` is the same as `userName`, but additionally contains an `id` (number)
 
 
 ### UserList component
@@ -80,7 +80,7 @@ The main purpose of this exercise is to try stateless components.
 
 Location: `src/modules/users/user-types.ts`
 
-* Add an `AddUser` interface, it's a function which takes `UserName` as parameter and returns `void`
+* Add an `AddUser` interface, it's a function which takes `userName` as parameter and returns `void`
 
 ### UserList component
 Location: `src/modules/users/components/user-list.tsx`
@@ -147,10 +147,10 @@ This file defines actions and action types.
 * Create an interface `AddUserAction` which extends `Action<T>` from `'redux'` for `users/addUser` action. In addition to the mandatory `type` property this action will contain a payload with the new user details.
   ```ts
   {
-    payload: UserName
+    payload: userName
   }
   ```
-* Create a function ([action creator](https://redux.js.org/basics/actions#action-creators) of `ActionCreator<A>` type from `'redux'`) called `addUser` that takes `UserName` object as parameter and returns the `AddUserAction` action.
+* Create a function ([action creator](https://redux.js.org/basics/actions#action-creators) of `ActionCreator<A>` type from `'redux'`) called `addUser` that takes `userName` object as parameter and returns the `AddUserAction` action.
 * Create and export a new type `UserActions`, which is a union of all user actions. This is useful in the reducer when more actions are defined. Note, currently we have only one action `users/addUser`.
 * Create and export an object `UserActionCreators`, which congregates all user action creators.
 
@@ -455,7 +455,7 @@ interface UserSkill {
   level: number
 }
 
-interface User extends UserName {
+interface User extends userName {
   id: string; // e.g. user-1
   regnalNumber: number // use Arabic numerals
   skills: Array<UserSkill>

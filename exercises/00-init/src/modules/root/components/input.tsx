@@ -1,7 +1,8 @@
 import React, {useCallback, useState} from "react";
 import {AddUser, SortAsc, SortLength, User} from "../../users/user-types";
 import {useDispatch} from "react-redux";
-import {addUser} from "../../../actions/userActions";
+import {addUser, setUsers} from "../../../actions/userActions";
+import axios from "axios";
 
 // State management with UseState function
 // export const Input = (props: Props) => {
@@ -31,7 +32,23 @@ export const Input = () => {
     const handleButtonClick = useCallback((): void => {
         // Dispatch function: send actions to our rootReducer and rootReducer update our current state
         // Action createor produced object below
-        dispatch(addUser(usersInput, Date.now()))
+        axios({
+            method: 'post',
+            url: 'http://localhost:7000/user',
+            withCredentials: true,
+            data: {
+                // The username of the user
+                userName: usersInput,
+                // The color of the user's eyes
+                eyeColor: "",
+                // The user's height in cm
+                height: 0
+            }
+        })
+            .then(function (response) {
+
+                dispatch(addUser(usersInput, response.data.id))
+            });
         setInput("")
     }, [usersInput, setInput]);
 
