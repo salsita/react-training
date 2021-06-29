@@ -1,8 +1,10 @@
 import React, {useCallback, useState, useEffect, ReactNode} from "react";
 import {User} from "../../users/user-types";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {State} from "../../../store";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import {addUser, deleteUser, setUsers} from "../../../actions/userActions";
 
 //
 // export const UserList = (props: Probs) => {
@@ -64,16 +66,33 @@ export const UserList = () => {
         ]
 
         if (sortType === "a-z") {
-            newUsersList.sort((a: User, b: User) => a.username.localeCompare(b.username))
+            newUsersList.sort((a: User, b: User) => a.userName.localeCompare(b.userName))
         }
 
         if (sortType === "length") {
-            newUsersList.sort((a: User, b: User) => a.username.length - b.username.length)
+            newUsersList.sort((a: User, b: User) => a.userName.length - b.userName.length)
         }
 
         return newUsersList
     })
+    const dispatch = useDispatch()
+    useEffect(() => {
+        // called backend
+        // GET request for remote image in node.js
+        // then i use when i dont have async function, await in async function
+        console.log("inside useEffect")
+        axios({
+            method: 'get',
+            url: 'http://localhost:7000/users',
+            withCredentials: true,
+        })
+            .then(function (response) {
+               dispatch(setUsers(response.data))
+                console.log(response)
+            });
+    },[]) // if [] is empty it will only "fire this function" for the first time
 
+    // DELETE request
 
     return (
         <div>
@@ -86,12 +105,22 @@ export const UserList = () => {
 
                 { /*Key attribute: Every element must have some unique key. (Only for list in parent component.)*/}
                 {sortedUsersList.map(user => (<>
-                    <tr key={user.username}>
-                        <td>{user.username}</td>
+                    <tr key={user.userName}>
+                        <td>{user.userName}</td>
                     </tr>
                         <Link to={`/edit/${user.id}`}>edit</Link>
-                        {/* <Link to="/delete/:userId">edit</Link> */}
-                    </>
+                       <button onClick={() => {
+                           // Action createor produced object below
+                           axios({
+                               method: 'delete',
+                               url: `http://localhost:7000/user/${user.id}`,
+                               withCredentials: true,
+                           })
+                               .then(function (response) {
+                                   dispatch(deleteUser(Number(user.id)))
+                               });
+                       }}>delete</button>
+                  </>
                 ))}
 
             </table>

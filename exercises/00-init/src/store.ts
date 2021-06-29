@@ -1,4 +1,12 @@
-import {AddUserAction, EditUserAction, SET_SORT_TYPE, SetSortTypeAction} from "./actions/userActions";
+import {
+    AddUserAction,
+    DeleteUserAction,
+    EditUserAction,
+    SET_SORT_TYPE,
+    SET_USERS,
+    SetSortTypeAction,
+    SetUsersAction
+} from "./actions/userActions";
 import {EditUser, User} from "./modules/users/user-types";
 import {createStore} from "redux";
 import {rootReducer} from "./reducers";
@@ -9,7 +17,7 @@ export interface State {
     sortType: SortType
 }
 
-export type Action = AddUserAction | SetSortTypeAction | EditUserAction
+export type Action = AddUserAction | SetSortTypeAction | EditUserAction | SetUsersAction | DeleteUserAction
 
 export const initialState: State = {usersList: [], sortType: ""}
 

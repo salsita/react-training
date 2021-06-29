@@ -1,6 +1,7 @@
-import {ADD_USER, EDIT_USER, SET_SORT_TYPE, setSortType} from "../actions/userActions";
+import {ADD_USER, DELETE_USER, EDIT_USER, SET_SORT_TYPE, SET_USERS, setSortType} from "../actions/userActions";
 import {Action, initialState} from "../store";
 import {userList} from "../../cypress/support/constants";
+import {User} from "../modules/users/user-types";
 
 // Index is name for 'main' files
 export const rootReducer = (state = initialState, action: Action) => {
@@ -37,6 +38,20 @@ export const rootReducer = (state = initialState, action: Action) => {
                     return user
                 }
             })
+        }
+    }
+
+    if(action.type == SET_USERS) {
+        return {
+            ...state,
+            usersList: action.users
+        }
+    }
+
+    if(action.type == DELETE_USER) {
+        return {
+            ...state,
+            usersList: state.usersList.filter((user: User) => user.id !== action.userId)
         }
     }
     return state

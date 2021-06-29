@@ -6,11 +6,12 @@ import {State} from "../../../store";
 import {useParams} from "react-router";
 import {User} from "../../users/user-types";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 
 // user information from redux
 // Make a new redux action for updating
-// user only have an username and we need to add eye color, height
+// user only have an userName and we need to add eye color, height
 // postman, postgres, react redux, axios... etc.
 export const EditPage = () => {
     const dispatch = useDispatch()
@@ -23,14 +24,30 @@ export const EditPage = () => {
     })
     // We can use casting
 
-    const [usersInputUsername, setInputUsername] = useState<string>(user.username)
+    const [usersInputUsername, setInputUsername] = useState<string>(user.userName)
     const [usersInputEyeColor, setInputEyeColor] = useState<string | undefined>(user.eyeColor)
     const [usersInputHeight, setInputHeight] = useState<number | undefined>(user.height)
 
+    // PATCH localhost:7000/user/:userId`
     const handleButtonClick = useCallback((): void => {
         // Dispatch function: send actions to our rootReducer and rootReducer update our current state
         // Action createor produced object below
-        dispatch(editUser(Number(userId),usersInputUsername, usersInputEyeColor, usersInputHeight))
+        axios({
+            method: 'patch',
+            url: `http://localhost:7000/user/${userId}`,
+            withCredentials: true,
+            data: {
+                // The username of the user
+                userName: usersInputUsername,
+                // The color of the user's eyes
+                eyeColor: usersInputEyeColor,
+                // The user's height in cm
+                height: usersInputHeight
+            }
+        })
+            .then(function (response) {
+                dispatch(editUser(Number(userId),usersInputUsername, usersInputEyeColor, usersInputHeight))
+            });
 
     }, [usersInputUsername,usersInputHeight,usersInputEyeColor, setInputUsername, setInputEyeColor, setInputHeight]);
 
