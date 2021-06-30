@@ -75,6 +75,11 @@ export const UserList = () => {
     })
 
 
+  // this is a different change
+    useEffect(() => {
+        console.log('this is in the effect')
+    }, [])
+
     return (
         <div>
 
