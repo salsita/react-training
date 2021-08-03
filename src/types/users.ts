@@ -1,0 +1,17 @@
+export interface User {
+    firstName: string;
+    lastName: string;
+    jobTitle: string;
+    age: number;
+}
+
+export enum JobTitle {
+    motherOfDragons = 'Mother of Dragons',
+    noOne = 'No One',
+    kingBeyondTheWall = 'King Beyond the Wall',
+    peasant = 'Peasant',
+    lord = 'Lord',
+    kingSlayer = 'Kingslayer',
+    bastard = 'Bastard',
+    wildling = 'Wildling',
+}

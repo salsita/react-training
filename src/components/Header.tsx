@@ -4,6 +4,8 @@ interface Props {
     text: string;
 }
 
-export const Header: FC<Props> = ({text}) => (
-    <h1>{text}</h1>
-)
+export const Header: FC<Props> = (props) => {
+    return (
+        <h1>{props.text}</h1>
+    )
+}
