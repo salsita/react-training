@@ -1,5 +1,7 @@
 import {ChangeEvent, Component, FC, useState} from "react";
 import {JobTitle} from "../types/users";
+import {useDispatch} from "react-redux";
+import {addUser} from "../store/actions/userActions";
 
 interface Props {
    onSave: (firstName: string, lastName: string, jobTitle: JobTitle, age: number) => void;
@@ -10,6 +12,8 @@ export const AddUserForm: FC<Props> = ({onSave}) => {
     const [lastName, setLastName] = useState('')
     const [jobTitle, setJobTitle] = useState<JobTitle>(JobTitle.motherOfDragons)
     const [age, setAge] = useState(20);
+
+    const dispatch = useDispatch();
 
     const onFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setFirstName(event.target.value)
@@ -30,7 +34,13 @@ export const AddUserForm: FC<Props> = ({onSave}) => {
     };
 
     const onButtonClick = () => {
-        onSave(firstName, lastName, jobTitle, age)
+        dispatch(addUser({
+            id: Date.now(),
+            firstName,
+            lastName,
+            jobTitle,
+            age
+        }))
         setFirstName('')
         setLastName('')
         setJobTitle(JobTitle.motherOfDragons)
