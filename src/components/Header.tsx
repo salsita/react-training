@@ -1,15 +1,9 @@
-import {Component} from "react";
+import {Component, FC} from "react";
 
 interface Props {
     text: string;
 }
 
-export class Header extends Component<Props> {
-    render() {
-        const text = this.props.text;
-
-        return (
-            <h1>{text}</h1>
-        )
-    }
-}
+export const Header: FC<Props> = ({text}) => (
+    <h1>{text}</h1>
+)
