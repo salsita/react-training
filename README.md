@@ -928,3 +928,45 @@ There are couple of things we need to update in our sagas.
   * Import `import { RouterActions } from '@salsita/react-router';`
   * Use the `RouterActions.Creators.navigateTo(routeName)` action to perform the redirect
 * Since we use forms for creating and updating users, we should add the 4th argument to the `saveEntity` saga, which is the name of the form that was submitted
+
+
+## The main summary
+- Exercise 0
+  - setup the project
+- Exercise 1
+  - Make a Header class component
+  - Make a UserList class component
+    - Includes a text input for entering a new user name
+    - Button for adding that user
+    - List of users added
+- Exercise 1.1
+    - Convert Header and UserList to function components
+    - use the useState hook for managing state
+- Exercise 2
+  - Pull the user list state up into App
+  - Create a new component for the input + add button
+    - Call it `<AddUserForm />`
+  - Call `<Header />`, `<AddUserForm />`, and `<UserList />` from `<App />`
+- Exercise 4
+  - Add more information to each user, including firstName, lastName, jobTitle, age, and id
+  - Make some mock data for storing a default list of workers (it will load from the start by default)
+- Exercise 5
+  - Implement redux for storing the list of users
+  - Move the users list into redux
+  - Make an `ADD_USER` action that you'll dispatch when you click "Save User" button
+- Exercise 6 
+  - Make a button that lets you delete users
+  - Create a new action called `DELETE_USER` that you'll dispatch to redux
+- Exercise 7
+  - Make a search input that will let you filter users by name (can also type in job title as well)
+  - Make a button that will let you sort by age asc/desc
+- Exercise 8
+  - Set up react router
+  - Make an edit page for each user
+- Exercise 9
+  - Setup the toy backend
+  - Hook up the frontend to the backend
+    - GET /users
+    - PATCH /user/:id
+    - DELETE /user/:id
+    - POST /users
