@@ -71,45 +71,29 @@ This component renders a list of the users saved in the state and two buttons to
 
 
 ## Exercise \#2
-The main purpose of this exercise is to try stateless components.
-
-* Continue with your previous project or open `01-react-stateful`
-* Modify `UserList` component into stateless [function](https://reactjs.org/docs/components-and-props.html#function-and-class-components) component
-
-
-### UserTypes
-
-Location: `src/modules/users/user-types.ts`
-
-* Add an `AddUser` interface, it's a function which takes `UserName` as parameter and returns `void`
-
-### UserList component
-Location: `src/modules/users/components/user-list.tsx`
-
-Props:
-```ts
-{
-  users: User[],
-  addUser: AddUser
-}
-```
-
-The functionality is the same like in the previous exercise. The only difference is that the logic will be outside the file.
-
-* Modify the `UserList` component into a function that renders users from the `users` property (or `No Users` when the list is empty)
-* Call the `addUser` function taken from the props when the user clicks on the button
-* Create and use a `UserProps` interface
-
-### Index file
-Location: `src/index.tsx`
-
-Move logic from the old `UserList` into the index file. All application data will be in a global object.
-
-* Create a global object called `state` with 2 fields (`title` and `users`)
-* Create your own function `render` that just calls [`ReactDOM.render`](https://reactjs.org/docs/react-dom.html#render) and uses data from the global object
-* Create a function called `addUser` that adds the user into the list of users and calls your `render` function
-  * Please prefer immutable change of the `state` object
-* Define necessary interfaces
+- The main purpose of this exercise is to try stateless components.
+  - Continue with your previous project or open `version2-1.1`
+  - Pull the state out of UserList and bring it up into the App component instead
+  - Make a new component for adding users to separate concerns
+  - ### UserList component
+    - Location: `src/modules/users/components/user-list.tsx`
+    - Props:
+      ```ts
+      interface Props {
+        users: User[];
+      }
+      ```
+    - The functionality is the same like in the previous exercise. The only difference is that the logic will be outside the file.
+    - Modify the `UserList` component into a function that renders users from the `users` property (or `No Users` when the list is empty)
+    - Create and use the new interface above
+  - ### Index file
+    - Location: `src/index.tsx`
+      - Move logic from the old `UserList` into the index file. All application data will be in a global object.
+      - Create a global object called `state` with 2 fields (`title` and `users`)
+      - Create your own function `render` that just calls [`ReactDOM.render`](https://reactjs.org/docs/react-dom.html#render) and uses data from the global object
+      - Create a function called `addUser` that adds the user into the list of users and calls your `render` function
+        - Please prefer immutable change of the `state` object
+      - Define necessary interfaces
 
 ### Root component
 Location: `src/modules/root/components/root.tsx`
