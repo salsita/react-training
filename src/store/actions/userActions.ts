@@ -12,7 +12,12 @@ export interface DeleteUserAction {
 
 export type Action = AddUserAction | DeleteUserAction
 
-export const addUser = (user: User) => ({
+export const addUser = (user: User): AddUserAction => ({
     type: 'ADD_USER',
     user
+})
+
+export const deleteUser = (id: number): DeleteUserAction => ({
+    type: 'DELETE_USER',
+    id
 })

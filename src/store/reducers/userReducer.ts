@@ -60,11 +60,7 @@ const initialState: UserState = {
     ]
 }
 
-export const userReducer: Reducer<UserState, Action> = (state, action): UserState => {
-    if (state === undefined) {
-        return initialState
-    }
-
+export const userReducer: Reducer<UserState, Action> = (state= initialState, action): UserState => {
     // depending on action.type, return a new version of the state
     if (action.type === 'ADD_USER') {
        return {
@@ -73,6 +69,12 @@ export const userReducer: Reducer<UserState, Action> = (state, action): UserStat
                action.user
            ]
        }
+    }
+
+    if (action.type === 'DELETE_USER') {
+        return {
+            users: state.users.filter(user => user.id !== action.id)
+        }
     }
 
     return state
