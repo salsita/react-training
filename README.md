@@ -945,11 +945,13 @@ There are couple of things we need to update in our sagas.
 - Exercise 2
   - Pull the user list state up into App
   - Create a new component for the input + add button
-    - Call it `<AddUserForm />`
-  - Call `<Header />`, `<AddUserForm />`, and `<UserList />` from `<App />`
+    - Call it `<UserForm />`
+  - Call `<Header />`, `<UserForm />`, and `<UserList />` from `<App />`
 - Exercise 4
-  - Add more information to each user, including firstName, lastName, jobTitle, age, and id
-  - Make some mock data for storing a default list of workers (it will load from the start by default)
+  - Add more information to each user, including firstName, lastName, jobTitle,
+    age, and id
+  - Make some mock data for storing a default list of workers (it will load from
+    the start by default)
 - Exercise 5
   - Implement redux for storing the list of users
   - Move the users list into redux
@@ -958,11 +960,22 @@ There are couple of things we need to update in our sagas.
   - Make a button that lets you delete users
   - Create a new action called `DELETE_USER` that you'll dispatch to redux
 - Exercise 7
-  - Make a search input that will let you filter users by name (can also type in job title as well)
-  - Make a button that will let you sort by age asc/desc
-- Exercise 8
   - Set up react router
   - Make an edit page for each user
+  - Hints:
+    - Use useSelector along with the user’s id from the URL (look at the docs)
+      to get the user out of the redux state
+      - React router 5 docs - https://reactrouter.com/web/guides/quick-start
+    - Populate the inputs with the user’s firstname, lastName, jobTitle, and age
+    - Make a redux action for updating a particular user that’s in the state
+    - call that action when the user clicks the “save” button
+- Exercise 8
+  - Make a search input that will let you filter users by name (can also type in
+    job title as well)
+  - Make a button that will let you sort by age asc/desc
+- Exercise 9
+  - Make a dialog that appears when you click the delete button next to a user's
+    entry. Make it have a confirm and a cancel button.
 - Exercise 9
   - Setup the toy backend
   - Hook up the frontend to the backend
