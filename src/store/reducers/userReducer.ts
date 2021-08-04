@@ -61,6 +61,7 @@ const initialState: UserState = {
 }
 
 export const userReducer: Reducer<UserState, Action> = (state= initialState, action): UserState => {
+    console.log('in the reducer!, state = ', state, action)
     // depending on action.type, return a new version of the state
     if (action.type === 'ADD_USER') {
        return {
@@ -74,6 +75,14 @@ export const userReducer: Reducer<UserState, Action> = (state= initialState, act
     if (action.type === 'DELETE_USER') {
         return {
             users: state.users.filter(user => user.id !== action.id)
+        }
+    }
+
+    if (action.type === 'EDIT_USER') {
+        return {
+            users: state.users.map(user => {
+                return user.id === action.id ? action.newData : user
+            })
         }
     }
 

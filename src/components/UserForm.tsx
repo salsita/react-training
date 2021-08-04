@@ -1,17 +1,18 @@
 import {ChangeEvent, Component, FC, useState} from "react";
-import {JobTitle} from "../types/users";
+import {JobTitle, User} from "../types/users";
 import {useDispatch} from "react-redux";
 import {addUser} from "../store/actions/userActions";
 
 interface Props {
-   onSave: (firstName: string, lastName: string, jobTitle: JobTitle, age: number) => void;
+   user?: User;
+   onSubmit: (firstName: string, lastName: string, jobTitle: JobTitle, age: number) => void;
 }
 
-export const AddUserForm: FC<Props> = ({onSave}) => {
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [jobTitle, setJobTitle] = useState<JobTitle>(JobTitle.motherOfDragons)
-    const [age, setAge] = useState(20);
+export const UserForm: FC<Props> = ({user, onSubmit}) => {
+    const [firstName, setFirstName] = useState(user ? user.firstName : '')
+    const [lastName, setLastName] = useState(user ? user.lastName : '')
+    const [jobTitle, setJobTitle] = useState<JobTitle>(user ? user.jobTitle : JobTitle.motherOfDragons)
+    const [age, setAge] = useState(user ? user.age : 20)
 
     const dispatch = useDispatch();
 
@@ -34,17 +35,14 @@ export const AddUserForm: FC<Props> = ({onSave}) => {
     };
 
     const onButtonClick = () => {
-        dispatch(addUser({
-            id: Date.now(),
-            firstName,
-            lastName,
-            jobTitle,
-            age
-        }))
-        setFirstName('')
-        setLastName('')
-        setJobTitle(JobTitle.motherOfDragons)
-        setAge(12)
+        onSubmit(firstName, lastName, jobTitle, age)
+        if (user == null) {
+            setFirstName('')
+            setLastName('')
+            setJobTitle(JobTitle.motherOfDragons)
+            setAge(20)
+
+        }
     }
 
     return (
