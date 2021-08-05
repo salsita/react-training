@@ -16,7 +16,12 @@ export interface EditUserAction {
     newData: User;
 }
 
-export type Action = AddUserAction | DeleteUserAction | EditUserAction
+export interface SetUsersAction {
+    type: 'SET_USERS';
+    users: User[]
+}
+
+export type Action = AddUserAction | DeleteUserAction | EditUserAction | SetUsersAction
 
 export const addUser = (user: User): AddUserAction => ({
     type: 'ADD_USER',
@@ -32,4 +37,9 @@ export const editUser = (id: number, newData: User): EditUserAction => ({
     type: 'EDIT_USER',
     id,
     newData
+})
+
+export const setUsers = (users: User[]): SetUsersAction => ({
+    type: 'SET_USERS',
+    users
 })

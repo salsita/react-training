@@ -16,3 +16,19 @@ export enum JobTitle {
     bastard = 'Bastard',
     wildling = 'Wildling',
 }
+
+export interface BackendUser {
+    id: number,
+    firstname: string;
+    lastname: string;
+    jobtitle: string;
+    age: number;
+}
+
+export const backendUserToUser = (user: BackendUser): User => ({
+    id: user.id,
+    firstName: user.firstname,
+    lastName: user.lastname,
+    jobTitle: user.jobtitle as JobTitle,
+    age: user.age
+})

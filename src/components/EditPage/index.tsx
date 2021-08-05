@@ -13,6 +13,7 @@ interface EditPageParams {
 export const EditPage: FC = () => {
     const params = useParams<EditPageParams>();
     const dispatch = useDispatch();
+
     const user = useSelector((state: UserState) => {
         console.log(state, params.userId, `<- state, params.userId`)
         return state.users.find(user => user.id === Number(params.userId))
