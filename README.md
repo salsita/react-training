@@ -962,6 +962,7 @@ There are couple of things we need to update in our sagas.
 - Exercise 7
   - Set up react router
   - Make an edit page for each user
+  - Make a link from each user's entry on the main page to go to their edit page
   - Hints:
     - Use useSelector along with the user’s id from the URL (look at the docs)
       to get the user out of the redux state
