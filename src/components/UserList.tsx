@@ -1,6 +1,6 @@
-import {ChangeEvent, Component, ReactElement} from "react";
+import { ChangeEvent, Component, ReactElement } from "react";
 
-type Props = Record<string, never>
+type Props = Record<string, never>;
 
 interface State {
   users: string[];

@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, { FC } from "react";
 import { Header } from "./components/Header";
 
 import "./App.css";
@@ -11,6 +11,6 @@ const App: FC = () => {
       <UserList />
     </div>
   );
-}
+};
 
 export default App;

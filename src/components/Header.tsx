@@ -1,4 +1,4 @@
-import {Component, ReactElement} from "react";
+import { Component, ReactElement } from "react";
 
 interface Props {
   text: string;
