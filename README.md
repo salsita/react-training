@@ -101,9 +101,9 @@ Location: `src/modules/root/components/root.tsx`
 Props:
 ```ts
 {
-  title: string,
-  users: User[],
-  addUser: AddUser
+  title: string;
+  users: Array<User>;
+  addUser: AddUser;
 }
 ```
 
@@ -145,8 +145,8 @@ Location: `src/modules/users/users-reducer.ts`
 State:
 ```ts
 {
-  title: string,
-  users: User[]
+  title: string;
+  users: Array<User>;
 }
 ```
 
