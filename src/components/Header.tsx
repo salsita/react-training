@@ -1,15 +1,13 @@
-import {Component} from "react";
+import {Component, ReactElement} from "react";
 
 interface Props {
-    text: string;
+  text: string;
 }
 
 export class Header extends Component<Props> {
-    render() {
-        const text = this.props.text;
+  render(): ReactElement {
+    const text = this.props.text;
 
-        return (
-            <h1>{text}</h1>
-        )
-    }
+    return <h1>{text}</h1>;
+  }
 }

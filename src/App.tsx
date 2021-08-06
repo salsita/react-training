@@ -1,15 +1,15 @@
-import React from 'react';
-import { Header } from './components/Header';
+import React, {FC} from "react";
+import { Header } from "./components/Header";
 
-import './App.css';
-import {UserList} from "./components/UserList";
+import "./App.css";
+import { UserList } from "./components/UserList";
 
-function App() {
+const App: FC = () => {
   return (
-      <div>
-        <Header text={'User Management'}/>
-        <UserList />
-      </div>
+    <div>
+      <Header text={"User Management"} />
+      <UserList />
+    </div>
   );
 }
 

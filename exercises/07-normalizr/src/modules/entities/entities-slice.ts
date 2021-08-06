@@ -33,7 +33,7 @@ const entitiesSlice = createSlice({
   name: 'entities',
   initialState: initState,
   reducers: {
-    entitiesUpdated: updateEntities
+    entitiesUpdated: updateEntities,
   },
 })
 
