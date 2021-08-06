@@ -25,6 +25,9 @@
     "fix": "eslint . --fix"
   },
   "eslintConfig": {
+    "plugins": [
+      "prettier"
+    ],
     "extends": [
       "react-app",
       "react-app/jest"
@@ -34,6 +37,9 @@
         "files": [
           "**/*.ts?(x)"
         ],
+        "plugins": [
+          "prettier"
+        ],
         "extends": [
           "eslint:recommended",
           "plugin:@typescript-eslint/eslint-recommended",
@@ -41,7 +47,8 @@
         ],
         "rules": {
           "react-hooks/rules-of-hooks": "error",
-          "react-hooks/exhaustive-deps": "warn"
+          "react-hooks/exhaustive-deps": "warn",
+          "prettier/prettier": "error"
         }
       }
     ]
@@ -61,6 +68,9 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "@typescript-eslint/parser": "^4.29.0",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.2"
   }
 }
